@@ -1,4 +1,5 @@
 import './css/styles.css';
+
 import './images/turing-logo.png';
 
 import {fetchUserData, fetchUserActivity, fetchUserSleep, fetchUserHydration} from './apiCalls';
@@ -21,6 +22,7 @@ let waterDrank = document.getElementById('water');
 let weeklyWater = document.getElementById('weekly-water');
 let email = document.getElementById('email');
 let avgStepGoal = document.getElementById('avg-step-goal');
+
 
 let displayedUsersID = Math.floor(Math.random() * 50);
 
@@ -62,16 +64,23 @@ function activityDataHelper(data) {
   displayActivityInfo(activityRepo)
 };
 
+let firstName = document.getElementById('first-name')
+let lastName = document.getElementById('last-name')
+
+
 //  DOM
 function displayUserInfo(user, userRepo) {
   const getFriendsNames = user.friends.map((friend) => {
     return userRepo.getUserById(friend).name;
   });
-  welcomeName.innerText = `Welcome, ${user.getUserFirstName()}`;
+  welcomeName.innerHTML = `WELCOME, ${user.getUserFirstName().toUpperCase()}`;
+  firstName.innerText = `${user.getUserFirstName().toUpperCase()}`
+  lastName.innerText = `${user.getUserLastName().toUpperCase()}`
   stepGoal.innerText = `${user.dailyStepGoal}`;
   email.innerText = `${user.email}`;
   friends.innerText = `${getFriendsNames}`;
   avgStepGoal.innerText = `${userRepo.calculateAvgStepGoal()}`;
+
 };
 
 function displayActivityInfo(activityRepo){
@@ -87,8 +96,9 @@ function displaySleepInfo(id, sleepRepo) {
 
   lastSleep.innerText = `Last Night: ${sleep.latest.hoursSlept}`
   weeklySleep.innerText = `Weekly Avg: ${sleep.calculateAvg(sleep.latest.date, "hoursSlept")}`
-  avgSleep.innerText = `Average Hours Slept: ${sleep.avgHoursSlept} Average Sleep Quality: ${sleep.avgSleepQuality}`
-};
+  avgSleep.innerHTML = `Average Hours Slept: ${sleep.avgHoursSlept}<br>Average Sleep Quality: ${sleep.avgSleepQuality}`
+}
+
 
 function displayHydrationInfo(id, hydrationRepo) {
   const waterByWeek = hydrationRepo.getFluidOuncesEachDayOfWeek(id, "2020/01/16");
