@@ -1,7 +1,5 @@
 import './css/styles.css';
-
 import './images/turing-logo.png';
-
 import {fetchUserData, fetchUserActivity, fetchUserSleep, fetchUserHydration} from './apiCalls';
 import UserRepository from './UserRepository';
 import SleepRepository from './sleep-repository';
@@ -9,6 +7,7 @@ import Activity from './Activity';
 import HydrationRepository from './HydrationRepository';
 import User from './User';
 
+// QUERY SELECTORS
 let friends = document.getElementById('friends');
 let welcomeName = document.getElementById('name');
 let stepGoal = document.getElementById('step-goal');
@@ -22,8 +21,10 @@ let waterDrank = document.getElementById('water');
 let weeklyWater = document.getElementById('weekly-water');
 let email = document.getElementById('email');
 let avgStepGoal = document.getElementById('avg-step-goal');
+let firstName = document.getElementById('first-name');
+let lastName = document.getElementById('last-name');
 
-
+// GLOBAL VARIABLE
 let displayedUsersID = Math.floor(Math.random() * 50);
 
 Promise.all([fetchUserData(), fetchUserActivity(), fetchUserSleep(), fetchUserHydration()])
@@ -35,7 +36,7 @@ Promise.all([fetchUserData(), fetchUserActivity(), fetchUserSleep(), fetchUserHy
     hydrationDataHelper(data[3].hydrationData);
 });
 
-//  HELPER FUNCTIONS
+// HELPER FUNCTIONS
 function getAllUsers(userData) {
   const createUsersArray = userData.map((user) => {
       return new User(user);
@@ -64,11 +65,7 @@ function activityDataHelper(data) {
   displayActivityInfo(activityRepo);
 };
 
-let firstName = document.getElementById('first-name');
-let lastName = document.getElementById('last-name');
-
-
-//  DOM
+// DOM
 function displayUserInfo(user, userRepo) {
   const getFriendsNames = user.friends.map((friend) => {
     return userRepo.getUserById(friend).name;
