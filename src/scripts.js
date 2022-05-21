@@ -42,7 +42,7 @@ Promise.all([fetchUserData(), fetchUserActivity(), fetchUserSleep(), fetchUserHy
   .then(data => {
       userDataHelper(data[0].userData);
       sleepDataHelper(data[2].sleepData);
-      // hydrationDataHelper(data[3].hydrationData);
+      hydrationDataHelper(data[3].hydrationData);
   });
 
 //usually reassign to global variables
