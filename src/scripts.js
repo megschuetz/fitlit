@@ -14,7 +14,7 @@ import {fetchUserData, fetchUserActivity, fetchUserSleep, fetchUserHydration} fr
 import UserRepository from './UserRepository';
 import SleepRepository from './sleep-repository';
 import ActivityRepository from './Activity';
-// import HydrationRepository from './HydrationRepository';
+import HydrationRepository from './HydrationRepository';
 import User from './User'
 
 let friends = document.getElementById('friends');
@@ -62,10 +62,10 @@ function userDataHelper(data) {
     displayUserInfo(userRepo.getUserById(displayedUsersID), userRepo);
 }
 
-// function hydrationDataHelper(data) {
-//   hydrationRepo = new HydrationRepository(data);
-//   displayHydrationInfo(displayedUsersID, hydrationRepo);
-// }
+function hydrationDataHelper(data) {
+  hydrationRepo = new HydrationRepository(data);
+  displayHydrationInfo(displayedUsersID, hydrationRepo);
+}
 
 function sleepDataHelper(data) {
   const sleepRepo = new SleepRepository(data);
@@ -100,8 +100,8 @@ function displaySleepInfo(id, sleepRepo) {
   avgSleep.innerHTML = `Average Hours Slept: ${sleep.avgHoursSlept}<br>Average Sleep Quality: ${sleep.avgSleepQuality}`
 }
 
-// function displayHydrationInfo(id, hydrationRepo) {
-//   const waterByWeek = hydrationRepo.getFluidOuncesEachDayOfWeek(id, "2020/01/16");
-//   waterDrank.innerText += `: ${hydrationRepo.getFluidOuncesByDate(id, "2020/01/22")} ounces`;
-//   weeklyWater.innerText += JSON.stringify(waterByWeek);
-// }
+function displayHydrationInfo(id, hydrationRepo) {
+  const waterByWeek = hydrationRepo.getFluidOuncesEachDayOfWeek(id, "2020/01/16");
+  waterDrank.innerText += `: ${hydrationRepo.getFluidOuncesByDate(id, "2020/01/22")} ounces`;
+  weeklyWater.innerText += JSON.stringify(waterByWeek);
+}
