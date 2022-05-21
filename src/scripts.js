@@ -1,21 +1,13 @@
-// An example of how you tell webpack to use a CSS file
 import './css/styles.css';
 
-// An example of how you tell webpack to use an image (also need to link to it in the index.html)
-import './images/turing-logo.png'
-// import './images/zenclouds.png'
-
-console.log('This is the JavaScript entry file - your code begins here.');
-
-// An example of how you tell webpack to use a JS file
+import './images/turing-logo.png';
 
 import {fetchUserData, fetchUserActivity, fetchUserSleep, fetchUserHydration} from './apiCalls';
-
 import UserRepository from './UserRepository';
 import SleepRepository from './sleep-repository';
-import ActivityRepository from './Activity';
+import Activity from './Activity';
 import HydrationRepository from './HydrationRepository';
-import User from './User'
+import User from './User';
 
 let friends = document.getElementById('friends');
 let welcomeName = document.getElementById('name');
@@ -30,47 +22,47 @@ let waterDrank = document.getElementById('water');
 let weeklyWater = document.getElementById('weekly-water');
 let email = document.getElementById('email');
 let avgStepGoal = document.getElementById('avg-step-goal');
-// window.addEventListener('load', Promise.all())
+
 
 let displayedUsersID = Math.floor(Math.random() * 50);
-let userRepo;
-let sleepRepo;
-let hydrationRepo;
-let activityRepo;
 
 Promise.all([fetchUserData(), fetchUserActivity(), fetchUserSleep(), fetchUserHydration()])
   .then(data => {
-      userDataHelper(data[0].userData);
-      sleepDataHelper(data[2].sleepData);
-      hydrationDataHelper(data[3].hydrationData);
-  });
-
-//usually reassign to global variables
-
+    console.log(data)
+    userDataHelper(data[0].userData);
+    activityDataHelper(data[1].activityData)
+    sleepDataHelper(data[2].sleepData);
+    hydrationDataHelper(data[3].hydrationData);
+});
 
 //  HELPER FUNCTIONS
 function getAllUsers(userData) {
-    const createUsersArray = userData.map((user) => {
-        return new User(user);
-    });
-    return createUsersArray;
-}
+  const createUsersArray = userData.map((user) => {
+      return new User(user);
+  });
+  return createUsersArray;
+};
 
 function userDataHelper(data) {
-    const usersArray = getAllUsers(data);
-    userRepo = new UserRepository(usersArray);
-    displayUserInfo(userRepo.getUserById(displayedUsersID), userRepo);
-}
+  const usersArray = getAllUsers(data);
+  const userRepo = new UserRepository(usersArray);
+  displayUserInfo(userRepo.getUserById(displayedUsersID), userRepo);
+};
 
 function hydrationDataHelper(data) {
-  hydrationRepo = new HydrationRepository(data);
+  const hydrationRepo = new HydrationRepository(data);
   displayHydrationInfo(displayedUsersID, hydrationRepo);
-}
+};
 
 function sleepDataHelper(data) {
   const sleepRepo = new SleepRepository(data);
   displaySleepInfo(displayedUsersID, sleepRepo)
-}
+};
+
+function activityDataHelper(data) {
+  const activityRepo = new Activity(data)
+  displayActivityInfo(activityRepo)
+};
 
 let firstName = document.getElementById('first-name')
 let lastName = document.getElementById('last-name')
@@ -82,26 +74,35 @@ function displayUserInfo(user, userRepo) {
     return userRepo.getUserById(friend).name;
   });
   welcomeName.innerHTML = `WELCOME, ${user.getUserFirstName().toUpperCase()}`;
-  // MY STUFF
   firstName.innerText = `${user.getUserFirstName().toUpperCase()}`
   lastName.innerText = `${user.getUserLastName().toUpperCase()}`
-  // NO MORE STUFF
   stepGoal.innerText = `${user.dailyStepGoal}`;
   email.innerText = `${user.email}`;
   friends.innerText = `${getFriendsNames}`;
   avgStepGoal.innerText = `${userRepo.calculateAvgStepGoal()}`;
-}
+
+};
+
+function displayActivityInfo(activityRepo){
+  const allUsersActivity = activityRepo.findUser(displayedUsersID)
+  stepsTaken.innerText = `Steps: ${allUsersActivity[allUsersActivity.length -1].numSteps}`
+  minsActive.innerText = `Minutes Active: ${allUsersActivity[allUsersActivity.length -1].minutesActive}`
+  flights.innerText = `Flights Taken: ${allUsersActivity[allUsersActivity.length -1].flightsOfStairs}`
+};
+
 function displaySleepInfo(id, sleepRepo) {
-  let allUserData = sleepRepo.getAllUserData(id);
-  let sleep = sleepRepo.makeNewSleep(id, allUserData);
+  const allUserData = sleepRepo.getAllUserData(id);
+  const sleep = sleepRepo.makeNewSleep(id, allUserData);
 
   lastSleep.innerText = `Last Night: ${sleep.latest.hoursSlept}`
   weeklySleep.innerText = `Weekly Avg: ${sleep.calculateAvg(sleep.latest.date, "hoursSlept")}`
   avgSleep.innerHTML = `Average Hours Slept: ${sleep.avgHoursSlept}<br>Average Sleep Quality: ${sleep.avgSleepQuality}`
 }
 
+
 function displayHydrationInfo(id, hydrationRepo) {
   const waterByWeek = hydrationRepo.getFluidOuncesEachDayOfWeek(id, "2020/01/16");
   waterDrank.innerText += `: ${hydrationRepo.getFluidOuncesByDate(id, "2020/01/22")} ounces`;
   weeklyWater.innerText += JSON.stringify(waterByWeek);
-}
+};
+
