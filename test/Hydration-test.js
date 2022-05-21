@@ -22,11 +22,6 @@ let hydration3;
         "userID": 3,
         "date": "2019/06/15",
         "numOunces": 47
-      }
-      const hydrationData4 = {
-        "userID": 4,
-        "date": "2019/06/15",
-        "numOunces": 85
       };
 
     hydration1 = new Hydration(hydrationData1);
@@ -35,7 +30,6 @@ let hydration3;
 
     hydration3 = new Hydration(hydrationData3);
 
-    hydration3 = new Hydration(hydrationData4);
   });
 
   it('should be a function', function () {
@@ -46,4 +40,15 @@ let hydration3;
     expect(hydration1).to.be.an.instanceOf(Hydration);
   });
 
+  it('should have a userID property', () => {
+    expect(hydration1.userID).to.equal(1);
+  });
+
+  it('should have a date property', () => {
+    expect(hydration2.date).to.equal("2019/06/15");
+  });
+
+  it('should have a numOunces property', () => {
+    expect(hydration3.numOunces).to.equal(47);
+  });
 });

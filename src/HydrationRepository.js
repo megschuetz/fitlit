@@ -21,8 +21,8 @@ class HydrationRepository {
 
   getFluidOuncesByDate(id, date) {
     const allHydrationDataById = this.getUserById(id);
-    const hydrationByDate = allHydrationDataById
-      .filter(hydroObj => hydroObj.date === date)
+    const hydrationByDate = allHydrationDataById;
+      .filter(hydroObj => hydroObj.date === date);
       .reduce((totalOunces, hydroObj) => {
         totalOunces += hydroObj.numOunces;
         return totalOunces;
@@ -37,7 +37,7 @@ class HydrationRepository {
     // create array of 7 dates starting with date param
     const weekFromDate = [0,0,0,0,0,0,0].map((el, index) => {
     return dayjs(date).add([index], 'day').format('YYYY/MM/DD');
-    })
+  });
 
     // Iterate over week array and for each date, add the date as a key
     // in the acc, and initialize the value at 0.
@@ -56,7 +56,7 @@ class HydrationRepository {
 
     const hydroWeek = weekFromDate.reduce((weekObj, date) => {
       weekObj[date] = 0;
-      allHydrationDataById.filter(hydroObj => hydroObj.date === date)
+      allHydrationDataById.filter(hydroObj => hydroObj.date === date);
       .forEach(el => {
         weekObj[date] += el.numOunces;
       })
