@@ -12,7 +12,7 @@ import {fetchUserData, fetchUserActivity, fetchUserSleep, fetchUserHydration} fr
 
 import UserRepository from './UserRepository';
 import SleepRepository from './sleep-repository';
-import ActivityRepository from './Activity';
+import Activity from './Activity';
 import HydrationRepository from './HydrationRepository';
 import User from './User'
 
@@ -41,6 +41,7 @@ let activityRepo;
 Promise.all([fetchUserData(), fetchUserActivity(), fetchUserSleep(), fetchUserHydration()])
   .then(data => {
       userDataHelper(data[0].userData);
+      activityHelper(data[1].activityData);
       sleepDataHelper(data[2].sleepData);
       hydrationDataHelper(data[3].hydrationData);
   });
@@ -72,7 +73,17 @@ function sleepDataHelper(data) {
   displaySleepInfo(displayedUsersID, sleepRepo)
 }
 
+ function activityHelper(data) {
+  showAllUsersActivity(userId)
+}
+
 //  DOM
+function showAllUsersActivity(userId) {
+    stepsTaken.innerText = `Steps Taken: ${activity.activtyStepsforWeek()}`
+    minsActive.innerText = `Minutes Active: ${activity.calculateAvg(sleep.latest.date, "hoursSlept")}`
+    flights.innerText = `Flights of stairs past week: ${activity.activityFlightsPast7Days()} `
+}
+
 function displayUserInfo(user, userRepo) {
   const getFriendsNames = user.friends.map((friend) => {
     return userRepo.getUserById(friend).name;
