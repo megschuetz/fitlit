@@ -64,8 +64,6 @@ class HydrationRepository {
     }, {})
     return hydroWeek;
   }
-
-
 }
 
 
