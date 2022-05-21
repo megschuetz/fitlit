@@ -50,5 +50,5 @@ let hydration3;
 
   it('should have a numOunces property', () => {
     expect(hydration3.numOunces).to.equal(47);
-  })
+  });
 });
