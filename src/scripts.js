@@ -75,7 +75,7 @@ function sleepDataHelper(data) {
 
  function activityHelper(data) {
   activityRepo = new Activity(data)
-  displayUsersActivity(userId)
+  displayUsersActivity(displayedUsersID, activity)
 }
 
 //  DOM
