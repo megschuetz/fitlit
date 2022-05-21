@@ -108,4 +108,11 @@ function displayHydrationInfo(id, hydrationRepo) {
   console.log("objkeys", keys, "ogObj", waterByWeek);
   waterDrank.innerText += `: ${hydrationRepo.getFluidOuncesByDate(id, lastElement.date)} ounces`;
   // weeklyWater.innerText += JSON.stringify(waterByWeek);
+    weeklyWater.innerHTML = `${keys[6]}: ${waterByWeek[keys[6]]}<br>
+                            ${keys[5]}: ${waterByWeek[keys[5]]}<br>
+                            ${keys[4]}: ${waterByWeek[keys[4]]}<br>
+                            ${keys[3]}: ${waterByWeek[keys[3]]}<br>
+                            ${keys[2]}: ${waterByWeek[keys[4]]}<br>
+                            ${keys[1]}: ${waterByWeek[keys[4]]}<br>
+                            ${keys[0]}: ${waterByWeek[keys[4]]}<br>`
 };
