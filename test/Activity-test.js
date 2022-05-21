@@ -24,10 +24,6 @@ describe("Activity Repository", () => {
     expect(activity.activeMinutesDay(1, "2019/06/15")).to.equal(140)
   });
 
-  it("should have a method that finds all days where step goal was exceeded", function () {
-    expect(activity.allDaysStepGoal(1)).to.deep.equal(["2019/06/17", "2019/06/20", "2019/06/22"])
-  });
-
   it("should have a method that lists number of flights for a week", function () {
     expect(activity.activityFlightsPast7Days(1)).to.deep.equal([
       36, 18, 33, 2,
