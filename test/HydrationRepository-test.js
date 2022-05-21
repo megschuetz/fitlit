@@ -94,6 +94,10 @@ let hydrationRepository2;
     expect(hydrationRepository1).to.be.an.instanceOf(HydrationRepository);
   });
 
+  it('should have a property to hold all hydration data', () => {
+    expect(hydrationRepository1.hydrationData).to.deep.equal(hydrationData);
+  })
+
   it('should return a user\'s hydration data when given an id', () => {
       const hydrationDataUser1 = hydrationData.filter(obj => obj.userID === 1)
 
