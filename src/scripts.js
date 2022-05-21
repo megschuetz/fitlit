@@ -101,8 +101,11 @@ function displaySleepInfo(id, sleepRepo) {
 
 
 function displayHydrationInfo(id, hydrationRepo) {
-  const waterByWeek = hydrationRepo.getFluidOuncesEachDayOfWeek(id, "2020/01/16");
-  waterDrank.innerText += `: ${hydrationRepo.getFluidOuncesByDate(id, "2020/01/22")} ounces`;
-  weeklyWater.innerText += JSON.stringify(waterByWeek);
+  const lastElement = hydrationRepo.hydrationData[hydrationRepo.hydrationData.length-1]
+  const waterByWeek = hydrationRepo.getFluidOuncesEachDayOfWeek(id, lastElement.date);
+  console.log("test", hydrationRepo.getFluidOuncesEachDayOfWeek(id, lastElement.date))
+  let keys = Object.keys(waterByWeek);
+  console.log("objkeys", keys, "ogObj", waterByWeek);
+  waterDrank.innerText += `: ${hydrationRepo.getFluidOuncesByDate(id, lastElement.date)} ounces`;
+  // weeklyWater.innerText += JSON.stringify(waterByWeek);
 };
-
