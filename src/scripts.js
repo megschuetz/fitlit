@@ -74,13 +74,14 @@ function sleepDataHelper(data) {
 }
 
  function activityHelper(data) {
-  showAllUsersActivity(userId)
+  activityRepo = new Activity(data)
+  displayUsersActivity(userId)
 }
 
 //  DOM
-function showAllUsersActivity(userId) {
+function displayUsersActivity(userId) {
     stepsTaken.innerText = `Steps Taken: ${activity.activtyStepsforWeek()}`
-    minsActive.innerText = `Minutes Active: ${activity.calculateAvg(sleep.latest.date, "hoursSlept")}`
+    minsActive.innerText = `Minutes Active: ${activity.activeMinutesDay()}`
     flights.innerText = `Flights of stairs past week: ${activity.activityFlightsPast7Days()} `
 }
 
