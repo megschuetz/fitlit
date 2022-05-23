@@ -40,7 +40,8 @@ class Sleep {
   calculateWeeklyAvg(startDate, type) {
     let startingObject = this.findUserDataObjectByDate(startDate);
     let index = this.allUserInstances.indexOf(startingObject);
-    let objectsWithinDateRange = this.allUserInstances.slice(index, 7);
+    let start = index-6
+    let objectsWithinDateRange = this.allUserInstances.slice(start, this.allUserInstances.length);
     let total = objectsWithinDateRange.reduce((acc, object) => {
       acc += object[type];
       return acc;

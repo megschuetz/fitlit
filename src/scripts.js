@@ -19,6 +19,7 @@ let flights = document.getElementById('flights');
 let lastSleep = document.getElementById('last-sleep');
 let weeklySleep = document.getElementById('weekly-sleep');
 let avgSleep = document.getElementById('avg-sleep');
+let avgQuality = document.getElementById('avg-quality')
 let waterDrank = document.getElementById('water');
 let weeklyWater = document.getElementById('weekly-water');
 let email = document.getElementById('email');
@@ -91,7 +92,7 @@ function displayUserInfo(user, userRepo) {
 
 function displayActivityInfo(activityRepo) {
   const allUsersActivity = activityRepo.findUser(displayedUsersID);
-  stepsTaken.innerText = `Steps: ${allUsersActivity[allUsersActivity.length -1].numSteps}`;
+  stepsTaken.innerText = `Total Steps: ${allUsersActivity[allUsersActivity.length -1].numSteps}`;
   minsActive.innerText = `Minutes Active: ${allUsersActivity[allUsersActivity.length -1].minutesActive}`;
   flights.innerText = `Flights Taken: ${allUsersActivity[allUsersActivity.length -1].flightsOfStairs}`;
 };
@@ -99,10 +100,10 @@ function displayActivityInfo(activityRepo) {
 function displaySleepInfo(id, sleepRepo) {
   const allUserData = sleepRepo.getAllUserData(id);
   const sleep = sleepRepo.makeNewSleep(id, allUserData);
-
   lastSleep.innerText = `Last Night: ${sleep.latest.hoursSlept}`;
-  weeklySleep.innerText = `Weekly Avg: ${sleep.calculateAvg(sleep.latest.date, "hoursSlept")}`;
-  avgSleep.innerHTML = `Average Hours Slept: ${sleep.avgHoursSlept}<br>Average Sleep Quality: ${sleep.avgSleepQuality}`;
+  weeklySleep.innerHTML = `Weekly Avg: ${sleep.calculateWeeklyAvg(sleep.latest.date, "hoursSlept")}<br>`;
+  avgSleep.innerHTML = `Average Hours Slept: ${sleep.avgHoursSlept}<br>`;
+  avgQuality.innerText = `Average Sleep Quality: ${sleep.avgSleepQuality}`;
 };
 
 function displayHydrationInfo(id, hydrationRepo) {
