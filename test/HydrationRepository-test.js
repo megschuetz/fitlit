@@ -124,6 +124,6 @@ let hydrationRepository2;
         "2019/06/21": 50
     }
 
-    expect(hydrationRepository2.getFluidOuncesEachDayOfWeek(1, "2019/06/15")).to.deep.equal(hydrationObject);
+    expect(hydrationRepository2.getFluidOuncesEachDayOfWeek(1, "2019/06/21")).to.deep.equal(hydrationObject);
   });
 });

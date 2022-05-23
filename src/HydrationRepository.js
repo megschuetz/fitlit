@@ -36,7 +36,7 @@ class HydrationRepository {
 
     // create array of 7 dates starting with date param
     const weekFromDate = [0,0,0,0,0,0,0].map((el, index) => {
-    return dayjs(date).add([index], 'day').format('YYYY/MM/DD');
+    return dayjs(date).subtract([index], 'day').format('YYYY/MM/DD');
   });
 
     // Iterate over week array and for each date, add the date as a key
