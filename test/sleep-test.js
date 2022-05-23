@@ -147,7 +147,7 @@ beforeEach( () => {
 
   it('should return the average of anything specified within a week(sleep quality, hours slept)', () => {
     let user3 = new Sleep(3, sleepRepo.getAllUserData(3))
-    expect(user3.calculateWeeklyAvg("2019/06/15", "sleepQuality")).to.equal(3.6);
-    expect(user3.calculateWeeklyAvg("2019/06/15", "hoursSlept")).to.equal(10.7);
+    expect(user3.calculateWeeklyAvg("2019/06/15", "sleepQuality")).to.equal(3.4);
+    expect(user3.calculateWeeklyAvg("2019/06/15", "hoursSlept")).to.equal(11.4);
   });
 });
