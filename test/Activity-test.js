@@ -4,7 +4,7 @@ import UserRepository from "../src/UserRepository";
 import activityData from "../src/data/activityData";
 import userData from "../src/data/users"
 
-describe("Activity Repository", () => {
+describe("Activity", () => {
   let activity = new Activity(activityData);
   let userRepo = new UserRepository(userData)
 
@@ -29,19 +29,6 @@ describe("Activity Repository", () => {
       36, 18, 33, 2,
       12,  6,  6
     ])
-  });
-
-  it("should have a method that lists number of steps for a week", function () {
-    expect(activity.activityStepsForWeek(1)).to.deep.equal([
-      6637, 14329,
-      4419,  8429,
-     14478,  6760,
-     10289
-   ])
-  });
-
-  it("should have a method that finds step climbing record", function () {
-    expect(activity.stairClimbRecord(1)).to.equal(36)
   });
 
 });
