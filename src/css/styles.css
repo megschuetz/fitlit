@@ -30,6 +30,7 @@ header {
 .main-wrapper {
   background-color: rgba(255, 255, 255, 0.3);
   height: 100%;
+  width: 80vw;
   display: flex;
   justify-content: center;
 }
@@ -45,13 +46,13 @@ header {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width:80%;
+  width:93%;
 }
 
 .sidebar {
   display: flex;
   flex-direction: column;
-  width: 30%;
+  width: 20vw;
   height: 100%;
   border-radius: 0; 
   justify-content: flex-start;
@@ -143,7 +144,7 @@ header {
 
 main > section {
   background-color: white;
-  height: 320px;
+  max-height: 320px;
   width: 320px;
   margin: 35px;
   display: flex;
