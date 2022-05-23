@@ -38,7 +38,7 @@ describe('User', () => {
         expect(eachUser.getUserFirstName()).to.equal('Luisa')
     });
 
-    it('should return first name', () => {
+    it('should return last name', () => {
       expect(eachUser.getUserLastName()).to.equal('Hane')
     });
 
