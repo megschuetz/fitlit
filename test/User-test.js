@@ -3,8 +3,8 @@ import User from '../src/User';
 
 describe('User', () => {
 
-    let eachUser;  
-    
+    let eachUser;
+
     beforeEach(() => {
         let user = {
             "id": 1,
@@ -25,7 +25,7 @@ describe('User', () => {
     it('should be a function', function () {
         expect(User).to.be.a('function');
     });
-    
+
     it('should be an instance of User Repository', () => {
         expect(eachUser).to.be.an.instanceOf(User);
     });
@@ -35,9 +35,9 @@ describe('User', () => {
     });
 
     it('should return first name', () => {
-        expect(eachUser.getUserFirstName()).to.equal('Luisa Hane')
+        expect(eachUser.getUserFirstName()).to.equal('Luisa')
     });
-    
+
     it('should check id', () => {
        expect(eachUser.id).to.equal(1)
     });

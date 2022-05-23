@@ -1,4 +1,4 @@
-import Sleep from './Sleep'
+import Sleep from './Sleep';
 
 class SleepRepository {
   constructor(sleepData){
@@ -9,13 +9,13 @@ class SleepRepository {
       return foundData;
   }
   makeNewSleep(user, data) {
-    return new Sleep(user, data)
+    return new Sleep(user, data);
   }
   calculateAvgHoursSlept() {
     const allUsersHoursSleptSum = this.dataObjects.reduce((totalHours, object) => {
       totalHours += object.hoursSlept
       return totalHours
-    }, 0)
+    }, 0);
     let result = allUsersHoursSleptSum / this.dataObjects.length;
     parseInt(result.toFixed(1));
     return result;

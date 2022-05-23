@@ -96,6 +96,10 @@ beforeEach( () => {
     expect(sleep).to.be.an.instanceOf(Sleep);
   });
 
+  it('should have an ID', () => {
+    expect(sleep.userId).to.equal(1);
+  });
+
   it('should hold all user occurrences', () => {
     expect(sleep.allUserInstances).to.deep.equal([
       { "userID": 1, "date": '2019/06/15', "hoursSlept": 6.1, "sleepQuality": 2.2 },
@@ -103,10 +107,32 @@ beforeEach( () => {
     ]);
   });
 
+  it('should hold the most recent sleep data object', () => {
+    expect(sleep.latest).to.deep.equal({ userID: 1, date: '2019/06/16', hoursSlept: 4.1, sleepQuality: 3.8 });
+  });
+
+  it('should hold user avg sleep quality', () => {
+    expect(sleep.avgSleepQuality).to.equal(3);
+  });
+
+  it('should hold user avg hours slept', () => {
+    expect(sleep.avgHoursSlept).to.equal(5.1);
+  });
+
+  it('should return a rounded average of two numbers', () => {
+    expect(sleep.findAvg(10, 2)).to.equal(5);
+  });
+
   it('should return average sleep quality over all time', () => {
     let user3 = new Sleep(3, sleepRepo.getAllUserData(3))
     expect(user3.allUserInstances.length).to.equal(8);
-    expect(user3.calculateAvgDailySleepQuality()).to.equal(11.3);
+    expect(user3.calculateAvgDailySleepQuality()).to.equal(3.6);
+  });
+
+  it('should return average hours slept over all time', () => {
+    let user3 = new Sleep(3, sleepRepo.getAllUserData(3))
+    expect(sleep.calculateAvgHoursSlept()).to.equal(5.1);
+    expect(user3.calculateAvgHoursSlept()).to.equal(11.3);
   });
 
   it('should find any data object by date', () => {
@@ -119,9 +145,9 @@ beforeEach( () => {
     expect(sleep.returnObjectByDate("2019/06/16", "sleepQuality")).to.equal(3.8);
   });
 
-  it('should return the average of anything specified within a week', () => {
+  it('should return the average of anything specified within a week(sleep quality, hours slept)', () => {
     let user3 = new Sleep(3, sleepRepo.getAllUserData(3))
-    expect(user3.calculateAvg("2019/06/15", "sleepQuality")).to.equal(3.6);
-    expect(user3.calculateAvg("2019/06/15", "hoursSlept")).to.equal(10.7);
+    expect(user3.calculateWeeklyAvg("2019/06/15", "sleepQuality")).to.equal(3.6);
+    expect(user3.calculateWeeklyAvg("2019/06/15", "hoursSlept")).to.equal(10.7);
   });
 });
