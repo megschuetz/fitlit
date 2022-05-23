@@ -74,10 +74,10 @@ function displayUserInfo(user, userRepo) {
   welcomeName.innerHTML = `WELCOME, ${user.getUserFirstName().toUpperCase()}`;
   firstName.innerText = `${user.getUserFirstName().toUpperCase()}`;
   lastName.innerText = `${user.getUserLastName().toUpperCase()}`;
-  stepGoal.innerText = `${user.dailyStepGoal}`;
+  stepGoal.innerText = `${user.dailyStepGoal} Steps`;
   email.innerText = `${user.email}`;
   friends.innerText = `${getFriendsNames}`;
-  avgStepGoal.innerText = `${userRepo.calculateAvgStepGoal()}`;
+  avgStepGoal.innerText = `${userRepo.calculateAvgStepGoal()} Steps`;
 };
 
 function displayActivityInfo(activityRepo) {
