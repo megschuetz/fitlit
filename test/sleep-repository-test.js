@@ -1,14 +1,15 @@
 import { expect } from 'chai';
 import SleepRepository from '../src/sleep-repository';
-// import Sleep from '../src/Sleep';
+import Sleep from '../src/Sleep';
 
 describe('Sleep Repository', () => {
 
-  let sleepData
-  let sleepRepo
+  let sleepData;
+  let sleepRepo;
+  let sleep;
 
   beforeEach( () => {
-    let sleepData = [
+    sleepData = [
       {
         "userID":1,
         "date":"2019/06/15",
@@ -45,18 +46,29 @@ describe('Sleep Repository', () => {
       "hoursSlept":10.7,
       "sleepQuality":3.4
     },
-  ]
+  ];
 
     sleepRepo = new SleepRepository(sleepData);
+    sleep = new Sleep(1, sleepRepo.getAllUserData(1));
 
   });
 
   it('should be a function', function () {
     expect(SleepRepository).to.be.a('function');
   });
+
   it('should instantiate a sleep repository', function () {
-    expect(sleepRepo).to.be.an.instanceOf(SleepRepository)
+    expect(sleepRepo).to.be.an.instanceOf(SleepRepository);
   });
+
+  it('should hold all sleep data', function () {
+    expect(sleepRepo.dataObjects).to.deep.equal(sleepData);
+  });
+
+  it('should have a method to instantiate Sleep', function () {
+    expect(sleep).to.be.an.instanceOf(Sleep);
+  });
+
   it('should return all user data entries when given id', function () {
     expect(sleepRepo.getAllUserData(1)).to.deep.equal([{
         "userID":1,
@@ -70,6 +82,7 @@ describe('Sleep Repository', () => {
         "sleepQuality":3.8
       }]);
   });
+
   it('should calculate average hours slept among all users', function () {
     expect(sleepRepo.calculateAvgHoursSlept()).to.equal(7.7);
   });
