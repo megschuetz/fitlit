@@ -1,4 +1,4 @@
-/* * {border:1px solid black} */
+* {border:1px solid black}
 /* html {
   height: 100vh;
   width:100vw;
@@ -7,13 +7,12 @@
 
 body {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  font-family: georgia;
-  /* background-color: #ffedf0; */
-  /* background-color: #ecc4b0; */
-  background-color: #eac5ae;
+  font-family: Georgia;
+  background-color: #E3B89C;
   margin: 0px;
+  background-image: url("./images/pngdesert.png");
 }
 
 div > section,
@@ -26,27 +25,19 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  /* height: 10vh; */
 }
 
-
-/* header > p {
-  margin: 18px;
-} */
 
 .page-wrapper {
   display: flex;
   align-items: center;
-  justify-content: center;
-  /* height: 90vh;
-  width: 100vw; */
-  height: 850px;
+  height: 800px;
 }
 
 .sidebar {
   display: flex;
   flex-direction: column;
-  max-width: 300px;
+  width: 30%;
   height: 100%;
   border-radius: 0;
   /* background-color: white; */
@@ -54,6 +45,8 @@ header {
   background-image: url("https://images.unsplash.com/photo-1542451542907-6cf80ff362d6?ixlib=rb-1.2.1&raw_url=true&q=80&fm=jpg&crop=entropy&cs=tinysrgb&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1842");
   justify-content: flex-start;
   border-right: 10px solid black;
+  position: relative;
+  left: 0;
 }
 
 .sidebar > .sb {
@@ -82,6 +75,13 @@ header {
   padding: 20px;
 }
 
+.step-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+}
 /*   Wraps welcome-message to end of page   */
 .content-wrapper {
   display: flex;
@@ -121,7 +121,12 @@ header {
 .step-display {
   display: flex;
   justify-content: space-around;
-  width: 100%
+  background-color:#A292B2;
+  height: 200px;
+  width: 95%;
+  margin-left: 20px;
+  margin-right: 20px;
+  border-radius: 25px;
 }
 
 .dashboard {
@@ -130,20 +135,21 @@ header {
   width: 100%;
 }
 
-.activity,
-.sleep,
-.hydration {
+
+/*   User Data Modules   */
+main > section {
+  height: 320px;
+  width: 320px;
+  margin: 35px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
 }
 
-
-/*   User Data Modules   */
-main > section {
-  background-color: white;
-  height: 320px;
-  width: 320px;
-  margin: 35px;
+.sleep,
+.activity,
+.hydration {
+  background-color: #C3A9B5;
 }
+
