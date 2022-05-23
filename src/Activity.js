@@ -44,18 +44,6 @@ class Activity {
     return stairs.shift();
   };
 
-  milesPerDay(userId, date) {
-    let findUser = this.findUser(userId);
-    let numberSteps = findUser.find((user) => {
-      if (user.date === date) {
-        return user;
-      }
-    }).numSteps;
-    let miles = numberSteps / 2000;
-
-    return Math.round(miles * 100) / 100;
-  };
-
   activityFlightsPast7Days(userId) {
     const userFlightsData = this.findUser(userId);
 
