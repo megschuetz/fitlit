@@ -5,6 +5,7 @@ import {fetchUserData, fetchUserActivity, fetchUserSleep, fetchUserHydration} fr
 import UserRepository from './UserRepository';
 import SleepRepository from './sleep-repository';
 import Activity from './Activity';
+import Hydration from './Hydration'
 import HydrationRepository from './HydrationRepository';
 import User from './User';
 
@@ -45,6 +46,13 @@ function getAllUsers(userData) {
   return createUsersArray;
 };
 
+function getAllHydrationData(hydrationData) {
+  const createHydrationArray = hydrationData.map((data) => {
+      return new Hydration(data);
+  });
+  return createHydrationArray;
+};
+
 function userDataHelper(data) {
   const usersArray = getAllUsers(data);
   const userRepo = new UserRepository(usersArray);
@@ -52,6 +60,7 @@ function userDataHelper(data) {
 };
 
 function hydrationDataHelper(data) {
+  const hydrationArray = getAllHydrationData(data);
   const hydrationRepo = new HydrationRepository(data);
   displayHydrationInfo(displayedUsersID, hydrationRepo);
 };
