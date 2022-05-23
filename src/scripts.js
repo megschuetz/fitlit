@@ -1,5 +1,6 @@
 import './css/styles.css';
 import './images/turing-logo.png';
+import './images/pngdesert.png'
 import {fetchUserData, fetchUserActivity, fetchUserSleep, fetchUserHydration} from './apiCalls';
 import UserRepository from './UserRepository';
 import SleepRepository from './sleep-repository';

@@ -10,7 +10,6 @@ body {
   justify-content: flex-start;
   align-items: center;
   font-family: Georgia;
-  background-color: #E3B89C;
   margin: 0px;
 }
 
@@ -26,7 +25,6 @@ header {
   justify-content: center;
 }
 
-
 .page-wrapper {
   display: flex;
   align-items: center;
@@ -36,13 +34,13 @@ header {
 .main-wrapper {
   background-color: rgba(255, 255, 255, 0.3);
   height: 100%;
+  align-items: flex-end;
 }
 
 .desert-image {
   position: absolute;
-  left: 15;
   z-index: -5;
-}
+} 
 
 .sidebar {
   display: flex;
@@ -98,7 +96,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0px;
+  margin: 10px;
   font-size: 30px;
 }
 
@@ -112,25 +110,25 @@ header {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  /* height: 200px; */
   width: 100%;
-  /* background-color: white; */
 }
 
 .name {
   font-size: 75px;
-  margin: 0;
+  margin: 10px;
 }
 
 .step-display {
   display: flex;
   justify-content: space-around;
-  background-color:#A292B2;
+  background-color: white;
   height: 200px;
   width: 95%;
   margin-left: 20px;
   margin-right: 20px;
   border-radius: 25px;
+  box-shadow: 5px 10px 5px;
+  opacity: 0.7;
 }
 
 .dashboard {
@@ -141,7 +139,9 @@ header {
 
 
 /*   User Data Modules   */
+
 main > section {
+  background-color: white;
   height: 320px;
   width: 320px;
   margin: 35px;
@@ -149,11 +149,6 @@ main > section {
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  box-shadow: 5px 10px 5px;
+  opacity: 0.7;
 }
-
-.sleep,
-.activity,
-.hydration {
-  background-color: #C3A9B5;
-}
-
