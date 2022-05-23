@@ -99,9 +99,8 @@ function displayActivityInfo(activityRepo) {
 function displaySleepInfo(id, sleepRepo) {
   const allUserData = sleepRepo.getAllUserData(id);
   const sleep = sleepRepo.makeNewSleep(id, allUserData);
-
   lastSleep.innerText = `Last Night: ${sleep.latest.hoursSlept}`;
-  weeklySleep.innerText = `Weekly Avg: ${sleep.calculateAvg(sleep.latest.date, "hoursSlept")}`;
+  weeklySleep.innerText = `Weekly Avg: ${sleep.calculateWeeklyAvg(sleep.latest.date, "hoursSlept")}`;
   avgSleep.innerHTML = `Average Hours Slept: ${sleep.avgHoursSlept}<br>Average Sleep Quality: ${sleep.avgSleepQuality}`;
 };
 
