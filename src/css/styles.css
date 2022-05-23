@@ -12,7 +12,6 @@ body {
   font-family: Georgia;
   background-color: #E3B89C;
   margin: 0px;
-  background-image: url("./images/pngdesert.png");
 }
 
 div > section,
@@ -34,15 +33,23 @@ header {
   height: 800px;
 }
 
+.main-wrapper {
+  background-color: rgba(255, 255, 255, 0.3);
+  height: 100%;
+}
+
+.desert-image {
+  position: absolute;
+  left: 15;
+  z-index: -5;
+}
+
 .sidebar {
   display: flex;
   flex-direction: column;
   width: 30%;
   height: 100%;
-  border-radius: 0;
-  /* background-color: white; */
-  /* background-image: linear-gradient(to left, rgb(255,255,255,0), rgba(255,255,255,1)); */
-  background-image: url("https://images.unsplash.com/photo-1542451542907-6cf80ff362d6?ixlib=rb-1.2.1&raw_url=true&q=80&fm=jpg&crop=entropy&cs=tinysrgb&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1842");
+  border-radius: 0; 
   justify-content: flex-start;
   border-right: 10px solid black;
   position: relative;
@@ -54,9 +61,7 @@ header {
 }
 
 .username {
-  /* display: flex; */
   flex-direction: column;
-  /* margin-top: 50px; */
   padding: 20px;
 }
 
@@ -86,7 +91,6 @@ header {
 .content-wrapper {
   display: flex;
   flex-direction: column;
-  /* justify-content: flex-end; */
   align-items: center;
 }
 
