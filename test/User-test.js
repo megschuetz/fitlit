@@ -35,7 +35,6 @@ describe('User', () => {
     });
 
     it('should return first name', () => {
-      console.log(eachUser.getUserFirstName())
         expect(eachUser.getUserFirstName()).to.equal('Luisa')
     });
 
