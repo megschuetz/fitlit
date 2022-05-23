@@ -38,6 +38,10 @@ describe('User', () => {
         expect(eachUser.getUserFirstName()).to.equal('Luisa')
     });
 
+    it('should return first name', () => {
+      expect(eachUser.getUserLastName()).to.equal('Hane')
+    });
+
     it('should check id', () => {
        expect(eachUser.id).to.equal(1)
     });
