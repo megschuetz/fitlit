@@ -35,13 +35,13 @@ class HydrationRepository {
     const weekFromDate = [0,0,0,0,0,0,0].map((el, index) => {
       return dayjs(date).subtract([index], 'day').format('YYYY/MM/DD');
     });
-    const hydroWeek = weekFromDate.reduce((weekObj, date) => {
-      weekObj[date] = 0;
+    const hydroWeek = weekFromDate.reduce((week, date) => {
+      week[date] = 0;
       allHydrationDataById.filter(hydroObj => hydroObj.date === date)
       .forEach(el => {
-        weekObj[date] += el.numOunces;
+        week[date] += el.numOunces;
       });
-      return weekObj;
+      return week;
     }, {})
     return hydroWeek;
   }
