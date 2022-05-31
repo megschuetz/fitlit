@@ -36,7 +36,8 @@ Promise.all([userProfileData, userActivityData, userSleepData, userHydrationData
     activityDataHelper(data[1].activityData);
     sleepDataHelper(data[2].sleepData);
     hydrationDataHelper(data[3].hydrationData);
-});
+  })
+  .catch((error) => alert("Opps something went wrong. Try again later."));
 
 // DOM
 const displayUserInfo = (user, userRepo) => {
