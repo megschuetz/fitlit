@@ -123,18 +123,6 @@ beforeEach( () => {
     expect(sleep.findAvg(10, 2)).to.equal(5);
   });
 
-  it('should return average sleep quality over all time', () => {
-    let user3 = new Sleep(3, sleepRepo.getAllUserData(3))
-    expect(user3.allUserInstances.length).to.equal(8);
-    expect(user3.calculateAvgDailySleepQuality()).to.equal(3.6);
-  });
-
-  it('should return average hours slept over all time', () => {
-    let user3 = new Sleep(3, sleepRepo.getAllUserData(3))
-    expect(sleep.calculateAvgHoursSlept()).to.equal(5.1);
-    expect(user3.calculateAvgHoursSlept()).to.equal(11.3);
-  });
-
   it('should find any data object by date', () => {
     expect(sleep.findUserDataObjectByDate("2019/06/15")).to.deep.equal(sleep.allUserInstances[0]);
     expect(sleep.findUserDataObjectByDate("2019/06/16")).to.deep.equal(sleep.allUserInstances[1]);
@@ -149,5 +137,10 @@ beforeEach( () => {
     let user3 = new Sleep(3, sleepRepo.getAllUserData(3))
     expect(user3.calculateWeeklyAvg("2019/06/15", "sleepQuality")).to.equal(3.4);
     expect(user3.calculateWeeklyAvg("2019/06/15", "hoursSlept")).to.equal(11.4);
+  });
+
+  it('should find overall avg', () => {
+    expect(sleep.calculateOverallAvg("hoursSlept")).to.equal(5.1);
+    expect(sleep.calculateOverallAvg("sleepQuality")).to.equal(3);
   });
 });
