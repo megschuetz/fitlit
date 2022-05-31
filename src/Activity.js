@@ -37,14 +37,13 @@ class Activity {
 
   hitDailyStepGoal(userId, date) {
     let findUser = this.findUser(userId);
-    let user = userData.find((user) => {
-        return user.id === userId;
+    let userProfileData = userData.find((user) => {
+        return userProfileData.id === userId;
     });
-
     let stepsDay = findUser.find((user) => {
-        return user.date === date;
+        return userProfileData.date === date;
     }).numSteps;
-    if (user.dailyStepGoal <= stepsDay) {
+    if (userProfileData.dailyStepGoal <= stepsDay) {
       return true;
     } else { 
       return false;
