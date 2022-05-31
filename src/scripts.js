@@ -1,7 +1,7 @@
 import './css/styles.css';
 import './images/turing-logo.png';
 import './images/pngdesert.png'
-import {fetchUserData, fetchUserActivity, fetchUserSleep, fetchUserHydration} from './apiCalls';
+import {userProfileData, userActivityData, userSleepData, userHydrationData} from './apiCalls';
 import UserRepository from './UserRepository';
 import SleepRepository from './sleep-repository';
 import Activity from './Activity';
@@ -30,9 +30,8 @@ let lastName = document.getElementById('last-name');
 // GLOBAL VARIABLE
 let displayedUsersID = Math.floor(Math.random() * 50);
 
-Promise.all([fetchUserData(), fetchUserActivity(), fetchUserSleep(), fetchUserHydration()])
+Promise.all([userProfileData, userActivityData, userSleepData, userHydrationData])
   .then(data => {
-    console.log(data)
     userDataHelper(data[0].userData);
     activityDataHelper(data[1].activityData);
     sleepDataHelper(data[2].sleepData);
