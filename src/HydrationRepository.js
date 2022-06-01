@@ -5,16 +5,29 @@ class HydrationRepository {
     this.hydrationData = hydrationData;
   }
 
-  getUserById(id) {
+  handleInputErrors(id, date) {
     if (!id) {
-      return "User is not found. Unable to load respective user data."
+      return "User is not found. Unable to load respective user data.";
     }
+    if (!date) {
+      return "Date not found. Unable to load respective user data."
+    }
+  }
+
+  getUserById(id) {
+    // if (!id) {
+    //   return "User is not found. Unable to load respective user data.";
+    // }
     const foundData = this.hydrationData.filter(data => data.userID === id);
-      return foundData;
+    const isValid = id ? foundData : this.handleInputErrors(id)
+    return isValid;
   }
 
   getAvgFluidOuncesById(id) {
     const allHydrationDataById = this.getUserById(id);
+    if (typeof allHydrationDataById === 'string') {
+      return allHydrationDataById;
+    }
     const totalFluidOunces = allHydrationDataById.reduce((totalOunces, hydroObj) => {
       totalOunces += hydroObj.numOunces;
       return totalOunces;

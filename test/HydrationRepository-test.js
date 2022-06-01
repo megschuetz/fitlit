@@ -114,6 +114,11 @@ let hydrationRepository2;
     expect(hydrationRepository1.getAvgFluidOuncesById(1)).to.equal(53);
   });
 
+  it('should return "User is not found" message if unable to gather user data by id', () => {
+
+    expect(hydrationRepository1.getAvgFluidOuncesById(undefined)).to.equal("User is not found. Unable to load respective user data.");
+  });
+
   it('should return total fluid ounces of a user for a specific date when given id and date', () => {
     expect(hydrationRepository1.getFluidOuncesByDate(1, "2019/06/15")).to.equal(37);
   });
