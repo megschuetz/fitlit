@@ -1,5 +1,6 @@
 import { expect } from "chai";
 import Activity from "../src/Activity";
+import User from "../src/User";
 import UserRepository from "../src/UserRepository";
 
 describe("Activity", () => {
@@ -28,6 +29,7 @@ describe("Activity", () => {
       "email": "Diana.Hayes1@hotmail.com",
       "strideLength": 4.3,
       "dailyStepGoal": 10000,
+
     }, 
     {
       "id": 2,
@@ -53,11 +55,11 @@ describe("Activity", () => {
     expect(activity).to.be.an.instanceOf(Activity);
   });
 
-  it("should be a function", function () {
+  it('should be a function', () => {
     expect(Activity).to.be.a("function");
   });
 
-  it("should return error message if user does not exist", function () {
+  it('should return error message if user does not exist', () => {
     expect(activity.findUser(52)).to.equal("User does not exist");
   });
 
@@ -75,7 +77,7 @@ describe("Activity", () => {
   it('should calulate 7day average for mins active based on date', () => {
     expect(activity.weeklyAverageMinsActive(1, '2019/06/22')).to.equal(1177)
   });
-
+  
   it('should calculate the average of a given unit of all users on a given day', () => {
     expect(activity.allUsersAverageUnits("2019/06/15", "numSteps")).to.equal(4637)
     

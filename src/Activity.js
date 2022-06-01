@@ -53,23 +53,28 @@ class Activity {
   milesPerDay(userId, date) {
     const findUser = this.findUser(userId);
     const numberSteps = findUser.find((user) => {
-        return user.date === date;
-    }).numSteps;
-    const miles = numberSteps / 2000;
+      return user.date === date;
+    });
+    let miles = numberSteps.numSteps / 2000;
     return Math.round(miles * 100) / 100;
   };
 
   stairClimbRecord(userId) {
-    const findUser = this.findUser(userId);
-    const stairs = findUser
-      .map((user) => {
+    let findUser = this.findUser(userId);
+    let stairs = findUser.map((user) => {
         return user.flightsOfStairs;
-      })
-      .sort((a, b) => {
+      }).sort((a, b) => {
         return b - a;
       });
     return stairs.shift();
   };
+
+  findLatestDaySteps(userId) {
+    const findUser = this.findUser(userId);
+    const userData = findUser.map((data) => data.numSteps);
+    return userData[userData.length - 1];
+  };
+
 }
 
 export default Activity;
