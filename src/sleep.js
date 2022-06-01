@@ -3,8 +3,8 @@ class Sleep {
     this.userId = userId;
     this.allUserInstances = allUserInstances;
     this.latest = this.returnLatest();
-    this.avgSleepQuality = this.calculateAvgDailySleepQuality();
-    this.avgHoursSlept = this.calculateAvgHoursSlept();
+    this.avgSleepQuality = this.calculateOverallAvg("sleepQuality");
+    this.avgHoursSlept = this.calculateOverallAvg("hoursSlept");
   };
   returnLatest() {
     let latestObject = this.allUserInstances.length -1;
@@ -15,19 +15,12 @@ class Sleep {
     quotient = (Math.round(quotient * 10) / 10);
     return quotient;
   }
-  calculateAvgDailySleepQuality() {
-    let overallSleepQualitySum = this.allUserInstances.reduce((totalAcc, instance) => {
-    totalAcc += instance.sleepQuality;
+  calculateOverallAvg(type){
+    let overallSum = this.allUserInstances.reduce((totalAcc, instance) => {
+    totalAcc += instance[type];
     return totalAcc;
   }, 0);
-    return this.findAvg(overallSleepQualitySum, this.allUserInstances.length);
-  };
-  calculateAvgHoursSlept() {
-    let overallSleepQualitySum = this.allUserInstances.reduce((totalAcc, instance) => {
-    totalAcc += instance.hoursSlept;
-    return totalAcc;
-  }, 0);
-    return this.findAvg(overallSleepQualitySum, this.allUserInstances.length);
+    return this.findAvg(overallSum, this.allUserInstances.length);
   };
   findUserDataObjectByDate(day) {
     let specifiedObject = this.allUserInstances.find(userObject => userObject.date === day);
