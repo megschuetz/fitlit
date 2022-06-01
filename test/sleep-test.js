@@ -126,6 +126,8 @@ beforeEach( () => {
   it('should find any data object by date', () => {
     expect(sleep.findUserDataObjectByDate("2019/06/15")).to.deep.equal(sleep.allUserInstances[0]);
     expect(sleep.findUserDataObjectByDate("2019/06/16")).to.deep.equal(sleep.allUserInstances[1]);
+    expect(sleep.findUserDataObjectByDate("2015/06/16")).to.equal("Error");
+
   });
 
   it('should return any object', () => {

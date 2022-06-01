@@ -24,7 +24,11 @@ class Sleep {
   };
   findUserDataObjectByDate(day) {
     let specifiedObject = this.allUserInstances.find(userObject => userObject.date === day);
+    if (!specifiedObject) {
+      return "Error"
+    } else {
     return specifiedObject;
+    }
   };
   returnObjectByDate(day, objectType) {
     let specifiedObject = this.findUserDataObjectByDate(day);
@@ -42,5 +46,4 @@ class Sleep {
     return this.findAvg(total, objectsWithinDateRange.length);
   };
 };
-
 export default Sleep;
