@@ -123,6 +123,11 @@ let hydrationRepository2;
     expect(hydrationRepository1.getFluidOuncesByDate(1, "2019/06/15")).to.equal(37);
   });
 
+  it('should return "User is not found" message if unable to gather user data by id', () => {
+
+    expect(hydrationRepository1.getFluidOuncesByDate(undefined)).to.equal("User is not found. Unable to load respective user data.");
+  });
+
   it('should return an object with 7 dates as keys and 7 numbers as values', () => {
     const hydrationObject = {
         "2019/06/15": 37,

@@ -15,9 +15,6 @@ class HydrationRepository {
   }
 
   getUserById(id) {
-    // if (!id) {
-    //   return "User is not found. Unable to load respective user data.";
-    // }
     const foundData = this.hydrationData.filter(data => data.userID === id);
     const isValid = id ? foundData : this.handleInputErrors(id)
     return isValid;
@@ -37,6 +34,9 @@ class HydrationRepository {
 
   getFluidOuncesByDate(id, date) {
     const allHydrationDataById = this.getUserById(id);
+    if (typeof allHydrationDataById === 'string') {
+      return allHydrationDataById;
+    }
     const hydrationByDate = allHydrationDataById
       .filter(hydroObj => hydroObj.date === date)
       .reduce((totalOunces, hydroObj) => {
