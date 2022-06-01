@@ -10,12 +10,10 @@ class Activity {
     return this.activityData.filter((id) => id.userID === userId);
   };
 
-  dateSpecificUnitMeasured(userId, date, unit) {
-    let findUser = this.findUser(userId);
-    let user = findUser.find((user) => {
-      return user.date === date;
-    });
-    return user[unit];
+  getLatestUnit(userId, unit) {
+    const findUser = this.findUser(userId);
+    const latestData = findUser[findUser.length - 1]
+    return latestData[unit];
   };
 
   activityStepsForWeek(userId) {
