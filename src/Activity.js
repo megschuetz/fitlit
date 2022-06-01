@@ -10,12 +10,12 @@ class Activity {
     return this.activityData.filter((id) => id.userID === userId);
   };
 
-  dailyMinsActive(userId, date) {
+  dateSpecificUnitMeasured(userId, date, unit) {
     let findUser = this.findUser(userId);
-    let minsActivity = findUser.find((user) => {
+    let user = findUser.find((user) => {
       return user.date === date;
-    }).minutesActive;
-    return minsActivity;
+    });
+    return user[unit];
   };
 
   activityStepsForWeek(userId) {
@@ -56,33 +56,33 @@ class Activity {
         return weekData.map((data) => data.flightsOfStairs);
   };
 
-  hitDailyStepGoal(userId, date) {
-    let findUser = this.findUser(userId);
-    let userProfileData = userData.find((user) => {
-        return userProfileData.id === userId;
-    });
-    let stepsDay = findUser.find((user) => {
-        return userProfileData.date === date;
-    }).numSteps;
-    if (userProfileData.dailyStepGoal <= stepsDay) {
-      return true;
-    } else { 
-      return false;
-    }
-  };
+  // hitDailyStepGoal(userId, date) {
+  //   let findUser = this.findUser(userId);
+  //   let userProfileData = userData.find((user) => {
+  //       return userProfileData.id === userId;
+  //   });
+  //   let stepsDay = findUser.find((user) => {
+  //       return userProfileData.date === date;
+  //   }).numSteps;
+  //   if (userProfileData.dailyStepGoal <= stepsDay) {
+  //     return true;
+  //   } else { 
+  //     return false;
+  //   }
+  // };
 
   milesPerDay(userId, date) {
-    let findUser = this.findUser(userId);
-    let numberSteps = findUser.find((user) => {
+    const findUser = this.findUser(userId);
+    const numberSteps = findUser.find((user) => {
         return user.date === date;
     }).numSteps;
-    let miles = numberSteps / 2000;
+    const miles = numberSteps / 2000;
     return Math.round(miles * 100) / 100;
   };
 
   stairClimbRecord(userId) {
-    let findUser = this.findUser(userId);
-    let stairs = findUser
+    const findUser = this.findUser(userId);
+    const stairs = findUser
       .map((user) => {
         return user.flightsOfStairs;
       })
