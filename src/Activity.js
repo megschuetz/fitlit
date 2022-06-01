@@ -59,6 +59,12 @@ class Activity {
   //   }
   // };
 
+  checkDaysExceedingStepGoal(userId, userData){
+    const findUser = this.findUser(userId);
+    const daysExceedingGoal = findUser.filter((user) => user.numSteps >= userData.dailyStepGoal)
+    return daysExceedingGoal.map(user => user.date)
+  }
+
   milesPerDay(userId, date) {
     const findUser = this.findUser(userId);
     const numberSteps = findUser.find((user) => {
