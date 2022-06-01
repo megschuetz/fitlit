@@ -44,26 +44,11 @@ class Activity {
     return Math.round(total/allUsersOnDate.length);
   };
 
-  // hitDailyStepGoal(userId, date) {
-  //   let findUser = this.findUser(userId);
-  //   let userProfileData = userData.find((user) => {
-  //       return userProfileData.id === userId;
-  //   });
-  //   let stepsDay = findUser.find((user) => {
-  //       return userProfileData.date === date;
-  //   }).numSteps;
-  //   if (userProfileData.dailyStepGoal <= stepsDay) {
-  //     return true;
-  //   } else { 
-  //     return false;
-  //   }
-  // };
-
   checkDaysExceedingStepGoal(userId, userData){
     const findUser = this.findUser(userId);
     const daysExceedingGoal = findUser.filter((user) => user.numSteps >= userData.dailyStepGoal)
     return daysExceedingGoal.map(user => user.date)
-  }
+  };
 
   milesPerDay(userId, date) {
     const findUser = this.findUser(userId);
