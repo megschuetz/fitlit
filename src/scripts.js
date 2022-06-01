@@ -85,37 +85,37 @@ function displayUserInfo(user, userRepo) {
   firstName.innerText = `${user.getUserFirstName().toUpperCase()}`;
   lastName.innerText = `${user.getUserLastName().toUpperCase()}`;
   stepGoal.innerText = `${user.dailyStepGoal} Steps`;
-  email.innerText = `${user.email}`;
-  friends.innerText = `${getFriendsNames}`;
+  email.innerHTML = `<b>email:</b> ${user.email}`;
+  friends.innerHTML = `<b>friends:</b> ${getFriendsNames}`;
   avgStepGoal.innerText = `${userRepo.calculateAvgStepGoal()} Steps`;
 };
 
 function displayActivityInfo(activityRepo) {
   const allUsersActivity = activityRepo.findUser(displayedUsersID);
-  stepsTaken.innerText = `Total Steps: ${allUsersActivity[allUsersActivity.length -1].numSteps}`;
-  minsActive.innerText = `Minutes Active: ${allUsersActivity[allUsersActivity.length -1].minutesActive}`;
-  flights.innerText = `Flights Taken: ${allUsersActivity[allUsersActivity.length -1].flightsOfStairs}`;
+  stepsTaken.innerHTML = `<b>Steps this week</b>: ${allUsersActivity[allUsersActivity.length -1].numSteps} steps`;
+  minsActive.innerHTML = `<b>Minutes active</b>: ${allUsersActivity[allUsersActivity.length -1].minutesActive} min.`;
+  flights.innerHTML = `<b>Flights conquered</b>: ${allUsersActivity[allUsersActivity.length -1].flightsOfStairs} flights`;
 };
 
 function displaySleepInfo(id, sleepRepo) {
   const allUserData = sleepRepo.getAllUserData(id);
   const sleep = sleepRepo.makeNewSleep(id, allUserData);
-  lastSleep.innerText = `Last Night: ${sleep.latest.hoursSlept}`;
-  weeklySleep.innerHTML = `Weekly Avg: ${sleep.calculateWeeklyAvg(sleep.latest.date, "hoursSlept")}<br>`;
-  avgSleep.innerHTML = `Average Hours Slept: ${sleep.avgHoursSlept}<br>`;
-  avgQuality.innerText = `Average Sleep Quality: ${sleep.avgSleepQuality}`;
+  lastSleep.innerHTML = `<b>Last Night:</b> you slept ${sleep.latest.hoursSlept} hours!`;
+  weeklySleep.innerHTML = `<b>Weekly Avg:</b> ${sleep.calculateWeeklyAvg(sleep.latest.date, "hoursSlept")} hrs.<br>`;
+  avgSleep.innerHTML = `<b>Average Hours Slept:</b> ${sleep.avgHoursSlept}<br> hrs.`;
+  avgQuality.innerHTML = `<b>Average Sleep Quality Rating:</b> ${sleep.avgSleepQuality}`;
 };
 
 function displayHydrationInfo(id, hydrationRepo) {
   const lastElement = hydrationRepo.hydrationData[hydrationRepo.hydrationData.length-1];
   const waterByWeek = hydrationRepo.getFluidOuncesEachDayOfWeek(id, lastElement.date);
   const keys = Object.keys(waterByWeek);
-  waterDrank.innerText += `: ${hydrationRepo.getFluidOuncesByDate(id, lastElement.date)} ounces`;
-  weeklyWater.innerHTML += `: <br>${keys[6]}: ${waterByWeek[keys[6]]} ounces<br>
-                            ${keys[5]}: ${waterByWeek[keys[5]]} ounces<br>
-                            ${keys[4]}: ${waterByWeek[keys[4]]} ounces<br>
-                            ${keys[3]}: ${waterByWeek[keys[3]]} ounces<br>
-                            ${keys[2]}: ${waterByWeek[keys[2]]} ounces<br>
-                            ${keys[1]}: ${waterByWeek[keys[1]]} ounces<br>
-                            ${keys[0]}: ${waterByWeek[keys[0]]} ounces<br>`;
+  waterDrank.innerHTML = `<b>Today's Intake</b>: ${hydrationRepo.getFluidOuncesByDate(id, lastElement.date)} oz.`;
+  weeklyWater.innerHTML = `<b>Weekly Water</b>: <br>${keys[6]}: ${waterByWeek[keys[6]]} oz.<br>
+                            ${keys[5]}: ${waterByWeek[keys[5]]} oz.<br>
+                            ${keys[4]}: ${waterByWeek[keys[4]]} oz.<br>
+                            ${keys[3]}: ${waterByWeek[keys[3]]} oz.<br>
+                            ${keys[2]}: ${waterByWeek[keys[2]]} oz.<br>
+                            ${keys[1]}: ${waterByWeek[keys[1]]} oz.<br>
+                            ${keys[0]}: ${waterByWeek[keys[0]]} oz.<br>`;
 };
