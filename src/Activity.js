@@ -1,5 +1,4 @@
-import userProfileData from "../src/data/users";
-
+import userData from "../src/data/users"
 
 class Activity {
   constructor(activityInfo) {
@@ -59,27 +58,25 @@ class Activity {
         return weekData.map((data) => data.flightsOfStairs);
   };
 
-  hitDailyStepGoal(userId, date) {
-    const findUser = this.findUser(userId);
-    const userProfileData = findUser.find((user) => {
-        return userProfileData.id === userId;
-    });
-    let stepsDay = findUser.find((userProfileData) => {
-        return userProfileData.date === date;
-    });
-    if (userId.dailyStepGoal <= stepsDay.numSteps) {
-        return true;
-    } else { 
-        return false;
-    }
-  };
-
+  // hitDailyStepGoal(userId, date) {
+  //   let findUser = this.findUser(userId);
+  //   let userProfileData = findUser.find((user) => {
+  //       return userProfileData.id === userId;
+  //   });
+  //   let stepsDay = findUser.find((user) => {
+  //       return userProfileData.date === date;
+  //   })
+  //   if (userProfileData.dailyStepGoal <= stepsDay.numSteps) {
+  //     return true;
+  //   } else { 
+  //     return false;
+  //   }
+  // };
+  
   allDaysStepGoal(userId) {
     let findUser = this.findUser(userId);
-    let user = userProfileData.find((user) => {
-      if (user.id === userId) {
-        return user;
-      }
+    let user = findUser.find((user) => {
+        return user.id === userId
     });
     let week = findUser.reduce((a, b) => {
       if (b.numSteps >= user.dailyStepGoal) {
@@ -88,7 +85,17 @@ class Activity {
       return a;
     }, []);
     return week;
-  }
+  };
+
+  stairClimbRecord(userId) {
+    let findUser = this.findUser(userId);
+    let stairs = findUser.map((user) => {
+        return user.flightsOfStairs;
+      }).sort((a, b) => {
+        return b - a;
+      });
+    return stairs.shift();
+  };
 
   milesPerDay(userId, date) {
     let findUser = this.findUser(userId);
