@@ -16,12 +16,11 @@ class Activity {
     return latestData[unit];
   };
 
-  activityStepsForWeek(userId) {
+  getWeeklyReportPerUnit(userId, unit) {
     const userData = this.findUser(userId);
     const lastElement = userData.indexOf(userData[userData.length - 1]);
     const weekData = userData.slice(lastElement - 6);
-      return weekData.map((data) => 
-        data.numSteps);
+    return weekData.map((data) => data[unit]);
   };
 
   weeklyAverageMinsActive(userId, date) {
