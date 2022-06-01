@@ -20,11 +20,15 @@ class Sleep {
     }
   }
   calculateOverallAvg(type){
+    if (!type) {
+      return "Error"
+    } else {
     let overallSum = this.allUserInstances.reduce((totalAcc, instance) => {
     totalAcc += instance[type];
     return totalAcc;
   }, 0);
     return this.findAvg(overallSum, this.allUserInstances.length);
+    }
   };
   findUserDataObjectByDate(day) {
     let specifiedObject = this.allUserInstances.find(userObject => userObject.date === day);
@@ -36,18 +40,26 @@ class Sleep {
   };
   returnObjectByDate(day, objectType) {
     let specifiedObject = this.findUserDataObjectByDate(day);
+    if (!day || !objectType || !specifiedObject || !specifiedObject[objectType]){
+      return "Error"
+    } else {
     return specifiedObject[objectType];
+    }
   };
   calculateWeeklyAvg(startDate, type) {
     let startingObject = this.findUserDataObjectByDate(startDate);
     let index = this.allUserInstances.indexOf(startingObject);
     let start = index-6
     let objectsWithinDateRange = this.allUserInstances.slice(start, this.allUserInstances.length);
+    if (!startDate || !type || !startingObject || !objectsWithinDateRange){
+      return "Error"
+    } else {
     let total = objectsWithinDateRange.reduce((acc, object) => {
       acc += object[type];
       return acc;
     },0);
     return this.findAvg(total, objectsWithinDateRange.length);
-  };
+    };
+  }
 };
 export default Sleep;
