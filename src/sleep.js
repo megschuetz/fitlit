@@ -10,17 +10,17 @@ class Sleep {
     let latestObject = this.allUserInstances.length -1;
     return this.allUserInstances[latestObject];
   }
-  // findAvg(dividend, divisor) {
-  //   let quotient = dividend / divisor;
-  //   quotient = (Math.round(quotient * 10) / 10);
-  //   return quotient;
-  // }
+  findAvg(dividend, divisor) {
+    let quotient = dividend / divisor;
+    quotient = (Math.round(quotient * 10) / 10);
+    return quotient;
+  }
   calculateOverallAvg(type){
     let overallSum = this.allUserInstances.reduce((totalAcc, instance) => {
     totalAcc += instance[type];
     return totalAcc;
   }, 0);
-    return Math.round(overallSum/this.allUserInstances.length)
+    return this.findAvg(overallSum, this.allUserInstances.length);
   };
   findUserDataObjectByDate(day) {
     let specifiedObject = this.allUserInstances.find(userObject => userObject.date === day);
@@ -39,7 +39,7 @@ class Sleep {
       acc += object[type];
       return acc;
     },0);
-    return Math.round(total/objectsWithinDateRange.length)
+    return this.findAvg(total, objectsWithinDateRange.length);
   };
 };
 
