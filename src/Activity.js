@@ -10,6 +10,14 @@ class Activity {
     return this.activityData.filter((id) => id.userID === userId);
   };
 
+  dailyMinsActive(userId, date) {
+    let findUser = this.findUser(userId);
+    let minsActivity = findUser.find((user) => {
+      return user.date === date;
+    }).minutesActive;
+    return minsActivity;
+  };
+
   activityStepsForWeek(userId) {
     const userData = this.findUser(userId);
     const lastElement = userData.indexOf(userData[userData.length - 1]);

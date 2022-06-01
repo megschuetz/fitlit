@@ -38,7 +38,7 @@ describe("Activity", () => {
   });
 
   it("should have a method that returns how many active minutes in a given day", function () {
-    expect(activity.activeMinutesDay(1, "2019/06/15")).to.equal(140)
+    expect(activity.dailyMinsActive(1, "2019/06/15")).to.equal(140)
   });
 
   it("should have a method that lists number of flights for a week", function () {
