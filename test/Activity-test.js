@@ -8,7 +8,7 @@ describe("Activity", () => {
   let activity;
   let userRepo;
   let userData;
-  let user1;
+  let users;
   
 
   beforeEach(() => {
@@ -24,7 +24,7 @@ describe("Activity", () => {
       {"userID":1,"date":"2019/06/21","numSteps":6760,"minutesActive":135,"flightsOfStairs":6},
       {"userID":1,"date":"2019/06/22","numSteps":10289,"minutesActive":119,"flightsOfStairs":6},
     ]
-     userData = {
+     users = {
       "id": 1,
       "name": "Luisa Hane",
       "address": "15195 Nakia Tunnel, Erdmanport VA 19901-1697",
@@ -40,7 +40,6 @@ describe("Activity", () => {
 
     activity = new Activity(activityData);
     userRepo = new UserRepository(userData);
-    user1 = new User(userData, activityData);
   });
 
   it('should be a instance of Activity', () => {
@@ -82,15 +81,6 @@ describe("Activity", () => {
 
   it('should calulate 7 day average for mins active based on date', () => {
     expect(activity.weeklyAverageMinsActive(1, '2019/06/22')).to.equal(1177)
-  });
-
-  it.skip('should have a method that returns boolean if a user reached their step goal for the day', () => {
-    expect(activity.hitDailyStepGoal(1, "2019/06/15")).to.equal(true)
-    expect(activity.hitDailyStepGoal(1, "2019/06/22")).to.equal(false)
-  });
-
-  it('should have a method that finds all days where step goal was exceeded', () => {
-    expect(activity.allDaysStepGoal(1)).to.deep.equal(["2019/06/17", "2019/06/20", "2019/06/22"])
   });
 
   it('should have a method that lists number of steps for a week', () => {
