@@ -1,12 +1,9 @@
 import { expect } from "chai";
 import Activity from "../src/Activity";
-import UserRepository from "../src/UserRepository";
 
 describe("Activity", () => {
   let activityData;
   let activity;
-  // let userRepo;
-  // let userData;
 
   beforeEach(() => {
      activityData = [
@@ -22,7 +19,6 @@ describe("Activity", () => {
       {"userID":1,"date":"2019/06/22","numSteps":10289,"minutesActive":119,"flightsOfStairs":6},
     ]
     activity = new Activity(activityData);
-    // userRepo = new UserRepository(userData);
   });
 
   it('should be a instance of Activity', () => {
