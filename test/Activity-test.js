@@ -46,11 +46,6 @@ describe("Activity", () => {
     ])
   });
 
-  it("should have a method that returns boolean if a user reached their step goal for the day", function () {
-    expect(activity.hitDailyStepGoal(1, "2019/06/15")).to.equal(false)
-    expect(activity.hitDailyStepGoal(1, "2019/06/22")).to.equal(true)
-  });
-
   it("should have a method that finds step climbing record", function () {
     expect(activity.stairClimbRecord(1)).to.equal(36)
   });
