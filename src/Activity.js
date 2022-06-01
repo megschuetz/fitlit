@@ -26,6 +26,21 @@ class Activity {
         data.numSteps);
   };
 
+  weeklyAverageMinsActive(userId, date) {
+    const userData = this.findUser(userId);
+    const lastElement = userData.indexOf(userData[userData.length - 1]);
+
+  }
+
+  allUsersAverage(date, unitMeasured) {
+    const allUsersOnDate = this.activityData.filter((user) => user.date === date)
+    const total = allUsersOnDate.reduce((sum, user) => {
+      sum += user[unitMeasured]
+      return sum
+    }, 0);
+    return Math.round(total/allUsersOnDate.length)
+  }
+
   activityFlightsPast7Days(userId) {
     const userFlightsData = this.findUser(userId);
     const lastElement = userFlightsData.indexOf(
