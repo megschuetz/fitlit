@@ -1,12 +1,15 @@
 import { expect } from "chai";
 import Activity from "../src/Activity";
+import User from "../src/User";
 import UserRepository from "../src/UserRepository";
 
 describe("Activity", () => {
   let activityData;
   let activity;
-  // let userRepo;
-  // let userData;
+  let userRepo;
+  let userData;
+  let user1;
+  
 
   beforeEach(() => {
      activityData = [
@@ -21,8 +24,23 @@ describe("Activity", () => {
       {"userID":1,"date":"2019/06/21","numSteps":6760,"minutesActive":135,"flightsOfStairs":6},
       {"userID":1,"date":"2019/06/22","numSteps":10289,"minutesActive":119,"flightsOfStairs":6},
     ]
+     userData = {
+      "id": 1,
+      "name": "Luisa Hane",
+      "address": "15195 Nakia Tunnel, Erdmanport VA 19901-1697",
+      "email": "Diana.Hayes1@hotmail.com",
+      "strideLength": 4.3,
+      "dailyStepGoal": 10000,
+      "friends": [
+        16,
+        4,
+        8
+      ]
+    };
+
     activity = new Activity(activityData);
-    // userRepo = new UserRepository(userData);
+    userRepo = new UserRepository(userData);
+    user1 = new User(userData, activityData);
   });
 
   it('should be a instance of Activity', () => {
@@ -83,5 +101,9 @@ describe("Activity", () => {
      10289
    ])
   });
+
+  it("should have a method that lists number of steps for latest day", function () {
+    expect(activity.findLatestDaySteps(1)).to.equal(10289)
+  })
 
 });
