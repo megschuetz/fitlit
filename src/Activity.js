@@ -56,45 +56,6 @@ class Activity {
         return weekData.map((data) => data.flightsOfStairs);
   };
 
-  // hitDailyStepGoal(userId, date) {
-  //   let findUser = this.findUser(userId);
-  //   let userProfileData = findUser.find((user) => {
-  //       return userProfileData.id === userId;
-  //   });
-  //   let stepsDay = findUser.find((user) => {
-  //       return userProfileData.date === date;
-  //   })
-  //   if (userProfileData.dailyStepGoal <= stepsDay.numSteps) {
-  //     return true;
-  //   } else { 
-  //     return false;
-  //   }
-  // };
-  
-  allDaysStepGoal(userId, userData) {
-    let findUser = this.findUser(userId);
-    let user = findUser.find((user) => {
-        return user.id === userId
-    });
-    let week = findUser.reduce((a, b) => {
-      if (b.numSteps >= userData.dailyStepGoal) {
-        a.push(b.date);
-      }
-      return a;
-    }, []);
-    return week;
-  };
-
-  stairClimbRecord(userId) {
-    let findUser = this.findUser(userId);
-    let stairs = findUser.map((user) => {
-        return user.flightsOfStairs;
-      }).sort((a, b) => {
-        return b - a;
-      });
-    return stairs.shift();
-  };
-
   milesPerDay(userId, date) {
     let findUser = this.findUser(userId);
     let numberSteps = findUser.find((user) => {
