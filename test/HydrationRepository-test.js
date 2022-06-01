@@ -105,9 +105,9 @@ let hydrationRepository2;
     expect(hydrationRepository1.getUserById(1).length).to.equal(2);
   });
 
-  it('should return "User is not found" if unable to find id', () => {
+  it('should return "User is not found" message if unable to find id', () => {
 
-    expect(hydrationRepository1.getUserById(undefined)).to.equal("User is not found");
+    expect(hydrationRepository1.getUserById(undefined)).to.equal("User is not found. Unable to load respective user data.");
   });
 
   it('should return the average fluid ounces of a user when given an id', () => {
