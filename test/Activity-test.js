@@ -43,25 +43,13 @@ describe("Activity", () => {
   });
 
   it("should make a weekly report per unit for last 7 days", () => {
-    console.log(activity.getWeeklyReportPerUnit(1, 'flightsOfStairs'))
     expect(activity.getWeeklyReportPerUnit(1, 'numSteps')).to.deep.equal([6637, 14329, 4419,  8429, 14478,  6760, 10289])
     expect(activity.getWeeklyReportPerUnit(1, 'minutesActive')).to.deep.equal([175, 168, 165, 275, 140, 135, 119])
     expect(activity.getWeeklyReportPerUnit(1, 'flightsOfStairs')).to.deep.equal([ 36, 18, 33, 2, 12, 6, 6 ])
   });
 
-  it("should have a method that lists number of flights for a week", function () {
-    expect(activity.activityFlightsPast7Days(1)).to.deep.equal([
-      36, 18, 33, 2,
-      12,  6,  6
-    ])
-  });
-
-  it("should have a method that finds step climbing record", function () {
-    expect(activity.stairClimbRecord(1)).to.equal(36)
-  });
-
-  it("should have a method that returns miles walked in a specific day", function () {
-    expect(activity.milesPerDay(1, "2019/06/15")).to.equal(1.79)
+  it('should calulate 7day average for mins active based on date', () => {
+    expect(activity.weeklyAverageMinsActive(1, '2019/06/22')).to.equal(1177)
   });
 
   it('should calculate the average of a given unit of all users on a given day', () => {
@@ -69,8 +57,12 @@ describe("Activity", () => {
     expect(activity.allUsersAverageUnits("2019/06/15", "minutesActive")).to.equal(97)
     expect(activity.allUsersAverageUnits("2019/06/15", "flightsOfStairs")).to.equal(16)
   });
+  
+  it("should have a method that returns miles walked in a specific day", function () {
+    expect(activity.milesPerDay(1, "2019/06/15")).to.equal(1.79)
+  });
 
-  it('should calulate 7day average for mins active based on date', () => {
-    expect(activity.weeklyAverageMinsActive(1, '2019/06/22')).to.equal(1177)
+  it("should have a method that finds step climbing record", function () {
+    expect(activity.stairClimbRecord(1)).to.equal(36)
   });
 });
