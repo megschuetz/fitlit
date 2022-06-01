@@ -43,8 +43,10 @@ describe("Activity", () => {
   });
 
   it("should make a weekly report per unit for last 7 days", () => {
-    console.log(activity.getWeeklyReportPerUnit(1, 'numSteps'))
-    expect(activity.getWeeklyReportPerUnit(1, 'numSteps')).to.equal([6637, 14329, 4419,  8429, 14478,  6760, 10289])
+    console.log(activity.getWeeklyReportPerUnit(1, 'flightsOfStairs'))
+    // expect(activity.getWeeklyReportPerUnit(1, 'numSteps')).to.equal([6637, 14329, 4419,  8429, 14478,  6760, 10289])
+    // expect(activity.getWeeklyReportPerUnit(1, 'minutesActive')).to.equal([175, 168, 165, 275, 140, 135, 119])
+    expect(activity.getWeeklyReportPerUnit(1, 'flightsOfStairs')).to.equal([ 36, 18, 33, 2, 12, 6, 6 ])
   });
 
   it("should have a method that lists number of flights for a week", function () {
