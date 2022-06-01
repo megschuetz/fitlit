@@ -70,8 +70,6 @@ class Activity {
       });
     return stairs.shift();
   };
-
-  
 }
 
 export default Activity;
