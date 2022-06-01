@@ -106,7 +106,6 @@ let hydrationRepository2;
   });
 
   it('should return "User is not found" message if unable to find id', () => {
-
     expect(hydrationRepository1.getUserById(undefined)).to.equal("User is not found. Unable to load respective user data.");
   });
 
@@ -115,7 +114,6 @@ let hydrationRepository2;
   });
 
   it('should return "User is not found" message if unable to gather user data by id', () => {
-
     expect(hydrationRepository1.getAvgFluidOuncesById(undefined)).to.equal("User is not found. Unable to load respective user data.");
   });
 
@@ -124,7 +122,6 @@ let hydrationRepository2;
   });
 
   it('should return "User is not found" message if unable to gather user data by id', () => {
-
     expect(hydrationRepository1.getFluidOuncesByDate(undefined)).to.equal("User is not found. Unable to load respective user data.");
   });
 
@@ -140,5 +137,9 @@ let hydrationRepository2;
     }
 
     expect(hydrationRepository2.getFluidOuncesEachDayOfWeek(1, "2019/06/21")).to.deep.equal(hydrationObject);
+  });
+
+  it('should return "User is not found" message if unable to gather user data by id', () => {
+    expect(hydrationRepository1.getFluidOuncesEachDayOfWeek(undefined)).to.equal("User is not found. Unable to load respective user data.");
   });
 });

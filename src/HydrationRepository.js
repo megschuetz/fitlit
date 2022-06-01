@@ -48,6 +48,9 @@ class HydrationRepository {
 
   getFluidOuncesEachDayOfWeek(id, date) {
     const allHydrationDataById = this.getUserById(id);
+    if (typeof allHydrationDataById === 'string') {
+      return allHydrationDataById;
+    }
     const weekFromDate = [0,0,0,0,0,0,0].map((el, index) => {
       return dayjs(date).subtract([index], 'day').format('YYYY/MM/DD');
     });
