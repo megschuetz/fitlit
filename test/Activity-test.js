@@ -37,8 +37,9 @@ describe("Activity", () => {
     expect(activity.findUser(52)).to.equal("User does not exist");
   });
 
-  it("should have a method that returns how many active minutes in a given day", function () {
-    expect(activity.dailyMinsActive(1, "2019/06/15")).to.equal(140)
+  it("should return a unit measured on a specific day", function () {
+    expect(activity.getLatestUnit(1, 'minutesActive')).to.equal(119)
+    expect(activity.getLatestUnit(1, 'flightsOfStairs')).to.equal(6)
   });
 
   it("should have a method that lists number of flights for a week", function () {
@@ -54,6 +55,7 @@ describe("Activity", () => {
 
   it("should have a method that returns miles walked in a specific day", function () {
     expect(activity.milesPerDay(1, "2019/06/15")).to.equal(1.79)
+  });
 
   it('should calculate the average of a given unit of all users on a given day', () => {
     expect(activity.allUsersAverageUnits("2019/06/15", "numSteps")).to.equal(4637)
