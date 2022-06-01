@@ -6,6 +6,9 @@ class HydrationRepository {
   }
 
   getUserById(id) {
+    if (!id) {
+      return "User is not found"
+    }
     const foundData = this.hydrationData.filter(data => data.userID === id);
       return foundData;
   }
