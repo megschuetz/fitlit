@@ -1,5 +1,3 @@
-import userData from "../src/data/users"
-
 class Activity {
   constructor(activityInfo) {
     this.activityData = activityInfo;
@@ -73,13 +71,13 @@ class Activity {
   //   }
   // };
   
-  allDaysStepGoal(userId) {
+  allDaysStepGoal(userId, userData) {
     let findUser = this.findUser(userId);
     let user = findUser.find((user) => {
         return user.id === userId
     });
     let week = findUser.reduce((a, b) => {
-      if (b.numSteps >= user.dailyStepGoal) {
+      if (b.numSteps >= userData.dailyStepGoal) {
         a.push(b.date);
       }
       return a;
