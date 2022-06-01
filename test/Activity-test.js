@@ -29,30 +29,30 @@ describe("Activity", () => {
     expect(activity).to.be.an.instanceOf(Activity);
   });
 
-  it("should be a function", () => {
+  it('should be a function', () => {
     expect(Activity).to.be.a("function");
   });
 
-  it("should return error message if user does not exist", () => {
+  it('should return error message if user does not exist', () => {
     expect(activity.findUser(52)).to.equal("User does not exist");
   });
 
-  it("should have a method that returns how many active minutes in a given day", () => {
+  it('should have a method that returns how many active minutes in a given day', () => {
     expect(activity.dailyMinsActive(1, "2019/06/15")).to.equal(140)
   });
 
-  it("should have a method that lists number of flights for a week", () => {
+  it('should have a method that lists number of flights for a week', () => {
     expect(activity.activityFlightsPast7Days(1)).to.deep.equal([
       36, 18, 33, 2,
       12,  6,  6
     ])
   });
 
-  it("should have a method that finds step climbing record", () => {
+  it('should have a method that finds step climbing record', () => {
     expect(activity.stairClimbRecord(1)).to.equal(36)
   });
 
-  it("should have a method that returns miles walked in a specific day", () => {
+  it('should have a method that returns miles walked in a specific day', () => {
     expect(activity.milesPerDay(1, "2019/06/15")).to.equal(1.79)
   });
 
@@ -64,6 +64,15 @@ describe("Activity", () => {
 
   it('should calulate 7 day average for mins active based on date', () => {
     expect(activity.weeklyAverageMinsActive(1, '2019/06/22')).to.equal(1177)
+  });
+
+  it.skip('should have a method that returns boolean if a user reached their step goal for the day', function () {
+    expect(activity.hitDailyStepGoal(1, "2019/06/15")).to.equal(true)
+    expect(activity.hitDailyStepGoal(1, "2019/06/22")).to.equal(false)
+  });
+
+  it('should have a method that finds all days where step goal was exceeded', function () {
+    expect(activity.allDaysStepGoal(1)).to.deep.equal(["2019/06/17", "2019/06/20", "2019/06/22"])
   });
 
 });
