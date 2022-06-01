@@ -1,9 +1,11 @@
 import { expect } from "chai";
 import Activity from "../src/Activity";
+import UserRepository from "../src/UserRepository";
 
 describe("Activity", () => {
   let activityData;
   let activity;
+  let users;
 
   beforeEach(() => {
      activityData = [
@@ -18,6 +20,32 @@ describe("Activity", () => {
       {"userID":1,"date":"2019/06/21","numSteps":6760,"minutesActive":135,"flightsOfStairs":6},
       {"userID":1,"date":"2019/06/22","numSteps":10289,"minutesActive":119,"flightsOfStairs":6},
     ]
+
+    users = [{
+      "id": 1,
+      "name": "Luisa Hane",
+      "address": "15195 Nakia Tunnel, Erdmanport VA 19901-1697",
+      "email": "Diana.Hayes1@hotmail.com",
+      "strideLength": 4.3,
+      "dailyStepGoal": 10000,
+    }, 
+    {
+      "id": 2,
+      "name": "Jarvis Considine",
+      "address": "30086 Kathryn Port, Ciceroland NE 07273",
+      "email": "Dimitri.Bechtelar11@gmail.com",
+      "strideLength": 4.5,
+      "dailyStepGoal": 5000,
+    },
+    {
+      "id": 3,
+      "name": "Herminia Witting",
+      "address": "85823 Bosco Fork, East Oscarstad MI 85126-5660",
+      "email": "Elwin.Tromp@yahoo.com",
+      "strideLength": 4.4,
+      "dailyStepGoal": 5000,
+    }
+  ]
     activity = new Activity(activityData);
   });
 
@@ -52,6 +80,11 @@ describe("Activity", () => {
     expect(activity.allUsersAverageUnits("2019/06/15", "numSteps")).to.equal(4637)
     expect(activity.allUsersAverageUnits("2019/06/15", "minutesActive")).to.equal(97)
     expect(activity.allUsersAverageUnits("2019/06/15", "flightsOfStairs")).to.equal(16)
+  });
+
+  it("should check user steps to stepgoal", () => { 
+    const getUser = users.find(user => user.id === 1)
+    expect(activity.checkDaysExceedingStepGoal(1, getUser)).to.deep.equal(['2019/06/17', '2019/06/20', '2019/06/22'])
   });
   
   it("should have a method that returns miles walked in a specific day", function () {
