@@ -66,13 +66,22 @@ describe("Activity", () => {
     expect(activity.weeklyAverageMinsActive(1, '2019/06/22')).to.equal(1177)
   });
 
-  it.skip('should have a method that returns boolean if a user reached their step goal for the day', function () {
+  it.skip('should have a method that returns boolean if a user reached their step goal for the day', () => {
     expect(activity.hitDailyStepGoal(1, "2019/06/15")).to.equal(true)
     expect(activity.hitDailyStepGoal(1, "2019/06/22")).to.equal(false)
   });
 
-  it('should have a method that finds all days where step goal was exceeded', function () {
+  it('should have a method that finds all days where step goal was exceeded', () => {
     expect(activity.allDaysStepGoal(1)).to.deep.equal(["2019/06/17", "2019/06/20", "2019/06/22"])
+  });
+
+  it('should have a method that lists number of steps for a week', () => {
+    expect(activity.activityStepsForWeek(1)).to.deep.equal([
+      6637, 14329,
+      4419,  8429,
+     14478,  6760,
+     10289
+   ])
   });
 
 });

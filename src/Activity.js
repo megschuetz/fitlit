@@ -1,3 +1,6 @@
+import userProfileData from "../src/data/users";
+
+
 class Activity {
   constructor(activityInfo) {
     this.activityData = activityInfo;
@@ -42,9 +45,9 @@ class Activity {
     const allUsersOnDate = this.activityData.filter((user) => user.date === date)
     const total = allUsersOnDate.reduce((sum, user) => {
       sum += user[unitMeasured]
-      return sum
+       return sum
     }, 0);
-    return Math.round(total/allUsersOnDate.length)
+       return Math.round(total/allUsersOnDate.length)
   };
 
   activityFlightsPast7Days(userId) {
@@ -57,19 +60,35 @@ class Activity {
   };
 
   hitDailyStepGoal(userId, date) {
-    let findUser = this.findUser(userId);
-    let userProfileData = findUser.find((user) => {
-        return user.id === userId;
+    const findUser = this.findUser(userId);
+    const userProfileData = findUser.find((user) => {
+        return userProfileData.id === userId;
     });
-    let stepsDay = findUser.find((user) => {
+    let stepsDay = findUser.find((userProfileData) => {
         return userProfileData.date === date;
     });
-    if (userProfileData.dailyStepGoal <= stepsDay.numSteps) {
-      return true;
+    if (userId.dailyStepGoal <= stepsDay.numSteps) {
+        return true;
     } else { 
-      return false;
+        return false;
     }
   };
+
+  allDaysStepGoal(userId) {
+    let findUser = this.findUser(userId);
+    let user = userProfileData.find((user) => {
+      if (user.id === userId) {
+        return user;
+      }
+    });
+    let week = findUser.reduce((a, b) => {
+      if (b.numSteps >= user.dailyStepGoal) {
+        a.push(b.date);
+      }
+      return a;
+    }, []);
+    return week;
+  }
 
   milesPerDay(userId, date) {
     let findUser = this.findUser(userId);
@@ -89,6 +108,13 @@ class Activity {
       });
     return stairs.shift();
   };
+
+  findLatestDaySteps(userId) {
+    const findUser = this.findUser(userId);
+    const userData = findUser.map((data) => data.numSteps);
+    return userData[userData.length - 1];
+  };
+
 }
 
 export default Activity;
