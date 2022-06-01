@@ -8,19 +8,20 @@ body {
 
 header {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 p {
-  margin: 0px 0px 15px 0px;
+  margin: 0px;
 }
 
-h3 {
+/* h3 {
   display: flex;
   position: relative;
   top: 0;
-}
+} */
 
 .page-wrapper {
   display: flex;
@@ -30,12 +31,13 @@ h3 {
 }
 
 .main-wrapper {
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
   /* background-color: rgba(255, 255, 255, 0.3); */
   background-color: rgba(255, 255, 255, 0.0);
   height: 100%;
-  width: 80vw;
-  display: flex;
-  justify-content: center;
+  width: auto;
 }
 
 .desert-image {
@@ -48,7 +50,8 @@ h3 {
 .content-wrapper {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  /* justify-content: center; */
+  align-items: center;
   width:93%;
 }
 
@@ -63,6 +66,7 @@ h3 {
   position: relative;
   left: 0;
   background-color: rgba(255, 255, 255, 0.2);
+  overflow-wrap: break-word;
 }
 
 .sidebar > .sb {
@@ -105,7 +109,7 @@ h3 {
   align-items: center;
   justify-content: center;
   margin: 10px;
-  font-size: 30px;
+  font-size: 25px;
 }
 
 .logo {
@@ -115,18 +119,19 @@ h3 {
 
 .welcome-message {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
+  height: auto;
 }
 
 .name {
-  font-size: 75px;
-  margin: 10px;
+  display: flex;
+  font-size: 60px;
+  margin: 0px 0px 10px 0px;
 }
 
-.step-display {
+/* .step-display {
   display: flex;
   justify-content: space-around;
   background-color: white;
@@ -137,18 +142,21 @@ h3 {
   border-radius: 25px;
   box-shadow: 5px 10px 5px;
   opacity: 0.7;
-}
+} */
 
 .dashboard {
-  display: grid;
-  grid-template-columns: 800px;
-  grid-template-rows: 200px 200px 200px 200px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+
   /* width: 100%; */
 }
 
 /*   User Data Modules   */
 
-main > section {
+.grid-container > section {
   background-color: white;
   /* max-height: 320px;
   width: 320px; */
@@ -160,13 +168,52 @@ main > section {
   box-shadow: 5px 10px 5px;
   opacity: 0.7;
   border-radius: 25px;
-  flex-wrap: wrap;
+  /* flex-wrap: wrap; */
 }
 
 section > .info {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   margin-top: 20px;
+}
+
+.info-title {
+  display: flex;
+  margin: 0px 0px 15px 0px;
+}
+
+.info-heading {
+  font-weight: bold;
+}
+
+.weekly-water {
+  display: grid;
+  grid-template-columns: 100px 100px 100px 100px 100px 100px 100px;
+  grid-template-rows: 30px 30px;
+}
+
+/* .weekly-water-grid {
+  display: grid;
+  grid-template-columns: 30px 30px 30px 30px 30px 30px 30px;
+  grid-template-rows: 15px 15px;
+} */
+
+.large-text {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 33% 33% 33%;
+  grid-template-rows: 230px 230px 150px;
+  grid-row-gap: 15px;
+  grid-column-gap: 15px;
+}
+
+.hydration-weekly {
+  grid-column: 1 / span 3;
+  grid-row: 3;
 }

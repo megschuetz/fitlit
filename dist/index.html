@@ -19,54 +19,66 @@
       </section>
       <div class="main-wrapper">
         <div class="content-wrapper">
-          <header>
-            <h1 class="title">FitLit<img class="logo" src="./images/turing-logo.png"></h1>
-          </header>
-          <section class="welcome-message">
-            <p class="name" id="name">Welcome, Name</p>
-            <!-- <section class="step-display">
-              <div class="step-info">
-                <p><b>Average User Step Goal</b></p>
-                <p class="avg-step-goal" id="avg-step-goal">Avg Step Goal</p>
-              </div>
-              <div class="step-info">
-                <p><b>Your Step Goal</b></p>
-                <p class="step-goal" id="step-goal">Users Step Goal</p>
-              </div>
-            </section> -->
-          </section>
           <main class="dashboard">
-            <section class="steps">
-              <h3>👟 Steps</h3>
-              <div class="info">
-                <p class="avg-step-goal" id="avg-step-goal">Avg Step Goal</p>
-                <p class="step-goal" id="step-goal">Mins Active</p>
-              </div>
-            </section>
-            <section class="activity">
-              <h3>👟 Activity</h3>
-              <div class="info">
-                <p class="'steps-taken" id="steps-taken">Steps Taken</p>
-                <p class="mins-active" id="mins-active">Mins Active</p>
-                <p class="flights" id="flights">Flights</p>
-              </div>
-            </section>
-            <section class="sleep">
-              <h3>🌙 Sleep</h3>
+            <header>
+              <h1 class="title">FitLit<img class="logo" src="./images/turing-logo.png"></h1>
+              <section class="welcome-message">
+                <p class="name" id="name">Welcome, Name</p>
+              </section>
+            </header>
+            <div class="grid-container">
+              <section class="steps">
+                <h3 class="info-title">👟 Steps</h3>
                 <div class="info">
-                <p class="last-sleep" id="last-sleep">Last Nights Sleep</p>
-                <p class="weekly-sleep" id="weekly-sleep">Weekly Report</p>
-                <p class="avg-sleep" id="avg-sleep">Averages</p>
-                <p class="avg-quality" id="avg-quality">Averages</p>
-              </div>
-            </section>
-            <section class="hydration">
-              <h3>💧 Hydration</h3>
-              <div class="info">
-                <p class="water" id="water">Today's Intake</p>
-                <p class="weekly-water" id="weekly-water">Weekly Report</p>
-              </div>
-            </section>
+                  <p class="avg-step-goal" id="avg-step-goal">Avg Step Goal</p>
+                  <p class="step-goal" id="step-goal">Mins Active</p>
+                </div>
+              </section>
+              <section class="activity">
+                <h3 class="info-title">👟 Activity</h3>
+                <div class="info">
+                  <p class="'steps-taken" id="steps-taken">Steps Taken</p>
+                  <p class="mins-active" id="mins-active">Mins Active</p>
+                  <p class="flights" id="flights">Flights</p>
+                </div>
+              </section>
+              <section class="sleep">
+                <h3 class="info-title">🌙 Sleep</h3>
+                  <div class="info">
+                  <p class="weekly-sleep" id="weekly-sleep">Weekly Report</p>
+                  <p class="avg-sleep" id="avg-sleep">Averages</p>
+                  <p class="avg-quality" id="avg-quality">Averages</p>
+                </div>
+              </section>
+              <section class="sleep-last-night">
+                <h3 class="info-title">🌙 Last Night:</h3>
+                <div class="info">
+                  <p>You slept for
+                  <div class="last-sleep large-text" id="last-sleep">Last Nights Sleep</div>
+                  hours!</p>
+                </div>
+              </section>
+              <section class="hydration">
+                <h3 class="info-title">💧 Hydration</h3>
+                <div class="info">
+                  <p class="info-heading">Today's Water Intake:</p>
+                  <div class="water large-text" id="water">Insert OZ here</div>
+                  oz.
+                </div>
+              </section>
+              <!-- <section class="test">
+                <h3 class="info-title">💧 Weekly Hydration:</h3>
+                <div class="info-weekly-water">
+                  <p class="weekly-water test">Hello</p>
+                </div>
+              </section> -->
+              <section class="hydration-weekly">
+                <h3 class="info-title">💧 Weekly Hydration:</h3>
+                <div class="info-weekly-water">
+                  <p class="weekly-water" id="weekly-water"></p>
+                </div>
+              </section>
+            </div>
           </main>
         </div>
       </div>
