@@ -42,6 +42,11 @@ describe("Activity", () => {
     expect(activity.getLatestUnit(1, 'flightsOfStairs')).to.equal(6)
   });
 
+  it("should make a weekly report per unit for last 7 days", () => {
+    console.log(activity.getWeeklyReportPerUnit(1, 'numSteps'))
+    expect(activity.getWeeklyReportPerUnit(1, 'numSteps')).to.equal([6637, 14329, 4419,  8429, 14478,  6760, 10289])
+  });
+
   it("should have a method that lists number of flights for a week", function () {
     expect(activity.activityFlightsPast7Days(1)).to.deep.equal([
       36, 18, 33, 2,
