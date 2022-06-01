@@ -49,6 +49,27 @@ class Activity {
       return false;
     }
   };
+
+  milesPerDay(userId, date) {
+    let findUser = this.findUser(userId);
+    let numberSteps = findUser.find((user) => {
+        return user.date === date;
+    }).numSteps;
+    let miles = numberSteps / 2000;
+    return Math.round(miles * 100) / 100;
+  };
+
+  stairClimbRecord(userId) {
+    let findUser = this.findUser(userId);
+    let stairs = findUser
+      .map((user) => {
+        return user.flightsOfStairs;
+      })
+      .sort((a, b) => {
+        return b - a;
+      });
+    return stairs.shift();
+  };
 }
 
 export default Activity;
