@@ -28,8 +28,14 @@ class Activity {
 
   weeklyAverageMinsActive(userId, date) {
     const userData = this.findUser(userId);
-    const lastElement = userData.indexOf(userData[userData.length - 1]);
-
+    const findUserByDate = userData.find(user => user.date === date)
+    const indexOfDay = userData.indexOf(findUserByDate);
+    const weekData = userData.slice(indexOfDay - 6);
+    const weeklyAverageMinsActive = weekData.reduce((sum, data) => {
+      sum += data.minutesActive
+      return sum
+    }, 0);
+    return weeklyAverageMinsActive
   }
 
   allUsersAverage(date, unitMeasured) {
