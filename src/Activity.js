@@ -14,8 +14,8 @@ class Activity {
     let findUser = this.findUser(userId);
     let minsActivity = findUser.find((user) => {
       return user.date === date;
-    }).minutesActive;
-    return minsActivity;
+    })
+    return minsActivity.minutesActive;
   };
 
   activityStepsForWeek(userId) {
@@ -36,16 +36,16 @@ class Activity {
       return sum
     }, 0);
     return weeklyAverageMinsActive
-  }
+  };
 
   allUsersAverageUnits(date, unitMeasured) {
     const allUsersOnDate = this.activityData.filter((user) => user.date === date)
     const total = allUsersOnDate.reduce((sum, user) => {
       sum += user[unitMeasured]
-      return sum
+       return sum
     }, 0);
-    return Math.round(total/allUsersOnDate.length)
-  }
+       return Math.round(total/allUsersOnDate.length)
+  };
 
   activityFlightsPast7Days(userId) {
     const userFlightsData = this.findUser(userId);
@@ -56,41 +56,31 @@ class Activity {
         return weekData.map((data) => data.flightsOfStairs);
   };
 
-  hitDailyStepGoal(userId, date) {
-    let findUser = this.findUser(userId);
-    let userProfileData = userData.find((user) => {
-        return userProfileData.id === userId;
-    });
-    let stepsDay = findUser.find((user) => {
-        return userProfileData.date === date;
-    }).numSteps;
-    if (userProfileData.dailyStepGoal <= stepsDay) {
-      return true;
-    } else { 
-      return false;
-    }
-  };
-
   milesPerDay(userId, date) {
     let findUser = this.findUser(userId);
     let numberSteps = findUser.find((user) => {
         return user.date === date;
-    }).numSteps;
-    let miles = numberSteps / 2000;
+    });
+    let miles = numberSteps.numSteps / 2000;
     return Math.round(miles * 100) / 100;
   };
 
   stairClimbRecord(userId) {
     let findUser = this.findUser(userId);
-    let stairs = findUser
-      .map((user) => {
+    let stairs = findUser.map((user) => {
         return user.flightsOfStairs;
-      })
-      .sort((a, b) => {
+      }).sort((a, b) => {
         return b - a;
       });
     return stairs.shift();
   };
+
+  findLatestDaySteps(userId) {
+    const findUser = this.findUser(userId);
+    const userData = findUser.map((data) => data.numSteps);
+    return userData[userData.length - 1];
+  };
+
 }
 
 export default Activity;

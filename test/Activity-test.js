@@ -1,12 +1,15 @@
 import { expect } from "chai";
 import Activity from "../src/Activity";
+import User from "../src/User";
 import UserRepository from "../src/UserRepository";
 
 describe("Activity", () => {
   let activityData;
   let activity;
-  // let userRepo;
-  // let userData;
+  let userRepo;
+  let userData;
+  let users;
+  
 
   beforeEach(() => {
      activityData = [
@@ -21,39 +24,54 @@ describe("Activity", () => {
       {"userID":1,"date":"2019/06/21","numSteps":6760,"minutesActive":135,"flightsOfStairs":6},
       {"userID":1,"date":"2019/06/22","numSteps":10289,"minutesActive":119,"flightsOfStairs":6},
     ]
+     users = {
+      "id": 1,
+      "name": "Luisa Hane",
+      "address": "15195 Nakia Tunnel, Erdmanport VA 19901-1697",
+      "email": "Diana.Hayes1@hotmail.com",
+      "strideLength": 4.3,
+      "dailyStepGoal": 10000,
+      "friends": [
+        16,
+        4,
+        8
+      ]
+    };
+
     activity = new Activity(activityData);
-    // userRepo = new UserRepository(userData);
+    userRepo = new UserRepository(userData);
   });
 
   it('should be a instance of Activity', () => {
     expect(activity).to.be.an.instanceOf(Activity);
   });
 
-  it("should be a function", function () {
+  it('should be a function', () => {
     expect(Activity).to.be.a("function");
   });
 
-  it("should return error message if user does not exist", function () {
+  it('should return error message if user does not exist', () => {
     expect(activity.findUser(52)).to.equal("User does not exist");
   });
 
-  it("should have a method that returns how many active minutes in a given day", function () {
+  it('should have a method that returns how many active minutes in a given day', () => {
     expect(activity.dailyMinsActive(1, "2019/06/15")).to.equal(140)
   });
 
-  it("should have a method that lists number of flights for a week", function () {
+  it('should have a method that lists number of flights for a week', () => {
     expect(activity.activityFlightsPast7Days(1)).to.deep.equal([
       36, 18, 33, 2,
       12,  6,  6
     ])
   });
 
-  it("should have a method that finds step climbing record", function () {
+  it('should have a method that finds step climbing record', () => {
     expect(activity.stairClimbRecord(1)).to.equal(36)
   });
 
-  it("should have a method that returns miles walked in a specific day", function () {
+  it('should have a method that returns miles walked in a specific day', () => {
     expect(activity.milesPerDay(1, "2019/06/15")).to.equal(1.79)
+  });
 
   it('should calculate the average of a given unit of all users on a given day', () => {
     expect(activity.allUsersAverageUnits("2019/06/15", "numSteps")).to.equal(4637)
@@ -61,7 +79,21 @@ describe("Activity", () => {
     expect(activity.allUsersAverageUnits("2019/06/15", "flightsOfStairs")).to.equal(16)
   });
 
-  it('should calulate 7day average for mins active based on date', () => {
+  it('should calulate 7 day average for mins active based on date', () => {
     expect(activity.weeklyAverageMinsActive(1, '2019/06/22')).to.equal(1177)
   });
+
+  it('should have a method that lists number of steps for a week', () => {
+    expect(activity.activityStepsForWeek(1)).to.deep.equal([
+      6637, 14329,
+      4419,  8429,
+     14478,  6760,
+     10289
+   ])
+  });
+
+  it("should have a method that lists number of steps for latest day", function () {
+    expect(activity.findLatestDaySteps(1)).to.equal(10289)
+  })
+
 });
