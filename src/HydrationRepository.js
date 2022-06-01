@@ -5,13 +5,26 @@ class HydrationRepository {
     this.hydrationData = hydrationData;
   }
 
+  handleInputErrors(id, date) {
+    if (!id) {
+      return "User is not found. Unable to load respective user data.";
+    }
+    if (!date) {
+      return "Date not found. Unable to load respective user data."
+    }
+  }
+
   getUserById(id) {
     const foundData = this.hydrationData.filter(data => data.userID === id);
-      return foundData;
+    const isValid = id ? foundData : this.handleInputErrors(id)
+    return isValid;
   }
 
   getAvgFluidOuncesById(id) {
     const allHydrationDataById = this.getUserById(id);
+    if (typeof allHydrationDataById === 'string') {
+      return allHydrationDataById;
+    }
     const totalFluidOunces = allHydrationDataById.reduce((totalOunces, hydroObj) => {
       totalOunces += hydroObj.numOunces;
       return totalOunces;
@@ -21,6 +34,9 @@ class HydrationRepository {
 
   getFluidOuncesByDate(id, date) {
     const allHydrationDataById = this.getUserById(id);
+    if (typeof allHydrationDataById === 'string') {
+      return allHydrationDataById;
+    }
     const hydrationByDate = allHydrationDataById
       .filter(hydroObj => hydroObj.date === date)
       .reduce((totalOunces, hydroObj) => {
@@ -32,16 +48,19 @@ class HydrationRepository {
 
   getFluidOuncesEachDayOfWeek(id, date) {
     const allHydrationDataById = this.getUserById(id);
+    if (typeof allHydrationDataById === 'string') {
+      return allHydrationDataById;
+    }
     const weekFromDate = [0,0,0,0,0,0,0].map((el, index) => {
       return dayjs(date).subtract([index], 'day').format('YYYY/MM/DD');
     });
-    const hydroWeek = weekFromDate.reduce((weekObj, date) => {
-      weekObj[date] = 0;
+    const hydroWeek = weekFromDate.reduce((week, date) => {
+      week[date] = 0;
       allHydrationDataById.filter(hydroObj => hydroObj.date === date)
       .forEach(el => {
-        weekObj[date] += el.numOunces;
+        week[date] += el.numOunces;
       });
-      return weekObj;
+      return week;
     }, {})
     return hydroWeek;
   }

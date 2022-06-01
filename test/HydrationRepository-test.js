@@ -105,12 +105,24 @@ let hydrationRepository2;
     expect(hydrationRepository1.getUserById(1).length).to.equal(2);
   });
 
+  it('should return "User is not found" message if unable to find id', () => {
+    expect(hydrationRepository1.getUserById(undefined)).to.equal("User is not found. Unable to load respective user data.");
+  });
+
   it('should return the average fluid ounces of a user when given an id', () => {
     expect(hydrationRepository1.getAvgFluidOuncesById(1)).to.equal(53);
   });
 
+  it('should return "User is not found" message if unable to gather user data by id', () => {
+    expect(hydrationRepository1.getAvgFluidOuncesById(undefined)).to.equal("User is not found. Unable to load respective user data.");
+  });
+
   it('should return total fluid ounces of a user for a specific date when given id and date', () => {
     expect(hydrationRepository1.getFluidOuncesByDate(1, "2019/06/15")).to.equal(37);
+  });
+
+  it('should return "User is not found" message if unable to gather user data by id', () => {
+    expect(hydrationRepository1.getFluidOuncesByDate(undefined)).to.equal("User is not found. Unable to load respective user data.");
   });
 
   it('should return an object with 7 dates as keys and 7 numbers as values', () => {
@@ -125,5 +137,9 @@ let hydrationRepository2;
     }
 
     expect(hydrationRepository2.getFluidOuncesEachDayOfWeek(1, "2019/06/21")).to.deep.equal(hydrationObject);
+  });
+
+  it('should return "User is not found" message if unable to gather user data by id', () => {
+    expect(hydrationRepository1.getFluidOuncesEachDayOfWeek(undefined)).to.equal("User is not found. Unable to load respective user data.");
   });
 });

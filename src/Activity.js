@@ -10,7 +10,7 @@ class Activity {
     return this.activityData.filter((id) => id.userID === userId);
   };
 
-  activeMinutesDay(userId, date) {
+  dailyMinsActive(userId, date) {
     let findUser = this.findUser(userId);
     let minsActivity = findUser.find((user) => {
       return user.date === date;
@@ -25,6 +25,27 @@ class Activity {
       return weekData.map((data) => 
         data.numSteps);
   };
+
+  weeklyAverageMinsActive(userId, date) {
+    const userData = this.findUser(userId);
+    const findUserByDate = userData.find(user => user.date === date)
+    const indexOfDay = userData.indexOf(findUserByDate);
+    const weekData = userData.slice(indexOfDay - 6);
+    const weeklyAverageMinsActive = weekData.reduce((sum, data) => {
+      sum += data.minutesActive
+      return sum
+    }, 0);
+    return weeklyAverageMinsActive
+  }
+
+  allUsersAverageUnits(date, unitMeasured) {
+    const allUsersOnDate = this.activityData.filter((user) => user.date === date)
+    const total = allUsersOnDate.reduce((sum, user) => {
+      sum += user[unitMeasured]
+      return sum
+    }, 0);
+    return Math.round(total/allUsersOnDate.length)
+  }
 
   activityFlightsPast7Days(userId) {
     const userFlightsData = this.findUser(userId);

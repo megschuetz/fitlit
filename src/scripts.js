@@ -37,7 +37,7 @@ Promise.all([userProfileData, userActivityData, userSleepData, userHydrationData
     sleepDataHelper(data[2].sleepData);
     hydrationDataHelper(data[3].hydrationData);
   })
-  .catch((error) => alert("Opps something went wrong. Try again later."));
+  .catch((error) => alert("Oops something went wrong. Try again later."));
 
 // DOM
 const displayUserInfo = (user, userRepo) => {
@@ -73,15 +73,15 @@ const displayHydrationInfo = (id, hydrationRepo) => {
   const lastElement = hydrationRepo.hydrationData[hydrationRepo.hydrationData.length-1];
   const waterByWeek = hydrationRepo.getFluidOuncesEachDayOfWeek(id, lastElement.date);
   const keys = Object.keys(waterByWeek);
-  waterDrank.innerText += `: ${hydrationRepo.getFluidOuncesByDate(id, lastElement.date)} ounces`;
-  weeklyWater.innerHTML += `: <br>${keys[6]}: ${waterByWeek[keys[6]]} ounces<br>
-  ${keys[5]}: ${waterByWeek[keys[5]]} ounces<br>
-  ${keys[4]}: ${waterByWeek[keys[4]]} ounces<br>
-  ${keys[3]}: ${waterByWeek[keys[3]]} ounces<br>
-  ${keys[2]}: ${waterByWeek[keys[2]]} ounces<br>
-  ${keys[1]}: ${waterByWeek[keys[1]]} ounces<br>
-  ${keys[0]}: ${waterByWeek[keys[0]]} ounces<br>`;
-
+  waterDrank.innerHTML = `<b>Today's Water Intake:</b> ${hydrationRepo.getFluidOuncesByDate(id, lastElement.date)} oz.`;
+  weeklyWater.innerHTML = `<b>Weekly Water Intake:</b> <br>
+  ${keys[6]}: ${waterByWeek[keys[6]]} oz.<br>
+  ${keys[5]}: ${waterByWeek[keys[5]]} oz.<br>
+  ${keys[4]}: ${waterByWeek[keys[4]]} oz.<br>
+  ${keys[3]}: ${waterByWeek[keys[3]]} oz.<br>
+  ${keys[2]}: ${waterByWeek[keys[2]]} oz.<br>
+  ${keys[1]}: ${waterByWeek[keys[1]]} oz.<br>
+  ${keys[0]}: ${waterByWeek[keys[0]]} oz.<br>`;
 };
 
 // HELPER FUNCTIONS
