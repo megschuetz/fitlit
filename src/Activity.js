@@ -1,5 +1,3 @@
-import userData from "../src/data/users";
-
 class Activity {
   constructor(activityInfo) {
     this.activityData = activityInfo;
@@ -15,9 +13,7 @@ class Activity {
   activeMinutesDay(userId, date) {
     let findUser = this.findUser(userId);
     let minsActivity = findUser.find((user) => {
-      if (user.date === date) {
-        return user;
-      }
+      return user.date === date;
     }).minutesActive;
     return minsActivity;
   };
@@ -26,36 +22,28 @@ class Activity {
     const userData = this.findUser(userId);
     const lastElement = userData.indexOf(userData[userData.length - 1]);
     const weekData = userData.slice(lastElement - 6);
-
-    return weekData.map((data) => 
-    data.numSteps);
+      return weekData.map((data) => 
+        data.numSteps);
   };
 
   activityFlightsPast7Days(userId) {
     const userFlightsData = this.findUser(userId);
-
     const lastElement = userFlightsData.indexOf(
       userFlightsData[userFlightsData.length - 1]
     );
     const weekData = userFlightsData.slice(lastElement - 6);
-
-    return weekData.map((data) => data.flightsOfStairs);
+        return weekData.map((data) => data.flightsOfStairs);
   };
 
   hitDailyStepGoal(userId, date) {
     let findUser = this.findUser(userId);
-    let user = userData.find((user) => {
-      if (user.id === userId) {
-        return user;
-      }
+    let userProfileData = userData.find((user) => {
+        return userProfileData.id === userId;
     });
-
     let stepsDay = findUser.find((user) => {
-      if (user.date === date) {
-        return user;
-      }
+        return userProfileData.date === date;
     }).numSteps;
-    if (user.dailyStepGoal <= stepsDay) {
+    if (userProfileData.dailyStepGoal <= stepsDay) {
       return true;
     } else { 
       return false;
