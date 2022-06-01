@@ -121,6 +121,7 @@ beforeEach( () => {
 
   it('should return a rounded average of two numbers', () => {
     expect(sleep.findAvg(10, 2)).to.equal(5);
+    expect(sleep.findAvg()).to.equal("Error");
   });
 
   it('should find any data object by date', () => {

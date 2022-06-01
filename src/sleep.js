@@ -11,9 +11,13 @@ class Sleep {
     return this.allUserInstances[latestObject];
   }
   findAvg(dividend, divisor) {
+    if (!dividend || !divisor) {
+      return "Error"
+    } else {
     let quotient = dividend / divisor;
     quotient = (Math.round(quotient * 10) / 10);
     return quotient;
+    }
   }
   calculateOverallAvg(type){
     let overallSum = this.allUserInstances.reduce((totalAcc, instance) => {
