@@ -10,56 +10,50 @@ class Activity {
     return this.activityData.filter((id) => id.userID === userId);
   };
 
-  dailyMinsActive(userId, date) {
-    let findUser = this.findUser(userId);
-    let minsActivity = findUser.find((user) => {
-      return user.date === date;
-    })
-    return minsActivity.minutesActive;
+  getLatestUnit(userId, unit) {
+    const findUser = this.findUser(userId);
+    const latestData = findUser[findUser.length - 1];
+    return latestData[unit];
   };
 
-  activityStepsForWeek(userId) {
+  getWeeklyReportPerUnit(userId, unit) {
     const userData = this.findUser(userId);
     const lastElement = userData.indexOf(userData[userData.length - 1]);
     const weekData = userData.slice(lastElement - 6);
-      return weekData.map((data) => 
-        data.numSteps);
+    return weekData.map((data) => data[unit]);
   };
 
   weeklyAverageMinsActive(userId, date) {
     const userData = this.findUser(userId);
-    const findUserByDate = userData.find(user => user.date === date)
+    const findUserByDate = userData.find(user => user.date === date);
     const indexOfDay = userData.indexOf(findUserByDate);
     const weekData = userData.slice(indexOfDay - 6);
     const weeklyAverageMinsActive = weekData.reduce((sum, data) => {
       sum += data.minutesActive
       return sum
     }, 0);
-    return weeklyAverageMinsActive
+    return weeklyAverageMinsActive;
   };
 
   allUsersAverageUnits(date, unitMeasured) {
-    const allUsersOnDate = this.activityData.filter((user) => user.date === date)
+    const allUsersOnDate = this.activityData.filter((user) => user.date === date);
     const total = allUsersOnDate.reduce((sum, user) => {
       sum += user[unitMeasured]
-       return sum
+      return sum
     }, 0);
-       return Math.round(total/allUsersOnDate.length)
+    return Math.round(total/allUsersOnDate.length);
   };
 
-  activityFlightsPast7Days(userId) {
-    const userFlightsData = this.findUser(userId);
-    const lastElement = userFlightsData.indexOf(
-      userFlightsData[userFlightsData.length - 1]
-    );
-    const weekData = userFlightsData.slice(lastElement - 6);
-        return weekData.map((data) => data.flightsOfStairs);
+  checkDaysExceedingStepGoal(userId, userData){
+    const findUser = this.findUser(userId);
+    const daysExceedingGoal = findUser.filter((user) => user.numSteps >= userData.dailyStepGoal)
+    return daysExceedingGoal.map(user => user.date)
   };
 
   milesPerDay(userId, date) {
-    let findUser = this.findUser(userId);
-    let numberSteps = findUser.find((user) => {
-        return user.date === date;
+    const findUser = this.findUser(userId);
+    const numberSteps = findUser.find((user) => {
+      return user.date === date;
     });
     let miles = numberSteps.numSteps / 2000;
     return Math.round(miles * 100) / 100;
