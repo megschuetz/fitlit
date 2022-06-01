@@ -74,14 +74,14 @@ const displayHydrationInfo = (id, hydrationRepo) => {
   const waterByWeek = hydrationRepo.getFluidOuncesEachDayOfWeek(id, lastElement.date);
   const keys = Object.keys(waterByWeek);
   waterDrank.innerHTML = `<b>Today's Water Intake:</b> ${hydrationRepo.getFluidOuncesByDate(id, lastElement.date)} oz.`;
-  weeklyWater.innerHTML = `<b>Weekly Water Intake:</b> <br>${keys[6]}: ${waterByWeek[keys[6]]} oz.<br>
+  weeklyWater.innerHTML = `<b>Weekly Water Intake:</b> <br>
+  ${keys[6]}: ${waterByWeek[keys[6]]} oz.<br>
   ${keys[5]}: ${waterByWeek[keys[5]]} oz.<br>
   ${keys[4]}: ${waterByWeek[keys[4]]} oz.<br>
   ${keys[3]}: ${waterByWeek[keys[3]]} oz.<br>
   ${keys[2]}: ${waterByWeek[keys[2]]} oz.<br>
   ${keys[1]}: ${waterByWeek[keys[1]]} oz.<br>
   ${keys[0]}: ${waterByWeek[keys[0]]} oz.<br>`;
-
 };
 
 // HELPER FUNCTIONS
