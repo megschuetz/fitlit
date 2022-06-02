@@ -4,22 +4,18 @@ body {
   align-items: center;
   font-family: Georgia;
   margin: 0px;
+  width: 100%;
 }
 
 header {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
 }
 
 p {
-  margin: 0px 0px 15px 0px;
-}
-
-h3 {
-  display: flex;
-  position: relative;
-  top: 0;
+  margin: 0px;
 }
 
 .page-wrapper {
@@ -27,15 +23,16 @@ h3 {
   align-items: center;
   justify-content: center;
   height: 800px;
+  width: auto;
 }
 
 .main-wrapper {
+  display: flex;
+  justify-content: center;
   /* background-color: rgba(255, 255, 255, 0.3); */
   background-color: rgba(255, 255, 255, 0.0);
   height: 100%;
-  width: 80vw;
-  display: flex;
-  justify-content: center;
+  width: auto;
 }
 
 .desert-image {
@@ -49,13 +46,18 @@ h3 {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width:93%;
+  align-items: center;
+  width:100%;
 }
+
+
+
+/*   -----  SIDEBAR  -----   */
 
 .sidebar {
   display: flex;
   flex-direction: column;
-  width: 20vw;
+  width: 300px;
   height: 100%;
   border-radius: 0;
   justify-content: flex-start;
@@ -63,6 +65,7 @@ h3 {
   position: relative;
   left: 0;
   background-color: rgba(255, 255, 255, 0.2);
+  overflow-wrap: break-word;
 }
 
 .sidebar > .sb {
@@ -90,22 +93,17 @@ h3 {
   color: tan;
 }
 
-.step-info {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: 20px;
-  margin: 0;
-}
 
+
+
+/*  -----  DASHBOARD  -----  */
 
 .title {
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 10px;
-  font-size: 30px;
+  font-size: 25px;
 }
 
 .logo {
@@ -115,43 +113,33 @@ h3 {
 
 .welcome-message {
   display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: auto;
+}
+
+.name {
+  display: flex;
+  font-size: 60px;
+  margin: 0px 0px 10px 0px;
+}
+
+.dashboard {
+  display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   width: 100%;
+  position: relative;
+  left: 100px;
 }
 
-.name {
-  font-size: 75px;
-  margin: 10px;
-}
 
-.step-display {
-  display: flex;
-  justify-content: space-around;
+/*  ------ USER DATA MODULES  ------  */
+
+.grid-container > section {
   background-color: white;
-  height: 200px;
-  width: 95%;
-  margin-left: 20px;
-  margin-right: 20px;
-  border-radius: 25px;
-  box-shadow: 5px 10px 5px;
-  opacity: 0.7;
-}
-
-.dashboard {
-  display: grid;
-  grid-template-columns: 800px;
-  grid-template-rows: 200px 200px 200px 200px;
-  /* width: 100%; */
-}
-
-/*   User Data Modules   */
-
-main > section {
-  background-color: white;
-  /* max-height: 320px;
-  width: 320px; */
   margin: 10px;
   display: flex;
   flex-direction: column;
@@ -160,13 +148,57 @@ main > section {
   box-shadow: 5px 10px 5px;
   opacity: 0.7;
   border-radius: 25px;
-  flex-wrap: wrap;
 }
 
 section > .info {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center;
   margin-top: 20px;
+}
+
+/*  --------   GRID   --------   */
+
+.grid-container {
+  display: grid;
+  /* grid-template-columns: 33% 33% 33%; */
+  grid-template-columns: 270px 270px 270px;
+  grid-template-rows: 230px 230px 150px;
+  grid-row-gap: 15px;
+  grid-column-gap: 15px;
+}
+
+/*   -------   HYDRATION STYLING   --------  */
+
+.weekly-water {
+  display: grid;
+  grid-template-columns: 100px 100px 100px 100px 100px 100px 100px;
+  grid-template-rows: 30px 30px;
+}
+
+.hydration-weekly {
+  grid-column: 1 / span 3;
+  grid-row: 3;
+}
+
+/*  -------  TEXT STYLING ---------  */
+
+.info-title {
+  display: flex;
+  margin: 0px 0px 15px 0px;
+}
+
+.med-text {
+  font-size: 30px;
+}
+
+.large-text {
+  font-size: 50px;
+  font-weight: bold;
+}
+
+.a {
+  display: flex;
+  align-items: flex-end;
 }
