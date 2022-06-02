@@ -7,11 +7,13 @@ body {
   width: 100%;
 }
 
-header {
-  display: flex;
+.header {
+  /* display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: center; */
+  grid-row: 1;
+  grid-column: 1 / span 3;
 }
 
 p {
@@ -93,6 +95,17 @@ p {
   color: tan;
 }
 
+.form {
+  background-color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+.user-input:hover {
+  cursor: pointer;
+}
 
 
 
@@ -130,9 +143,11 @@ p {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-right: 100px;
   width: 100%;
   position: relative;
   left: 100px;
+  overflow: scroll;
 }
 
 
@@ -162,11 +177,35 @@ section > .info {
 
 .grid-container {
   display: grid;
+  position: relative;
+  top: 100px;
+  max-height: 900px;
   /* grid-template-columns: 33% 33% 33%; */
   grid-template-columns: 270px 270px 270px;
-  grid-template-rows: 230px 230px 150px;
+  grid-template-rows: 230px 230px 230px 150px;
   grid-row-gap: 15px;
   grid-column-gap: 15px;
+}
+
+/*  ------- ACTIVITY STYLING -------- */
+
+#steps {
+  display: flex;
+  justify-content: center;
+  grid-column: 1 / span 2;
+  grid-row: 2;
+}
+
+.chart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 500px;
+  max-height: 200px;
+}
+
+.step-goal-chart {
+  margin-right: 50px;
 }
 
 /*   -------   HYDRATION STYLING   --------  */
@@ -179,7 +218,7 @@ section > .info {
 
 .hydration-weekly {
   grid-column: 1 / span 3;
-  grid-row: 3;
+  grid-row: 4;
 }
 
 /*  -------  TEXT STYLING ---------  */

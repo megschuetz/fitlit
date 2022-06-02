@@ -16,22 +16,63 @@
           <p class="sb email" id="email">email</p>
           <p class="sb friends" id="friends">friends</p>
         </div>
+        <section class="form">
+          <form>
+            <!-- <form action="/action_page.php" method="post"> -->
+            <!-- RADIO -->
+            <input class="user-input" id="sleep-radio" type="radio" name="user-input" value="sleep" checked>
+            <label for="sleep">Sleep</label>
+            <input class="user-input" id="hydration-radio" type="radio" name="user-input" value="hydration">
+            <label for="hydration">Hydration</label>
+            <input class="user-input" id="activity-radio" type="radio" name="user-input" value="activity">
+            <label for="activity">Activity</label><br>
+
+            <label for="date">Date</label>
+            <input class="user-input" type="date" id="date-input" name="date"><br>
+
+            <!-- SLEEP FORM -->
+            <div class="" id="sleep-form">
+              <label for="hours-slept">Hours Slept:</label>
+              <input class="user-input" id="sleep-hours-input" type="form" name="user-input" value=""><br>
+              <label for="sleep-quality">Rate Your Sleep Quality:</label>
+              <input class="user-input" id="sleep-quality-input" type="form" name="user-input" value=""><br>
+            </div>
+
+            <!-- HYDRATION FORM -->
+            <div class="hidden" id="hydration-form">
+              <label for="steps">Water Today:</label>
+              <input class="user-input" id="water-input" type="form" name="user-input" value=""><br>
+            </div>
+
+            <!-- ACTIVITY FORM -->
+            <div class="hidden" id="activity-form">
+              <label for="steps">Steps Today:</label>
+              <input class="user-input" id="activity-steps-input" type="form" name="user-input" value=""><br>
+              <label for="flights-steps">Flights of stairs:</label>
+              <input class="user-input" id="activity-stairs" type="form" name="user-input" value=""><br>
+            </div>
+
+
+
+        </form>
+        </section>
       </section>
       <div class="main-wrapper">
         <div class="content-wrapper">
           <main class="dashboard">
-            <header>
-              <h1 class="title">FitLit<img class="logo" src="./images/turing-logo.png" alt="TuringLogo"></h1>
-              <section class="welcome-message">
-                <p class="name" id="name">Welcome, Name</p>
-              </section>
-            </header>
             <div class="grid-container">
-              <section class="steps">
-                <h2 class="info-title">👟 Steps</h2>
-                <div class="info">
-                  <p class="avg-step-goal" id="avg-step-goal">Avg Step Goal</p>
-                  <p class="step-goal" id="step-goal">Your Step Goal</p>
+              <section class="header">
+                <h1 class="title">FitLit<img class="logo" src="./images/turing-logo.png"></h1>
+                <div class="welcome-message">
+                  <p class="name" id="name">Welcome, Name</p>
+                </div>
+              </section>
+              <section class="steps" id="steps">
+                <h3 class="info-title">👟 Step Goal</h3>
+                <div class="chart">
+                  <div class="step-goal-chart"><canvas id="myChart" width="200" height="150"></canvas></div>
+                  <div class="avg-step-goal" id="avg-step-goal">Avg Step Goal</div>
+                  <div class="step-goal" id="step-goal">Your Step Goal</div>
                 </div>
               </section>
               <section class="activity">
@@ -66,12 +107,12 @@
                   oz.
                 </div>
               </section>
-              <!-- <section class="test">
-                <h3 class="info-title">💧 Weekly Hydration:</h3>
-                <div class="info-weekly-water">
-                  <p class="weekly-water test">Hello</p>
+              <section class="test">
+                <h3 class="test-title">💧 Chart:</h3>
+                <div class="test-div">
+                  <div class="step-goal-chart"><canvas id="donut" width="200" height="150"></canvas></div>
                 </div>
-              </section> -->
+              </section>
               <section class="hydration-weekly">
                 <h2 class="info-title">💧 Weekly Hydration:</h2>
                 <div class="info-weekly-water">

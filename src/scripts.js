@@ -8,6 +8,7 @@ import Activity from './Activity';
 import Hydration from './Hydration'
 import HydrationRepository from './HydrationRepository';
 import User from './User';
+import Chart from 'chart.js/auto';
 
 // QUERY SELECTORS
 let friends = document.getElementById('friends');
@@ -26,6 +27,19 @@ let email = document.getElementById('email');
 let avgStepGoal = document.getElementById('avg-step-goal');
 let firstName = document.getElementById('first-name');
 let lastName = document.getElementById('last-name');
+
+//  QUERY SELECTORS: FORM INPUT
+let sleepRadio = document.getElementById("sleep-radio");
+let hydrationRadio = document.getElementById("hydration-radio");
+let activityRadio = document.getElementById("activity-radio");
+let sleepForm = document.getElementById("sleep-form");
+let hydrationForm = document.getElementById("hydration-form");
+let activityForm = document.getElementById("activity-form");
+
+// EVENT LISTENERS
+sleepRadio.addEventListener("click", toggleFormVisibility);
+hydrationRadio.addEventListener("click", toggleFormVisibility);
+activityRadio.addEventListener("click", toggleFormVisibility);
 
 // GLOBAL VARIABLE
 let displayedUsersID = Math.floor(Math.random() * 50);
@@ -51,6 +65,7 @@ const displayUserInfo = (user, userRepo) => {
   email.innerHTML = `<b>email:</b> ${user.email}`;
   friends.innerHTML = `<b>friends:</b> ${getFriendsNames}`;
   avgStepGoal.innerHTML = `<b>FitLit Avg. Step Goal:</b><br>${userRepo.calculateAvgStepGoal()} Steps`;
+  makeChart(user.dailyStepGoal, userRepo.calculateAvgStepGoal())
 };
 
 const displayActivityInfo = (activityRepo) => {
@@ -80,15 +95,9 @@ const displayHydrationInfo = (id, hydrationRepo) => {
   <div>${Array.from(keys[4]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${waterByWeek[keys[4]]}</b></div>  oz.</div></div>
   <div>${Array.from(keys[3]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${waterByWeek[keys[3]]}</b></div>  oz.</div></div>
   <div>${Array.from(keys[2]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${waterByWeek[keys[2]]}</b></div>  oz.</div></div>
-  <div>${Array.from(keys[6]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${waterByWeek[keys[1]]}</b></div>  oz.</div></div>
-  <div>${Array.from(keys[6]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${waterByWeek[keys[0]]}</b></div>  oz.</div></div>`;
+  <div>${Array.from(keys[1]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${waterByWeek[keys[1]]}</b></div>  oz.</div></div>
+  <div>${Array.from(keys[0]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${waterByWeek[keys[0]]}</b></div>  oz.</div></div>`;
 };
-
-function getDate(key){
-  let array = key.join();
-  let date = array.splice(0, 4)
-  console.log(date)
-}
 
 // HELPER FUNCTIONS
 const getAllUsers = (userData) => {
@@ -126,3 +135,100 @@ const activityDataHelper = (data) => {
   const activityRepo = new Activity(data);
   displayActivityInfo(activityRepo);
 };
+
+// USER INPUT
+
+function toggleFormVisibility(){
+  if(sleepRadio.checked){
+    sleepForm.classList.remove("hidden");
+    hydrationForm.className = "hidden";
+    activityForm.className = "hidden";
+  } else if (hydrationRadio.checked){
+    hydrationForm.classList.remove("hidden");
+    sleepForm.className = "hidden";
+    activityForm.className = "hidden";
+  } else if (activityRadio.checked){
+    activityForm.classList.remove("hidden");
+    hydrationForm.className = "hidden";
+    sleepForm.className = "hidden";
+  }
+}
+
+// WEIRD CHART EXPERIMENT STUFF
+
+const ctx = document.getElementById('myChart');
+
+function makeChart(userGoal, avgGoal){
+  const myChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+          labels: ['Your Goal', 'Avg. Goal'],
+          datasets: [{
+              label: '# of Steps',
+              data: [userGoal, avgGoal],
+              backgroundColor: [
+                  'rgba(255, 99, 132, 0.2)',
+                  'rgba(54, 162, 235, 0.2)',
+                  'rgba(255, 206, 86, 0.2)',
+                  'rgba(75, 192, 192, 0.2)',
+                  'rgba(153, 102, 255, 0.2)',
+                  'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                  'rgba(255, 99, 132, 1)',
+                  'rgba(54, 162, 235, 1)',
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(153, 102, 255, 1)',
+                  'rgba(255, 159, 64, 1)'
+              ],
+              borderWidth: 1
+          }]
+      },
+      options: {
+          scales: {
+              y: {
+                  beginAtZero: true
+              }
+          }
+      }
+  });
+}
+const dctx = document.getElementById('donut');
+makeAnotherChart()
+function makeAnotherChart(){
+  const myDonutChart = new Chart(dctx, {
+    type: 'doughnut',
+    data: {
+        labels: ['Your Goal', 'Avg. Goal'],
+        datasets: [{
+            label: '# of Steps',
+            data: [10, 15],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+}
