@@ -27,6 +27,13 @@ let email = document.getElementById('email');
 let avgStepGoal = document.getElementById('avg-step-goal');
 let firstName = document.getElementById('first-name');
 let lastName = document.getElementById('last-name');
+let milesWalked = document.getElementById("miles-walked");
+let allUserDailyAvgSteps = document.getElementById("all-users-avg-steps");
+let allUsersDailyAvgFlights = document.getElementById("all-users-avg-flights");
+let allUsersDailyAvgMinActive = document.getElementById("all-users-avg-mins-active");
+let weeklyUserSteps = document.getElementById("weekly-steps");
+let weeklyUserFlights = document.getElementById("weekly-flights");
+let weeklyUserMinActive = document.getElementById("weekly-mins-active");
 
 //  QUERY SELECTORS: FORM INPUT
 let sleepRadio = document.getElementById("sleep-radio");
