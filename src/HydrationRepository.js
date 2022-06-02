@@ -7,7 +7,7 @@ class HydrationRepository {
 
   handleIdInputErrors(id) {
     if (!id) {
-      return "User is not found. Unable to load respective user data.";
+      return "User not found. Unable to load respective user data.";
     }
   }
 
