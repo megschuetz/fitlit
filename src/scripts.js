@@ -47,10 +47,10 @@ const displayUserInfo = (user, userRepo) => {
   welcomeName.innerHTML = `WELCOME, ${user.getUserFirstName().toUpperCase()}`;
   firstName.innerText = `${user.getUserFirstName().toUpperCase()}`;
   lastName.innerText = `${user.getUserLastName().toUpperCase()}`;
-  stepGoal.innerHTML = `<b>Your Daily Step Goal:</b> ${user.dailyStepGoal} Steps`;
+  stepGoal.innerHTML = `<b>Your Daily Step Goal:</b><br>${user.dailyStepGoal} Steps`;
   email.innerHTML = `<b>email:</b> ${user.email}`;
   friends.innerHTML = `<b>friends:</b> ${getFriendsNames}`;
-  avgStepGoal.innerHTML = `<b>FitLit Avg. Step Goal:</b> ${userRepo.calculateAvgStepGoal()} Steps`;
+  avgStepGoal.innerHTML = `<b>FitLit Avg. Step Goal:</b><br>${userRepo.calculateAvgStepGoal()} Steps`;
 };
 
 const displayActivityInfo = (activityRepo) => {
@@ -75,13 +75,13 @@ const displayHydrationInfo = (id, hydrationRepo) => {
   const keys = Object.keys(waterByWeek);
   waterDrank.innerHTML = `${hydrationRepo.getFluidOuncesByDate(id, lastElement.date)}`;
   weeklyWater.innerHTML = `
-  <p><b>${Array.from(keys[6]).splice(5).join("")}:</b> <br>${waterByWeek[keys[6]]} oz.</p>
-  <p><b>${Array.from(keys[5]).splice(5).join("")}:</b> <br>${waterByWeek[keys[5]]} oz.</p>
-  <p><b>${Array.from(keys[4]).splice(5).join("")}:</b> <br>${waterByWeek[keys[4]]} oz.</p>
-  <p><b>${Array.from(keys[3]).splice(5).join("")}:</b> <br>${waterByWeek[keys[3]]} oz.</p>
-  <p><b>${Array.from(keys[2]).splice(5).join("")}:</b> <br>${waterByWeek[keys[2]]} oz.</p>
-  <p><b>${Array.from(keys[6]).splice(5).join("")}:</b> <br>${waterByWeek[keys[1]]} oz.</p>
-  <p><b>${Array.from(keys[6]).splice(5).join("")}:</b> <br>${waterByWeek[keys[0]]} oz.</p>`;
+  <div>${Array.from(keys[6]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${waterByWeek[keys[6]]}</b></div>  oz.</div></div>
+  <div>${Array.from(keys[5]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${waterByWeek[keys[5]]}</b></div>  oz.</div></div>
+  <div>${Array.from(keys[4]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${waterByWeek[keys[4]]}</b></div>  oz.</div></div>
+  <div>${Array.from(keys[3]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${waterByWeek[keys[3]]}</b></div>  oz.</div></div>
+  <div>${Array.from(keys[2]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${waterByWeek[keys[2]]}</b></div>  oz.</div></div>
+  <div>${Array.from(keys[6]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${waterByWeek[keys[1]]}</b></div>  oz.</div></div>
+  <div>${Array.from(keys[6]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${waterByWeek[keys[0]]}</b></div>  oz.</div></div>`;
 };
 
 function getDate(key){
