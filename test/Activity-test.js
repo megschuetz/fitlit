@@ -91,6 +91,7 @@ describe("Activity", () => {
   
   it("should have a method that returns miles walked in a specific day", () => {
     expect(activity.milesPerDay(1, "2019/06/15")).to.equal(1.79)
+    expect(activity.milesPerDay(2, "2019/06/15")).to.equal(1.73)
   });
 
   it("should have a method that finds step climbing record", () => {
