@@ -5,18 +5,15 @@ class HydrationRepository {
     this.hydrationData = hydrationData;
   }
 
-  handleInputErrors(id, date) {
+  handleIdInputErrors(id) {
     if (!id) {
-      return "User is not found. Unable to load respective user data.";
-    }
-    if (!date) {
-      return "Date not found. Unable to load respective user data."
+      return "User not found. Unable to load respective user data.";
     }
   }
 
   getUserById(id) {
     const foundData = this.hydrationData.filter(data => data.userID === id);
-    const isValid = id ? foundData : this.handleInputErrors(id)
+    const isValid = id ? foundData : this.handleIdInputErrors(id)
     return isValid;
   }
 
@@ -25,8 +22,8 @@ class HydrationRepository {
     if (typeof allHydrationDataById === 'string') {
       return allHydrationDataById;
     }
-    const totalFluidOunces = allHydrationDataById.reduce((totalOunces, hydroObj) => {
-      totalOunces += hydroObj.numOunces;
+    const totalFluidOunces = allHydrationDataById.reduce((totalOunces, hydrationInfo) => {
+      totalOunces += hydrationInfo.numOunces;
       return totalOunces;
     }, 0)
     return Math.round(totalFluidOunces / allHydrationDataById.length);
@@ -37,10 +34,13 @@ class HydrationRepository {
     if (typeof allHydrationDataById === 'string') {
       return allHydrationDataById;
     }
+    if (!date) {
+      return "Date not found. Unable to load respective user data.";
+    }
     const hydrationByDate = allHydrationDataById
-      .filter(hydroObj => hydroObj.date === date)
-      .reduce((totalOunces, hydroObj) => {
-        totalOunces += hydroObj.numOunces;
+      .filter(hydrationInfo => hydrationInfo.date === date)
+      .reduce((totalOunces, hydrationInfo) => {
+        totalOunces += hydrationInfo.numOunces;
         return totalOunces;
       }, 0)
       return Math.round(hydrationByDate);
@@ -51,12 +51,15 @@ class HydrationRepository {
     if (typeof allHydrationDataById === 'string') {
       return allHydrationDataById;
     }
+    if (!date) {
+      return "Date not found. Unable to load respective user data.";
+    }
     const weekFromDate = [0,0,0,0,0,0,0].map((el, index) => {
       return dayjs(date).subtract([index], 'day').format('YYYY/MM/DD');
     });
     const hydroWeek = weekFromDate.reduce((week, date) => {
       week[date] = 0;
-      allHydrationDataById.filter(hydroObj => hydroObj.date === date)
+      allHydrationDataById.filter(hydrationInfo => hydrationInfo.date === date)
       .forEach(el => {
         week[date] += el.numOunces;
       });
