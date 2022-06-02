@@ -1,7 +1,5 @@
 import { expect } from "chai";
 import Activity from "../src/Activity";
-import User from "../src/User";
-import UserRepository from "../src/UserRepository";
 
 describe("Activity", () => {
   let activityData;
@@ -63,7 +61,7 @@ describe("Activity", () => {
     expect(activity.findUser(52)).to.equal("User does not exist");
   });
 
-  it("should return a unit measured on a specific day", function () {
+  it("should return a unit measured on a specific day", () => {
     expect(activity.getLatestUnit(1, 'minutesActive')).to.equal(119)
     expect(activity.getLatestUnit(1, 'flightsOfStairs')).to.equal(6)
   });
@@ -84,17 +82,17 @@ describe("Activity", () => {
     expect(activity.allUsersAverageUnits("2019/06/15", "flightsOfStairs")).to.equal(16)
   });
 
-  it("should check user steps to stepgoal", () => { 
+  it('should check user steps to stepgoal', () => { 
     const getUser = users.find(user => user.id === 1)
     expect(activity.checkDaysExceedingStepGoal(1, getUser)).to.deep.equal(['2019/06/17', '2019/06/20', '2019/06/22'])
   });
   
-  it("should have a method that returns miles walked in a specific day", () => {
+  it('should have a method that returns miles walked in a specific day', () => {
     expect(activity.milesPerDay(1, "2019/06/15")).to.equal(1.79)
     expect(activity.milesPerDay(2, "2019/06/15")).to.equal(1.73)
   });
 
-  it("should have a method that finds step climbing record", () => {
+  it('should have a method that finds step climbing record', () => {
     expect(activity.stairClimbRecord(1)).to.equal(36)
   });
 });
