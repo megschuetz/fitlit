@@ -1,8 +1,8 @@
 class Hydration {
-  constructor(hydrationObj) {
-    this.userID = hydrationObj.userID;
-    this.date = hydrationObj.date;
-    this.numOunces = hydrationObj.numOunces;
+  constructor(hydrationInfo) {
+    this.userID = hydrationInfo.userID;
+    this.date = hydrationInfo.date;
+    this.numOunces = hydrationInfo.numOunces;
   }
 }
 
