@@ -51,6 +51,9 @@ class HydrationRepository {
     if (typeof allHydrationDataById === 'string') {
       return allHydrationDataById;
     }
+    if (!date) {
+      return "Date not found. Unable to load respective user data.";
+    }
     const weekFromDate = [0,0,0,0,0,0,0].map((el, index) => {
       return dayjs(date).subtract([index], 'day').format('YYYY/MM/DD');
     });
