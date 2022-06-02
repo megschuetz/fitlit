@@ -11,6 +11,9 @@ class Activity {
   };
 
   getLatestUnit(userId, unit) {
+    if (!unit) {
+      return "Unit not found. Unable to load respective user data.";
+    }
     const findUser = this.findUser(userId);
     const latestData = findUser[findUser.length - 1];
     return latestData[unit];
@@ -25,6 +28,9 @@ class Activity {
 
   weeklyAverageMinsActive(userId, date) {
     const userData = this.findUser(userId);
+    if (!date) {
+      return "Date not found. Unable to load respective user data.";
+    }
     const findUserByDate = userData.find(user => user.date === date);
     const indexOfDay = userData.indexOf(findUserByDate);
     const weekData = userData.slice(indexOfDay - 6);
@@ -52,14 +58,20 @@ class Activity {
 
   milesPerDay(userId, date) {
     const findUser = this.findUser(userId);
+    if (!date) {
+      return "Date not found. Unable to load respective user data.";
+    }
     const numberSteps = findUser.find((user) => {
-      return user.date === date;
+    return user.date === date;
     });
     let miles = numberSteps.numSteps / 2000;
     return Math.round(miles * 100) / 100;
   };
 
   stairClimbRecord(userId) {
+    if (!userId) {
+      return "User Id not found. Unable to load respective user data.";
+    }
     let findUser = this.findUser(userId);
     let stairs = findUser.map((user) => {
         return user.flightsOfStairs;
