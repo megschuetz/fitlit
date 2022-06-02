@@ -5,18 +5,15 @@ class HydrationRepository {
     this.hydrationData = hydrationData;
   }
 
-  handleInputErrors(id, date) {
+  handleIdInputErrors(id) {
     if (!id) {
       return "User is not found. Unable to load respective user data.";
-    // }
-    // if (!date) {
-    //   return "Date not found. Unable to load respective user data."
     }
   }
 
   getUserById(id) {
     const foundData = this.hydrationData.filter(data => data.userID === id);
-    const isValid = id ? foundData : this.handleInputErrors(id)
+    const isValid = id ? foundData : this.handleIdInputErrors(id)
     return isValid;
   }
 
@@ -36,6 +33,9 @@ class HydrationRepository {
     const allHydrationDataById = this.getUserById(id);
     if (typeof allHydrationDataById === 'string') {
       return allHydrationDataById;
+    }
+    if (!date) {
+      return "Date not found. Unable to load respective user data.";
     }
     const hydrationByDate = allHydrationDataById
       .filter(hydrationInfo => hydrationInfo.date === date)
