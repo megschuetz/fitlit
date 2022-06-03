@@ -84,7 +84,7 @@ const displayActivityInfo = (activityRepo) => {
   const stepKeys = Object.keys(weeklySteps);
 
   const weeklyFlights = activityRepo.getWeeklyReportPerUnit(displayedUsersID, date, 'flightsOfStairs');
-  const flightKeys = Object.keys(weeklySteps);
+  const flightKeys = Object.keys(weeklyFlights);
 
   stepsTaken.innerHTML = `<b>Steps today</b>: ${lastActivityElement.numSteps} steps`;
   minsActive.innerHTML = `<b>Minutes active</b>: ${lastActivityElement.minutesActive} min.`;
@@ -104,7 +104,15 @@ const displayActivityInfo = (activityRepo) => {
   <div>${Array.from(stepKeys[2]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[2]]}</b></div>  steps</div></div>
   <div>${Array.from(stepKeys[1]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[1]]}</b></div>  steps</div></div>
   <div>${Array.from(stepKeys[0]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[0]]}</b></div>  steps</div></div>`;
-  weeklyUserFlights.innerHTML = `${activityRepo.getWeeklyReportPerUnit(displayedUsersID, date, 'flightsOfStairs')}`
+
+  weeklyUserFlights.innerHTML = `
+  <div>${Array.from(flightKeys[6]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklyFlights[flightKeys[6]]}</b></div>  flights</div></div>
+  <div>${Array.from(flightKeys[5]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklyFlights[flightKeys[5]]}</b></div>  flights</div></div>
+  <div>${Array.from(flightKeys[4]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklyFlights[flightKeys[4]]}</b></div>  flights</div></div>
+  <div>${Array.from(flightKeys[3]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklyFlights[flightKeys[3]]}</b></div>  flights</div></div>
+  <div>${Array.from(flightKeys[2]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklyFlights[flightKeys[2]]}</b></div>  flights</div></div>
+  <div>${Array.from(flightKeys[1]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklyFlights[flightKeys[1]]}</b></div>  flights</div></div>
+  <div>${Array.from(flightKeys[0]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklyFlights[flightKeys[0]]}</b></div>  flights</div></div>`;
   weeklyUserMinActive.innerHTML = `${activityRepo.getWeeklyReportPerUnit(displayedUsersID, date, 'minutesActive')}`
 };
 
