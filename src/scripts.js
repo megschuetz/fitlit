@@ -86,6 +86,9 @@ const displayActivityInfo = (activityRepo) => {
   const weeklyFlights = activityRepo.getWeeklyReportPerUnit(displayedUsersID, date, 'flightsOfStairs');
   const flightKeys = Object.keys(weeklyFlights);
 
+  const userMinsActiveWeek = activityRepo.getWeeklyReportPerUnit(displayedUsersID, date, 'minutesActive')
+  const minsActiveKeys = Object.keys(userMinsActiveWeek)
+
   stepsTaken.innerHTML = `<b>Steps today</b>: ${lastActivityElement.numSteps} steps`;
   minsActive.innerHTML = `<b>Minutes active</b>: ${lastActivityElement.minutesActive} min.`;
   flights.innerHTML = `<b>Flights conquered</b>: ${lastActivityElement.flightsOfStairs} flights`;
@@ -113,7 +116,15 @@ const displayActivityInfo = (activityRepo) => {
   <div>${Array.from(flightKeys[2]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklyFlights[flightKeys[2]]}</b></div>  flights</div></div>
   <div>${Array.from(flightKeys[1]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklyFlights[flightKeys[1]]}</b></div>  flights</div></div>
   <div>${Array.from(flightKeys[0]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklyFlights[flightKeys[0]]}</b></div>  flights</div></div>`;
-  weeklyUserMinActive.innerHTML = `${activityRepo.getWeeklyReportPerUnit(displayedUsersID, date, 'minutesActive')}`
+
+  weeklyUserMinActive.innerHTML = `
+    <div>${Array.from(minsActiveKeys[6]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[6]]}</b></div>  min.</div></div>
+    <div>${Array.from(minsActiveKeys[5]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[5]]}</b></div>  min.</div></div>
+    <div>${Array.from(minsActiveKeys[4]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[4]]}</b></div>  min.</div></div>
+    <div>${Array.from(minsActiveKeys[3]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[3]]}</b></div>  min.</div></div>
+    <div>${Array.from(minsActiveKeys[2]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[2]]}</b></div>  min.</div></div>
+    <div>${Array.from(minsActiveKeys[1]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[1]]}</b></div>  min.</div></div>
+    <div>${Array.from(minsActiveKeys[0]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[0]]}</b></div>  min.</div></div>`;
 };
 
 const displaySleepInfo = (id, sleepRepo) => {
