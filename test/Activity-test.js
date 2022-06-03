@@ -132,9 +132,15 @@ describe("Activity", () => {
   });
   
   it('should calculate the average of a given unit of all users on a given day', () => {
-    expect(activity.allUsersAverageUnits("2019/06/15", "numSteps")).to.equal(4637)
-    expect(activity.allUsersAverageUnits("2019/06/15", "minutesActive")).to.equal(97)
-    expect(activity.allUsersAverageUnits("2019/06/15", "flightsOfStairs")).to.equal(16)
+    const dataJustForTest = [ 
+    {"userID":1,"date":"2019/06/15","numSteps":3577,"minutesActive":140,"flightsOfStairs":16},
+    {"userID":2,"date":"2019/06/15","numSteps":3456,"minutesActive":60,"flightsOfStairs":17},
+    {"userID":3,"date":"2019/06/15","numSteps":6879,"minutesActive":90,"flightsOfStairs":15},   
+  ]
+    activity = new Activity(dataJustForTest)
+    expect(activity.allUsersAverageUnits("numSteps")).to.equal(4637)
+    expect(activity.allUsersAverageUnits("minutesActive")).to.equal(97)
+    expect(activity.allUsersAverageUnits("flightsOfStairs")).to.equal(16)
   });
 
   it('should check user steps to stepgoal', () => { 
