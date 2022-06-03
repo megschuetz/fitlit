@@ -77,10 +77,14 @@ const displayUserInfo = (user, userRepo) => {
 
 const displayActivityInfo = (activityRepo) => {
   const allUsersActivity = activityRepo.findUser(displayedUsersID);
-  stepsTaken.innerHTML = `<b>Steps this week</b>: ${allUsersActivity[allUsersActivity.length -1].numSteps} steps`;
-  minsActive.innerHTML = `<b>Minutes active</b>: ${allUsersActivity[allUsersActivity.length -1].minutesActive} min.`;
-  flights.innerHTML = `<b>Flights conquered</b>: ${allUsersActivity[allUsersActivity.length -1].flightsOfStairs} flights`;
-
+  const lastActivityElement = allUsersActivity[allUsersActivity.length -1];
+  
+  stepsTaken.innerHTML = `<b>Steps today</b>: ${lastActivityElement.numSteps} steps`;
+  minsActive.innerHTML = `<b>Minutes active</b>: ${lastActivityElement.minutesActive} min.`;
+  flights.innerHTML = `<b>Flights conquered</b>: ${lastActivityElement.flightsOfStairs} flights`;
+  
+  milesWalked.innerHTML = `<b>Miles walked</b>: ${activityRepo.milesPerDay(displayedUsersID, lastActivityElement.date)} miles`;
+  
   allUserDailyAvgSteps.innerHTML = `${activityRepo.allUsersAverageUnits('numSteps')}`
   allUsersDailyAvgFlights.innerHTML = `${activityRepo.allUsersAverageUnits('flightsOfStairs')}`
   allUsersDailyAvgMinActive.innerHTML = `${activityRepo.allUsersAverageUnits('minutesActive')}`
