@@ -41,8 +41,9 @@ class Activity {
     return weeklyAverageMinsActive;
   };
 
-  allUsersAverageUnits(date, unitMeasured) {
-    const allUsersOnDate = this.activityData.filter((user) => user.date === date);
+  allUsersAverageUnits(unitMeasured) {
+    const latestDate = this.activityData[this.activityData.length -1]
+    const allUsersOnDate = this.activityData.filter((user) => user.date === latestDate.date);
     const total = allUsersOnDate.reduce((sum, user) => {
       sum += user[unitMeasured]
       return sum
