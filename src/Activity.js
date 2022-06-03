@@ -1,3 +1,5 @@
+import dayjs from 'dayjs'
+
 class Activity {
   constructor(activityInfo) {
     this.activityData = activityInfo;
@@ -19,13 +21,25 @@ class Activity {
     return latestData[unit];
   };
 
-  getWeeklyReportPerUnit(userId, unit) {
-    const userData = this.findUser(userId);
-    const lastElement = userData.indexOf(userData[userData.length - 1]);
-    const weekData = userData.slice(lastElement - 6);
-    return weekData.map((data) => data[unit]);
+  getWeeklyReportPerUnit(id, date, unit) {
+    if (!date) {
+      return "Date not found. Unable to load respective user data.";
+    }
+    const userData = this.findUser(id)
+    const weekFromDate = [0,0,0,0,0,0,0].map((el, index) => {
+      return dayjs(date).subtract([index], 'day').format('YYYY/MM/DD');
+    });
+    const entireWeek = weekFromDate.reduce((week, date) => {
+      week[date] = 0;
+      userData.filter(activityInfo => activityInfo.date === date)
+      .forEach(el => {
+        week[date] += el[unit];
+      });
+      return week;
+    }, {})
+    return entireWeek;
   };
-
+  
   weeklyAverageMinsActive(userId, date) {
     const userData = this.findUser(userId);
     if (!date) {
