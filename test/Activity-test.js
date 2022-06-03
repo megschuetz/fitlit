@@ -121,9 +121,33 @@ describe("Activity", () => {
   });
 
   it('should make a weekly report per unit for last 7 days', () => {
-    expect(activity.getWeeklyReportPerUnit(1, 'numSteps')).to.deep.equal([6637, 14329, 4419,  8429, 14478,  6760, 10289])
-    expect(activity.getWeeklyReportPerUnit(1, 'minutesActive')).to.deep.equal([175, 168, 165, 275, 140, 135, 119])
-    expect(activity.getWeeklyReportPerUnit(1, 'flightsOfStairs')).to.deep.equal([ 36, 18, 33, 2, 12, 6, 6 ])
+    expect(activity.getWeeklyReportPerUnit(1, '2019/06/22', 'numSteps')).to.deep.equal({
+      '2019/06/22': 10289,
+      '2019/06/21': 6760,
+      '2019/06/20': 14478,
+      '2019/06/19': 8429,
+      '2019/06/18': 4419,
+      '2019/06/17': 14329,
+      '2019/06/16': 6637
+    })
+    expect(activity.getWeeklyReportPerUnit(1, '2019/06/22', 'minutesActive')).to.deep.equal({
+      '2019/06/22': 119,
+      '2019/06/21': 135,
+      '2019/06/20': 140,
+      '2019/06/19': 275,
+      '2019/06/18': 165,
+      '2019/06/17': 168,
+      '2019/06/16': 175
+    })
+    expect(activity.getWeeklyReportPerUnit(1, '2019/06/22', 'flightsOfStairs')).to.deep.equal({
+      '2019/06/22': 6,
+      '2019/06/21': 6,
+      '2019/06/20': 12,
+      '2019/06/19': 2,
+      '2019/06/18': 33,
+      '2019/06/17': 18,
+      '2019/06/16': 36
+    })
   });
 
   it('should calulate 7 day average for mins active based on date', () => {
@@ -132,9 +156,15 @@ describe("Activity", () => {
   });
   
   it('should calculate the average of a given unit of all users on a given day', () => {
-    expect(activity.allUsersAverageUnits("2019/06/15", "numSteps")).to.equal(4637)
-    expect(activity.allUsersAverageUnits("2019/06/15", "minutesActive")).to.equal(97)
-    expect(activity.allUsersAverageUnits("2019/06/15", "flightsOfStairs")).to.equal(16)
+    const dataJustForTest = [ 
+    {"userID":1,"date":"2019/06/15","numSteps":3577,"minutesActive":140,"flightsOfStairs":16},
+    {"userID":2,"date":"2019/06/15","numSteps":3456,"minutesActive":60,"flightsOfStairs":17},
+    {"userID":3,"date":"2019/06/15","numSteps":6879,"minutesActive":90,"flightsOfStairs":15},   
+  ]
+    activity = new Activity(dataJustForTest)
+    expect(activity.allUsersAverageUnits("numSteps")).to.equal(4637)
+    expect(activity.allUsersAverageUnits("minutesActive")).to.equal(97)
+    expect(activity.allUsersAverageUnits("flightsOfStairs")).to.equal(16)
   });
 
   it('should check user steps to stepgoal', () => { 

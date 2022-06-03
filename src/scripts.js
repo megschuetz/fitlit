@@ -59,7 +59,7 @@ Promise.all([userProfileData, userActivityData, userSleepData, userHydrationData
     hydrationDataHelper(data[3].hydrationData);
   })
   .catch((error) => alert("Oops something went wrong. Try again later."));
-
+ 
 // DOM
 const displayUserInfo = (user, userRepo) => {
   const getFriendsNames = user.friends.map((friend) => {
@@ -78,10 +78,16 @@ const displayUserInfo = (user, userRepo) => {
 const displayActivityInfo = (activityRepo) => {
   const allUsersActivity = activityRepo.findUser(displayedUsersID);
   const lastActivityElement = allUsersActivity[allUsersActivity.length -1];
+  
   stepsTaken.innerHTML = `<b>Steps today</b>: ${lastActivityElement.numSteps} steps`;
   minsActive.innerHTML = `<b>Minutes active</b>: ${lastActivityElement.minutesActive} min.`;
   flights.innerHTML = `<b>Flights conquered</b>: ${lastActivityElement.flightsOfStairs} flights`;
+  
   milesWalked.innerHTML = `<b>Miles walked</b>: ${activityRepo.milesPerDay(displayedUsersID, lastActivityElement.date)} miles`;
+  
+  allUserDailyAvgSteps.innerHTML = `${activityRepo.allUsersAverageUnits('numSteps')}`
+  allUsersDailyAvgFlights.innerHTML = `${activityRepo.allUsersAverageUnits('flightsOfStairs')}`
+  allUsersDailyAvgMinActive.innerHTML = `${activityRepo.allUsersAverageUnits('minutesActive')}`
 };
 
 const displaySleepInfo = (id, sleepRepo) => {
