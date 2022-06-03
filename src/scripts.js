@@ -92,7 +92,14 @@ const displayActivityInfo = (activityRepo) => {
   allUsersDailyAvgFlights.innerHTML = `${activityRepo.allUsersAverageUnits('flightsOfStairs')}`
   allUsersDailyAvgMinActive.innerHTML = `${activityRepo.allUsersAverageUnits('minutesActive')}`
 
-  weeklyUserSteps.innerHTML =  `${activityRepo.getWeeklyReportPerUnit(displayedUsersID, date, 'numSteps')}`
+  weeklyUserSteps.innerHTML =  `
+  <div>${Array.from(stepKeys[6]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[6]]}</b></div>  oz.</div></div>
+  <div>${Array.from(stepKeys[5]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[5]]}</b></div>  oz.</div></div>
+  <div>${Array.from(stepKeys[4]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[4]]}</b></div>  oz.</div></div>
+  <div>${Array.from(stepKeys[3]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[3]]}</b></div>  oz.</div></div>
+  <div>${Array.from(stepKeys[2]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[2]]}</b></div>  oz.</div></div>
+  <div>${Array.from(stepKeys[1]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[1]]}</b></div>  oz.</div></div>
+  <div>${Array.from(stepKeys[0]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[0]]}</b></div>  oz.</div></div>`;
   weeklyUserFlights.innerHTML = `${activityRepo.getWeeklyReportPerUnit(displayedUsersID, date, 'flightsOfStairs')}`
   weeklyUserMinActive.innerHTML = `${activityRepo.getWeeklyReportPerUnit(displayedUsersID, date, 'minutesActive')}`
 };
