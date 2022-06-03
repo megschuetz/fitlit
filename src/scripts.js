@@ -78,10 +78,10 @@ const displayUserInfo = (user, userRepo) => {
 const displayActivityInfo = (activityRepo) => {
   const allUsersActivity = activityRepo.findUser(displayedUsersID);
   const lastActivityElement = allUsersActivity[allUsersActivity.length -1];
-  stepsTaken.innerHTML = `<b>Steps this week</b>: ${lastActivityElement.numSteps} steps`;
+  stepsTaken.innerHTML = `<b>Steps today</b>: ${lastActivityElement.numSteps} steps`;
   minsActive.innerHTML = `<b>Minutes active</b>: ${lastActivityElement.minutesActive} min.`;
   flights.innerHTML = `<b>Flights conquered</b>: ${lastActivityElement.flightsOfStairs} flights`;
-  milesWalked.innerHTML = `<b>Distance Walked in Miles</b>: ${activityRepo.milesPerDay(displayedUsersID, lastActivityElement.date)} miles`;
+  milesWalked.innerHTML = `<b>Miles walked</b>: ${activityRepo.milesPerDay(displayedUsersID, lastActivityElement.date)} miles`;
 };
 
 const displaySleepInfo = (id, sleepRepo) => {
