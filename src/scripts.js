@@ -77,9 +77,11 @@ const displayUserInfo = (user, userRepo) => {
 
 const displayActivityInfo = (activityRepo) => {
   const allUsersActivity = activityRepo.findUser(displayedUsersID);
+  const lastActivityElement = allUsersActivity[allUsersActivity.length -1];
   stepsTaken.innerHTML = `<b>Steps this week</b>: ${allUsersActivity[allUsersActivity.length -1].numSteps} steps`;
   minsActive.innerHTML = `<b>Minutes active</b>: ${allUsersActivity[allUsersActivity.length -1].minutesActive} min.`;
   flights.innerHTML = `<b>Flights conquered</b>: ${allUsersActivity[allUsersActivity.length -1].flightsOfStairs} flights`;
+  milesWalked.innerHTML = `<b>Distance Walked in Miles</b>: ${activityRepo.milesPerDay(displayedUsersID, lastActivityElement.date)} miles`;
 };
 
 const displaySleepInfo = (id, sleepRepo) => {
