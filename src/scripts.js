@@ -72,7 +72,7 @@ const displayUserInfo = (user, userRepo) => {
   email.innerHTML = `<b>email:</b> ${user.email}`;
   friends.innerHTML = `<b>friends:</b> ${getFriendsNames}`;
   avgStepGoal.innerHTML = `<b>FitLit Avg. Step Goal:</b><br>${userRepo.calculateAvgStepGoal()} Steps`;
-  makeChart(user.dailyStepGoal, userRepo.calculateAvgStepGoal())
+  makeChart(user.dailyStepGoal, userRepo.calculateAvgStepGoal());
 };
 
 const displayActivityInfo = (activityRepo) => {
@@ -86,8 +86,8 @@ const displayActivityInfo = (activityRepo) => {
   const weeklyFlights = activityRepo.getWeeklyReportPerUnit(displayedUsersID, date, 'flightsOfStairs');
   const flightKeys = Object.keys(weeklyFlights);
 
-  const userMinsActiveWeek = activityRepo.getWeeklyReportPerUnit(displayedUsersID, date, 'minutesActive')
-  const minsActiveKeys = Object.keys(userMinsActiveWeek)
+  const userMinsActiveWeek = activityRepo.getWeeklyReportPerUnit(displayedUsersID, date, 'minutesActive');
+  const minsActiveKeys = Object.keys(userMinsActiveWeek);
 
   stepsTaken.innerHTML = `<b>Steps today</b>: ${lastActivityElement.numSteps} steps`;
   minsActive.innerHTML = `<b>Minutes active</b>: ${lastActivityElement.minutesActive} min.`;
@@ -95,9 +95,9 @@ const displayActivityInfo = (activityRepo) => {
 
   milesWalked.innerHTML = `<b>Miles walked</b>: ${activityRepo.milesPerDay(displayedUsersID, lastActivityElement.date)} miles`;
 
-  allUserDailyAvgSteps.innerHTML = `${activityRepo.allUsersAverageUnits('numSteps')}`
-  allUsersDailyAvgFlights.innerHTML = `${activityRepo.allUsersAverageUnits('flightsOfStairs')}`
-  allUsersDailyAvgMinActive.innerHTML = `${activityRepo.allUsersAverageUnits('minutesActive')}`
+  allUserDailyAvgSteps.innerHTML = `${activityRepo.allUsersAverageUnits('numSteps')}`;
+  allUsersDailyAvgFlights.innerHTML = `${activityRepo.allUsersAverageUnits('flightsOfStairs')}`;
+  allUsersDailyAvgMinActive.innerHTML = `${activityRepo.allUsersAverageUnits('minutesActive')}`;
 
   weeklyUserSteps.innerHTML =  `
   <div>${Array.from(stepKeys[6]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[6]]}</b></div>  steps</div></div>
