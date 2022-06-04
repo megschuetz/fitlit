@@ -21,5 +21,12 @@ const addData = (postObject) => {
   })
 }
 
+const addHydrationData = (postHydrationObject) => {
+  return fetch("http://localhost:3001/api/v1/hydration", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(postHydrationObject)
+  })
+}
 
-export {userProfileData, userActivityData, userSleepData, userHydrationData, addData}
+export {userProfileData, userActivityData, userSleepData, userHydrationData, addData, addHydrationData}
