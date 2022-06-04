@@ -71,13 +71,14 @@ Promise.all([userProfileData, userActivityData, userSleepData, userHydrationData
 
 function submitActivityForm(e){
   e.preventDefault();
-  let date = document.getElementById("date-input").value;
+  let date = document.getElementById("activity-date-input").value;
   let betterDate = dayjs(date).format("YYYY/MM/DD");
-  let hours = document.getElementById("sleep-hours-input").value;
   let steps = document.getElementById("activity-steps-input").value;
   let activeMins = document.getElementById("activity-minutes").value;
+  let flights = document.getElementById("activity-stairs").value;
   let postActiveObject = createSleepPostObject(betterDate, steps, activeMins, flights);
 
+    console.log(betterDate)
   addActivityData(postActiveObject);
   activityForm.reset();
 }
