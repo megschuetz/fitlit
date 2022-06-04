@@ -180,16 +180,15 @@ section > .info {
   position: relative;
   top: 100px;
   max-height: 900px;
-  /* grid-template-columns: 33% 33% 33%; */
   grid-template-columns: 270px 270px 270px;
-  grid-template-rows: 230px 230px 230px 150px;
+  grid-template-rows: 230px 230px 230px 230px 150px 150px 150px 150px 150px;
   grid-row-gap: 15px;
   grid-column-gap: 15px;
 }
 
-/*  ------- ACTIVITY STYLING -------- */
+/*  ------- COMPARE AVG USER STEP GOAL/USER STEP GOAL-------- */
 
-#steps {
+.step-goal {
   display: flex;
   justify-content: center;
   grid-column: 1 / span 2;
@@ -208,17 +207,41 @@ section > .info {
   margin-right: 50px;
 }
 
-/*   -------   HYDRATION STYLING   --------  */
+/*   -------   WEEKLY DISPLAY STYLING   --------  */
 
-.weekly-water {
+.weekly {
   display: grid;
   grid-template-columns: 100px 100px 100px 100px 100px 100px 100px;
   grid-template-rows: 30px 30px;
 }
 
+.all-users-weekly {
+  display: flex;
+  justify-content: center;
+}
+
 .hydration-weekly {
+  display: flex;
   grid-column: 1 / span 3;
-  grid-row: 4;
+  grid-row: 5;
+}
+
+.steps-weekly {
+  display: flex;
+  grid-column: 1 / span 3;
+  grid-row: 6;
+}
+
+.flights-weekly {
+  display: flex;
+  grid-column: 1/ span 3;
+  grid-row: 7;
+}
+
+.mins-active-weekly {
+  display: flex;
+  grid-column: 1/ span 3;
+  grid-row: 8;
 }
 
 /*  -------  TEXT STYLING ---------  */
