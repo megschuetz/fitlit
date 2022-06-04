@@ -1,7 +1,7 @@
 import './css/styles.css';
 import './images/turing-logo.png';
 import './images/pngdesert.png'
-import {userProfileData, userActivityData, userSleepData, userHydrationData} from './apiCalls';
+import {userProfileData, userActivityData, userSleepData, userHydrationData, addData} from './apiCalls';
 import UserRepository from './UserRepository';
 import SleepRepository from './sleep-repository';
 import Activity from './Activity';
@@ -79,28 +79,19 @@ function submitSleepForm(e){
   let quality = document.getElementById("sleep-quality-input").value;
   let postObject = createSleepPostObject(betterDate, hours, quality);
 
-  addData(postObject)
-
-  sleepForm.reset();
-}
-
-const addData = (postObject) => {
-  fetch("http://localhost:3001/api/v1/sleep", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(postObject)
-  })
-  .then(response => response.json())
+  addData(postObject).then(response => response.json())
   .then(object => {
     fetchData("http://localhost:3001/api/v1/sleep").then(data => {
-      renderSleepData(data)
+      sleepDataHelper(data.sleepData)
     })
   })
+  sleepForm.reset();
 }
 
 const fetchData = (url) => {
     return fetch(url).then(response => response.json())
 }
+
 function createSleepPostObject(date, hours, quality){
   let object = {
     userID: displayedUsersID,
@@ -110,23 +101,6 @@ function createSleepPostObject(date, hours, quality){
   }
   return object
 }
-
-function renderSleepData(userSleepData) {
-  let newSleepRepo = new SleepRepository(userSleepData)
-  displayNewSleepInfo(displayedUsersID, newSleepRepo)
-}
-
-function displayNewSleepInfo(id, repo) {
-  let allNewUserData = repo.getAllNewUserData(id);
-  console.log(allNewUserData);
-  let newSleep = repo.makeNewSleep(id, allNewUserData);
-    lastSleep.innerHTML = `${newSleep.latest.hoursSlept}`;
-    weeklySleep.innerHTML = `<b>Weekly Avg:</b> ${newSleep.calculateWeeklyAvg(newSleep.latest.date, "hoursSlept")} hrs.<br>`;
-    avgSleep.innerHTML = `<b>Average Hours Slept:</b> ${newSleep.avgHoursSlept}<br> hrs.`;
-    avgQuality.innerHTML = `<b>Average Sleep Quality Rating:</b> ${newSleep.avgSleepQuality}`;
-}
-
-
 
 // let postObject = {
 //   userID: 1,
