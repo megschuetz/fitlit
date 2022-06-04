@@ -76,14 +76,14 @@ function submitActivityForm(e){
   let steps = document.getElementById("activity-steps-input").value;
   let activeMins = document.getElementById("activity-minutes").value;
   let flights = document.getElementById("activity-stairs").value;
-  let postActiveObject = createSleepPostObject(betterDate, steps, activeMins, flights);
+  let postActiveObject = createActivePostObject(betterDate, steps, activeMins, flights);
 
     console.log(betterDate)
   addActivityData(postActiveObject);
   activityForm.reset();
 }
 
-function createSleepPostObject(date, steps, activeMins, flights){
+function createActivePostObject(date, steps, activeMins, flights){
   let object = {
     userID: displayedUsersID,
     date: date,
