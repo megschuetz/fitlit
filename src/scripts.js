@@ -59,7 +59,7 @@ Promise.all([userProfileData, userActivityData, userSleepData, userHydrationData
     hydrationDataHelper(data[3].hydrationData);
   })
   .catch((error) => alert("Oops something went wrong. Try again later."));
- 
+
 // DOM
 const displayUserInfo = (user, userRepo) => {
   const getFriendsNames = user.friends.map((friend) => {
@@ -72,22 +72,59 @@ const displayUserInfo = (user, userRepo) => {
   email.innerHTML = `<b>email:</b> ${user.email}`;
   friends.innerHTML = `<b>friends:</b> ${getFriendsNames}`;
   avgStepGoal.innerHTML = `<b>FitLit Avg. Step Goal:</b><br>${userRepo.calculateAvgStepGoal()} Steps`;
-  makeChart(user.dailyStepGoal, userRepo.calculateAvgStepGoal())
+  makeChart(user.dailyStepGoal, userRepo.calculateAvgStepGoal());
 };
 
 const displayActivityInfo = (activityRepo) => {
   const allUsersActivity = activityRepo.findUser(displayedUsersID);
   const lastActivityElement = allUsersActivity[allUsersActivity.length -1];
-  
+  const date = lastActivityElement.date;
+
+  const weeklySteps = activityRepo.getWeeklyReportPerUnit(displayedUsersID, date, 'numSteps');
+  const stepKeys = Object.keys(weeklySteps);
+
+  const weeklyFlights = activityRepo.getWeeklyReportPerUnit(displayedUsersID, date, 'flightsOfStairs');
+  const flightKeys = Object.keys(weeklyFlights);
+
+  const userMinsActiveWeek = activityRepo.getWeeklyReportPerUnit(displayedUsersID, date, 'minutesActive');
+  const minsActiveKeys = Object.keys(userMinsActiveWeek);
+
   stepsTaken.innerHTML = `<b>Steps today</b>: ${lastActivityElement.numSteps} steps`;
   minsActive.innerHTML = `<b>Minutes active</b>: ${lastActivityElement.minutesActive} min.`;
   flights.innerHTML = `<b>Flights conquered</b>: ${lastActivityElement.flightsOfStairs} flights`;
-  
+
   milesWalked.innerHTML = `<b>Miles walked</b>: ${activityRepo.milesPerDay(displayedUsersID, lastActivityElement.date)} miles`;
-  
-  allUserDailyAvgSteps.innerHTML = `${activityRepo.allUsersAverageUnits('numSteps')}`
-  allUsersDailyAvgFlights.innerHTML = `${activityRepo.allUsersAverageUnits('flightsOfStairs')}`
-  allUsersDailyAvgMinActive.innerHTML = `${activityRepo.allUsersAverageUnits('minutesActive')}`
+
+  allUserDailyAvgSteps.innerHTML = `${activityRepo.allUsersAverageUnits('numSteps')}`;
+  allUsersDailyAvgFlights.innerHTML = `${activityRepo.allUsersAverageUnits('flightsOfStairs')}`;
+  allUsersDailyAvgMinActive.innerHTML = `${activityRepo.allUsersAverageUnits('minutesActive')}`;
+
+  weeklyUserSteps.innerHTML =  `
+  <div>${Array.from(stepKeys[6]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[6]]}</b></div>  steps</div></div>
+  <div>${Array.from(stepKeys[5]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[5]]}</b></div>  steps</div></div>
+  <div>${Array.from(stepKeys[4]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[4]]}</b></div>  steps</div></div>
+  <div>${Array.from(stepKeys[3]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[3]]}</b></div>  steps</div></div>
+  <div>${Array.from(stepKeys[2]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[2]]}</b></div>  steps</div></div>
+  <div>${Array.from(stepKeys[1]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[1]]}</b></div>  steps</div></div>
+  <div>${Array.from(stepKeys[0]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[0]]}</b></div>  steps</div></div>`;
+
+  weeklyUserFlights.innerHTML = `
+  <div>${Array.from(flightKeys[6]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklyFlights[flightKeys[6]]}</b></div>  flights</div></div>
+  <div>${Array.from(flightKeys[5]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklyFlights[flightKeys[5]]}</b></div>  flights</div></div>
+  <div>${Array.from(flightKeys[4]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklyFlights[flightKeys[4]]}</b></div>  flights</div></div>
+  <div>${Array.from(flightKeys[3]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklyFlights[flightKeys[3]]}</b></div>  flights</div></div>
+  <div>${Array.from(flightKeys[2]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklyFlights[flightKeys[2]]}</b></div>  flights</div></div>
+  <div>${Array.from(flightKeys[1]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklyFlights[flightKeys[1]]}</b></div>  flights</div></div>
+  <div>${Array.from(flightKeys[0]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklyFlights[flightKeys[0]]}</b></div>  flights</div></div>`;
+
+  weeklyUserMinActive.innerHTML = `
+    <div>${Array.from(minsActiveKeys[6]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[6]]}</b></div>  min.</div></div>
+    <div>${Array.from(minsActiveKeys[5]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[5]]}</b></div>  min.</div></div>
+    <div>${Array.from(minsActiveKeys[4]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[4]]}</b></div>  min.</div></div>
+    <div>${Array.from(minsActiveKeys[3]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[3]]}</b></div>  min.</div></div>
+    <div>${Array.from(minsActiveKeys[2]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[2]]}</b></div>  min.</div></div>
+    <div>${Array.from(minsActiveKeys[1]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[1]]}</b></div>  min.</div></div>
+    <div>${Array.from(minsActiveKeys[0]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[0]]}</b></div>  min.</div></div>`;
 };
 
 const displaySleepInfo = (id, sleepRepo) => {
