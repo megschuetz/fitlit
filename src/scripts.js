@@ -1,14 +1,16 @@
 import './css/styles.css';
 import './images/turing-logo.png';
 import './images/pngdesert.png'
-import {userProfileData, userActivityData, userSleepData, userHydrationData} from './apiCalls';
+import {userProfileData, userActivityData, userSleepData, userHydrationData, addData} from './apiCalls';
 import UserRepository from './UserRepository';
 import SleepRepository from './sleep-repository';
 import Activity from './Activity';
-import Hydration from './Hydration'
+import Hydration from './Hydration';
+import Sleep from './sleep.js';
 import HydrationRepository from './HydrationRepository';
 import User from './User';
 import Chart from 'chart.js/auto';
+import dayjs from 'dayjs'
 
 // QUERY SELECTORS
 let friends = document.getElementById('friends');
@@ -50,9 +52,10 @@ let activityForm = document.getElementById("activity-form");
 sleepRadio.addEventListener("click", toggleFormVisibility);
 hydrationRadio.addEventListener("click", toggleFormVisibility);
 activityRadio.addEventListener("click", toggleFormVisibility);
-sleepFormSubmit.addEventListener("click", submitForm);
-hydrationFormSubmit.addEventListener("click", submitForm);
-activityFormSubmit.addEventListener("click", submitForm);
+
+sleepFormSubmit.addEventListener("click", submitSleepForm);
+// hydrationFormSubmit.addEventListener("click", submitForm);
+// activityFormSubmit.addEventListener("click", submitForm);
 
 // GLOBAL VARIABLE
 let displayedUsersID = Math.floor(Math.random() * 50);
@@ -68,32 +71,52 @@ Promise.all([userProfileData, userActivityData, userSleepData, userHydrationData
 
 
 //POST Request
+function submitSleepForm(e){
+  e.preventDefault();
+  let date = document.getElementById("date-input").value;
+  let betterDate = dayjs(date).format("YYYY/MM/DD");
+  let hours = document.getElementById("sleep-hours-input").value;
+  let quality = document.getElementById("sleep-quality-input").value;
+  let postObject = createSleepPostObject(betterDate, hours, quality);
 
-const addData = (postObject) => {
-  fetch("http://localhost:3001/api/v1/sleep", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(postObject)
+  addData(postObject).then(response => response.json())
+  .then(object => {
+    fetchData("http://localhost:3001/api/v1/sleep").then(data => {
+      sleepDataHelper(data.sleepData)
+    })
   })
-  .then(response => response.json())
-  .then(object => console.log('newinfo', object))
+  sleepForm.reset();
 }
 
-let postObject = {
-  userID: 1,
-  date: '2022/03/01',
-  hoursSlept: 4,
-  sleepQuality: 5
+const fetchData = (url) => {
+    return fetch(url).then(response => response.json())
 }
 
-addData(postObject)
-
-let postSleepObject = {
-  userID: 1,
-  date: '2022/03/01',
-  hoursSlept: 4,
-  sleepQuality: 5
+function createSleepPostObject(date, hours, quality){
+  let object = {
+    userID: displayedUsersID,
+    date: date,
+    hoursSlept: hours,
+    sleepQuality: quality,
+  }
+  return object
 }
+
+// let postObject = {
+//   userID: 1,
+//   date: '2022/03/01',
+//   hoursSlept: 4,
+//   sleepQuality: 5
+// }
+//
+// addData(postObject)
+
+// let postSleepObject = {
+//   userID: 1,
+//   date: '2022/03/01',
+//   hoursSlept: 4,
+//   sleepQuality: 5
+// }
 // let postActivityObject = {
 //   userID:
 //   date:
@@ -226,6 +249,7 @@ const hydrationDataHelper = (data) => {
 };
 
 const sleepDataHelper = (data) => {
+  console.log(data)
   const sleepRepo = new SleepRepository(data);
   displaySleepInfo(displayedUsersID, sleepRepo);
 };

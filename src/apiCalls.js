@@ -13,5 +13,13 @@ const userActivityData = fetchData(activeApi);
 const userSleepData = fetchData(sleepApi);
 const userHydrationData = fetchData(hydrationApi);
 
+const addData = (postObject) => {
+  return fetch("http://localhost:3001/api/v1/sleep", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(postObject)
+  })
+}
 
-export {userProfileData, userActivityData, userSleepData, userHydrationData}
+
+export {userProfileData, userActivityData, userSleepData, userHydrationData, addData}

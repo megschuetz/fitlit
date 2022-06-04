@@ -8,6 +8,10 @@ class SleepRepository {
     const foundData = this.dataObjects.filter(user => user.userID === userId);
       return foundData;
   }
+  getAllNewUserData(userId) {
+    const foundData = this.dataObjects.sleepData.filter(user => user.userID === userId);
+      return foundData;
+  }
   makeNewSleep(user, data) {
     return new Sleep(user, data);
   }
