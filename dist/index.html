@@ -26,33 +26,44 @@
             <label for="hydration-radio">Hydration</label>
             <input class="user-input" id="activity-radio" type="radio" name="user-input" value="activity">
             <label for="activity-radio">Activity</label><br>
-            <input class="user-input" type="date" id="date-input" name="date"><br>
-            <label for="date-input">Date</label>
+          </form>
+
             <!-- SLEEP FORM -->
-            <div class="" id="sleep-form">
-              <input class="user-input" id="sleep-hours-input" type="form" name="user-input" value=""><br>
+          <form class="" id="sleep-form">
+              <label for="date-input">Date:</label>
+              <input class="user-input" type="date" id="date-input" name="date"><br>
               <label for="sleep-hours-input">Hours Slept:</label>
-              <input class="user-input" id="sleep-quality-input" type="form" name="user-input" value=""><br>
+              <input class="user-input" id="sleep-hours-input" type="form" name="user-input" value=""><br>
               <label for="sleep-quality-input">Rate Your Sleep Quality:</label>
-            </div>
+              <input class="user-input" id="sleep-quality-input" type="form" name="user-input" value=""><br>
+              <button id="submit-sleep">Submit</button>
+          </form>
 
             <!-- HYDRATION FORM -->
-            <div class="hidden" id="hydration-form">
-              <label for="steps">Water Today:</label>
+          <form class="hidden" id="hydration-form">
+              <label for="date-input">Date:</label>
+              <input class="user-input" type="date" id="date-input" name="date"><br>
+              <label for="steps">Oz. Water Today:</label>
               <input class="user-input" id="water-input" type="form" name="user-input" value=""><br>
-            </div>
+              <button id="submit-hydration">Submit</button>
+          </form>
 
             <!-- ACTIVITY FORM -->
-            <div class="hidden" id="activity-form">
-              <label for="steps">Steps Today:</label>
+          <form class="hidden" id="activity-form">
+              <label for="date-input">Date:</label>
+              <input class="user-input" type="date" id="date-input" name="date"><br>
+              <label for="steps">Steps Taken:</label>
               <input class="user-input" id="activity-steps-input" type="form" name="user-input" value=""><br>
-              <label for="flights-steps">Flights of stairs:</label>
+              <label for="flights-steps">Flights of Stairs:</label>
               <input class="user-input" id="activity-stairs" type="form" name="user-input" value=""><br>
-            </div>
+              <label for="flights-steps">Minutes of Activity:</label>
+              <input class="user-input" id="activity-stairs" type="form" name="user-input" value=""><br>
+              <button id="submit-activity">Submit</button>
+          </form>
 
 
 
-        </form>
+
         </section>
       </section>
       <div class="main-wrapper">
@@ -65,7 +76,7 @@
                   <p class="name" id="name">Welcome, Name</p>
                 </div>
               </section>
-              <section class="steps" id="steps">
+              <section class="step-goal">
                 <h1 class="info-title">👟 Step Goal</h1>
                 <div class="chart">
                   <div class="step-goal-chart"><canvas id="myChart" width="200" height="150"></canvas></div>
@@ -109,22 +120,42 @@
               <section class="test">
                 <h1 class="test-title">💧 Chart:</h1>
                 <div class="test-div">
-                  <div class="step-goal-chart"><canvas id="donut" width="200" height="150"></canvas></div>
+                  <div class="test-chart"><canvas id="donut" width="200" height="150"></canvas></div>
+                </div>
+              </section>
+              <section class="all-users-weekly">
+                <h1 class="info-title">💧 FitLit Users Avg Today:</h1>
+                <div>
+                  <div class="all-users-avg-steps" id="all-users-avg-steps"></div>
+                  <div class="all-users-avg-flights" id="all-users-avg-flights"></div>
+                  <div class="all-users-avg-mins-active" id="all-users-avg-mins-active"></div>
                 </div>
               </section>
               <section class="hydration-weekly">
                 <h1 class="info-title">💧 Weekly Hydration:</h1>
                 <div class="info-weekly-water">
-                  <p class="weekly-water" id="weekly-water"></p>
+                  <p class="weekly water" id="weekly-water"></p>
+                </div>
+              </section>
+              <section class="steps-weekly">
+                <h1 class="info-title">👟 Weekly Steps:</h1>
+                <div>
+                  <p class="weekly" id="weekly-steps"></p>
+                </div>
+              </section>
+              <section class="flights-weekly">
+                <h1 class="info-title">👟 Weekly Flights:</h1>
+                <div>
+                  <p class="weekly" id="weekly-flights"></p>
+                </div>
+              </section>
+              <section class="mins-active-weekly">
+                <h1 class="info-title">👟 Weekly Mins Active:</h1>
+                <div>
+                  <p class="weekly" id="weekly-mins-active"></p>
                 </div>
               </section>
               <!-- <div class="miles-walked" id="miles-walked"></div> -->
-              <div class="all-users-avg-steps" id="all-users-avg-steps"></div>
-              <div class="all-users-avg-flights" id="all-users-avg-flights"></div>
-              <div class="all-users-avg-mins-active" id="all-users-avg-mins-active"></div>
-              <div class="weekly-steps" id="weekly-steps"></div>
-              <div class="weekly-flights" id="weekly-flights"></div>
-              <div class="weekly-mins-active" id="weekly-mins-active"></div>
             </div>
           </main>
         </div>

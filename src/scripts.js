@@ -34,6 +34,9 @@ let allUsersDailyAvgMinActive = document.getElementById("all-users-avg-mins-acti
 let weeklyUserSteps = document.getElementById("weekly-steps");
 let weeklyUserFlights = document.getElementById("weekly-flights");
 let weeklyUserMinActive = document.getElementById("weekly-mins-active");
+let sleepFormSubmit = document.getElementById("submit-sleep");
+let hydrationFormSubmit = document.getElementById("submit-hydration");
+let activityFormSubmit = document.getElementById("submit-activity");
 
 //  QUERY SELECTORS: FORM INPUT
 let sleepRadio = document.getElementById("sleep-radio");
@@ -47,6 +50,9 @@ let activityForm = document.getElementById("activity-form");
 sleepRadio.addEventListener("click", toggleFormVisibility);
 hydrationRadio.addEventListener("click", toggleFormVisibility);
 activityRadio.addEventListener("click", toggleFormVisibility);
+sleepFormSubmit.addEventListener("click", submitForm);
+hydrationFormSubmit.addEventListener("click", submitForm);
+activityFormSubmit.addEventListener("click", submitForm);
 
 // GLOBAL VARIABLE
 let displayedUsersID = Math.floor(Math.random() * 50);
@@ -72,7 +78,7 @@ const addData = (postObject) => {
   .then(response => response.json())
   .then(object => console.log('newinfo', object))
 }
-  
+
 let postObject = {
   userID: 1,
   date: '2022/03/01',
@@ -81,6 +87,25 @@ let postObject = {
 }
 
 addData(postObject)
+
+let postSleepObject = {
+  userID: 1,
+  date: '2022/03/01',
+  hoursSlept: 4,
+  sleepQuality: 5
+}
+// let postActivityObject = {
+//   userID:
+//   date:
+//   numSteps:
+//   minutesActive:
+//   flightsOfStairs:
+// }
+// let postHydrationObject = {
+//   userID:
+//   date:
+//   water:
+// }
 
 // DOM
 const displayUserInfo = (user, userRepo) => {
