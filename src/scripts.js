@@ -1,7 +1,7 @@
 import './css/styles.css';
 import './images/turing-logo.png';
 import './images/pngdesert.png'
-import {userProfileData, userActivityData, userSleepData, userHydrationData, addData} from './apiCalls';
+import {userProfileData, userActivityData, userSleepData, userHydrationData, addData, addHydrationData} from './apiCalls';
 import UserRepository from './UserRepository';
 import SleepRepository from './sleep-repository';
 import Activity from './Activity';
@@ -47,6 +47,8 @@ let activityRadio = document.getElementById("activity-radio");
 let sleepForm = document.getElementById("sleep-form");
 let hydrationForm = document.getElementById("hydration-form");
 let activityForm = document.getElementById("activity-form");
+let hydrationDateInput = document.getElementById("hydration-date-input");
+let numOuncesInput = document.getElementById("water-input");
 
 // EVENT LISTENERS
 sleepRadio.addEventListener("click", toggleFormVisibility);
