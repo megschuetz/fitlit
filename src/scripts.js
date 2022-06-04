@@ -60,6 +60,28 @@ Promise.all([userProfileData, userActivityData, userSleepData, userHydrationData
   })
   .catch((error) => alert("Oops something went wrong. Try again later."));
 
+
+//POST Request
+
+const addData = (postObject) => {
+  fetch("http://localhost:3001/api/v1/sleep", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(postObject)
+  })
+  .then(response => response.json())
+  .then(object => console.log('newinfo', object))
+}
+  
+let postObject = {
+  userID: 1,
+  date: '2022/03/01',
+  hoursSlept: 4,
+  sleepQuality: 5
+}
+
+addData(postObject)
+
 // DOM
 const displayUserInfo = (user, userRepo) => {
   const getFriendsNames = user.friends.map((friend) => {
