@@ -1,7 +1,7 @@
 import './css/styles.css';
 import './images/turing-logo.png';
 import './images/pngdesert.png'
-import {userProfileData, userActivityData, userSleepData, userHydrationData, addData} from './apiCalls';
+import {userProfileData, userActivityData, userSleepData, userHydrationData, addData, addActivityData} from './apiCalls';
 import UserRepository from './UserRepository';
 import SleepRepository from './sleep-repository';
 import Activity from './Activity';
@@ -55,7 +55,7 @@ activityRadio.addEventListener("click", toggleFormVisibility);
 
 sleepFormSubmit.addEventListener("click", submitSleepForm);
 // hydrationFormSubmit.addEventListener("click", submitForm);
-// activityFormSubmit.addEventListener("click", submitForm);
+activityFormSubmit.addEventListener("click", submitActivityForm);
 
 // GLOBAL VARIABLE
 let displayedUsersID = Math.floor(Math.random() * 50);
@@ -101,34 +101,36 @@ function createSleepPostObject(date, hours, quality){
   }
   return object
 }
+//<<-----------------activity post stuff----------------->>>
+function submitActivityForm(e){
+  e.preventDefault();
+  let date = document.getElementById("activity-date-input").value;
+  let betterDate = dayjs(date).format("YYYY/MM/DD");
+  let steps = document.getElementById("activity-steps-input").value;
+  let activeMins = document.getElementById("activity-minutes").value;
+  let flights = document.getElementById("activity-stairs").value;
+  let postActiveObject = createActivePostObject(betterDate, steps, activeMins, flights);
 
-// let postObject = {
-//   userID: 1,
-//   date: '2022/03/01',
-//   hoursSlept: 4,
-//   sleepQuality: 5
-// }
-//
-// addData(postObject)
+  addActivityData(postActiveObject).then(response => response.json())
+  .then(object => {
+    fetchData("http://localhost:3001/api/v1/activity").then(data => {
+    activityDataHelper(data.activityData)
+    })
+  })
+  activityForm.reset();
+}
 
-// let postSleepObject = {
-//   userID: 1,
-//   date: '2022/03/01',
-//   hoursSlept: 4,
-//   sleepQuality: 5
-// }
-// let postActivityObject = {
-//   userID:
-//   date:
-//   numSteps:
-//   minutesActive:
-//   flightsOfStairs:
-// }
-// let postHydrationObject = {
-//   userID:
-//   date:
-//   water:
-// }
+function createActivePostObject(date, steps, activeMins, flights){
+  let object = {
+    userID: displayedUsersID,
+    date: date,
+    numSteps: steps,
+    minutesActive: activeMins,
+    flightsOfStairs: flights,
+  }
+  return object
+}
+//<<--------------------------------------------------->>>
 
 // DOM
 const displayUserInfo = (user, userRepo) => {
