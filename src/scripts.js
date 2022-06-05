@@ -47,6 +47,10 @@ let activityRadio = document.getElementById("activity-radio");
 let sleepForm = document.getElementById("sleep-form");
 let hydrationForm = document.getElementById("hydration-form");
 let activityForm = document.getElementById("activity-form");
+let activityData = document.getElementById("activity-date-input")
+let activityStepsInput = document.getElementById("activity-steps-input")
+let activityMinsInput = document.getElementById("activity-minutes")
+let activityFlightsInput = document.getElementById("activity-stairs")
 
 // EVENT LISTENERS
 sleepRadio.addEventListener("click", toggleFormVisibility);
@@ -88,10 +92,6 @@ function submitSleepForm(e){
   sleepForm.reset();
 }
 
-const fetchData = (url) => {
-    return fetch(url).then(response => response.json())
-}
-
 function createSleepPostObject(date, hours, quality){
   let object = {
     userID: displayedUsersID,
@@ -104,11 +104,11 @@ function createSleepPostObject(date, hours, quality){
 //<<-----------------activity post stuff----------------->>>
 function submitActivityForm(e){
   e.preventDefault();
-  let date = document.getElementById("activity-date-input").value;
+  let date = activityData.value;
   let betterDate = dayjs(date).format("YYYY/MM/DD");
-  let steps = document.getElementById("activity-steps-input").value;
-  let activeMins = document.getElementById("activity-minutes").value;
-  let flights = document.getElementById("activity-stairs").value;
+  let steps = activityStepsInput.value;
+  let activeMins = activityMinsInput.value;
+  let flights = activityFlightsInput.value;
   let postActiveObject = createActivePostObject(betterDate, steps, activeMins, flights);
 
   addActivityData(postActiveObject).then(response => response.json())
