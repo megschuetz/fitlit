@@ -95,16 +95,6 @@ const fetchData = (url) => {
     return fetch(url).then(response => response.json())
 }
 
-function createSleepPostObject(date, hours, quality){
-  let object = {
-    userID: displayedUsersID,
-    date: date,
-    hoursSlept: hours,
-    sleepQuality: quality,
-  }
-  return object
-}
-
 function submitHydrationForm(e){
   e.preventDefault();
   let postHydrationObject = {
