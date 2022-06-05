@@ -56,7 +56,7 @@ hydrationRadio.addEventListener("click", toggleFormVisibility);
 activityRadio.addEventListener("click", toggleFormVisibility);
 
 sleepFormSubmit.addEventListener("click", submitSleepForm);
-// hydrationFormSubmit.addEventListener("click", submitForm);
+hydrationFormSubmit.addEventListener("click", submitHydrationForm);
 // activityFormSubmit.addEventListener("click", submitForm);
 
 // GLOBAL VARIABLE
@@ -102,6 +102,23 @@ function createSleepPostObject(date, hours, quality){
     sleepQuality: quality,
   }
   return object
+}
+
+function submitHydrationForm(e){
+  e.preventDefault();
+  let postHydrationObject = {
+    userID: displayedUsersID,
+    date: dayjs(hydrationDateInput.value).format("YYYY/MM/DD"),
+    numOunces: numOuncesInput.value
+  }
+
+  addHydrationData(postHydrationObject).then(response => response.json())
+  .then(object => {
+    fetchData("http://localhost:3001/api/v1/hydration").then(data => {
+      hydrationDataHelper(data.hydrationData)
+    })
+  })
+  hydrationForm.reset();
 }
 
 // let postObject = {
