@@ -111,6 +111,15 @@ function submitActivityForm(e){
   let flights = activityFlightsInput.value;
   let postActiveObject = createActivePostObject(betterDate, steps, activeMins, flights);
 
+  addActivityData = (postActiveObject).then(response => response.json())
+  .then(object => {
+    fetchData("http://localhost:3001/api/v1/activity").then(data => {
+    activityDataHelper(data.activityData)
+    })
+  })
+  activityForm.reset();
+}
+
 function createActivePostObject(date, steps, activeMins, flights){
   let object = {
     userID: displayedUsersID,
