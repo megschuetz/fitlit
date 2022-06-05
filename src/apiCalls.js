@@ -20,16 +20,12 @@ const addData = (postObject) => {
       body: JSON.stringify(postObject)
     })
   }
-
-  addActivityData(postActiveObject).then(response => response.json())
-  .then(object => {
-    fetchData("http://localhost:3001/api/v1/activity").then(data => {
-    activityDataHelper(data.activityData)
-    })
+const addActivityData = (postActivityObject) => {
+fetch("http://localhost:3001/api/v1/activity", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(postActivityObject)
   })
-  activityForm.reset();
 }
-  
 
-
-export {userProfileData, userActivityData, userSleepData, userHydrationData, addData, addActivityData}
+export {userProfileData, userActivityData, userSleepData, userHydrationData, addData, fetchData, addActivityData}
