@@ -72,7 +72,7 @@ Promise.all([userProfileData, userActivityData, userSleepData, userHydrationData
   .catch((error) => alert("Oops something went wrong. Try again later."));
 
 
-//POST Request
+//Event Handlers:
 function submitSleepForm(e){
  e.preventDefault();
  let betterDate = dayjs(date).format("YYYY/MM/DD");
@@ -82,10 +82,11 @@ function submitSleepForm(e){
    hoursSlept: hours.value,
    sleepQuality: quality.value,
  }
- addData(postObject).then(response => response.json())
+
+ addData(postObject)
  .then(object => {
    fetchData("http://localhost:3001/api/v1/sleep").then(data => {
-     sleepDataHelper(data.sleepData)
+     sleepDataHelper(data.sleepData);
    })
  })
  sleepForm.reset();
@@ -99,7 +100,7 @@ function submitHydrationForm(e){
     numOunces: numOuncesInput.value
   }
 
-  addHydrationData(postHydrationObject).then(response => response.json())
+  addHydrationData(postHydrationObject)
   .then(object => {
     fetchData("http://localhost:3001/api/v1/hydration").then(data => {
       hydrationDataHelper(data.hydrationData)

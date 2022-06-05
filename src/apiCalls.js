@@ -18,7 +18,7 @@ const addData = (postObject) => {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(postObject)
-  })
+  }).then(response => response.json());
 }
 
 const addHydrationData = (postHydrationObject) => {
@@ -26,7 +26,7 @@ const addHydrationData = (postHydrationObject) => {
     method: "POST",
     headers: {"Content-Type": "application/json"},
     body: JSON.stringify(postHydrationObject)
-  })
+  }).then(response => response.json());
 }
 
 export {userProfileData, userActivityData, userSleepData, userHydrationData, addData, addHydrationData, fetchData}
