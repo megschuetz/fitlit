@@ -52,6 +52,10 @@ let numOuncesInput = document.getElementById("water-input");
 let sleepDateInput = document.getElementById("sleep-date-input");
 let sleepHoursInput = document.getElementById("sleep-hours-input");
 let sleepQualityInput = document.getElementById("sleep-quality-input");
+let activityDateInput = document.getElementById("activity-date-input");
+let activityStepsInput = document.getElementById("activity-steps-input");
+let activityFlightsInput = document.getElementById("activity-stairs-input");
+let activityMinInput = document.getElementById("activity-minutes-input");
 
 // EVENT LISTENERS
 sleepRadio.addEventListener("click", toggleFormVisibility);
@@ -114,7 +118,24 @@ function submitHydrationForm(e){
 }
 
 // Activity Form:
+function submitActivityForm(e){
+  e.preventDefault();
+  let postActivityObject = {
+    userID: displayedUsersID,
+    date: dayjs(activityDateInput.value).format("YYYY/MM/DD"),
+    numSteps: Number(activityStepsInput.value),
+    minutesActive: Number(activityMinInput.value),
+    flightsOfStairs: Number(activityFlightsInput.value)
+  }
 
+  addActivityData(postActivityObject)
+  .then(object => {
+    fetchData("http://localhost:3001/api/v1/activity").then(data => {
+      activityDataHelper(data.activityData)
+    })
+  })
+  activityForm.reset();
+}
 
 
 // DOM
