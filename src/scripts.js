@@ -74,20 +74,21 @@ Promise.all([userProfileData, userActivityData, userSleepData, userHydrationData
 
 //POST Request
 function submitSleepForm(e){
-  e.preventDefault();
-  let date = document.getElementById("date-input").value;
-  let betterDate = dayjs(date).format("YYYY/MM/DD");
-  let hours = document.getElementById("sleep-hours-input").value;
-  let quality = document.getElementById("sleep-quality-input").value;
-  let postObject = createSleepPostObject(betterDate, hours, quality);
-
-  addData(postObject).then(response => response.json())
-  .then(object => {
-    fetchData("http://localhost:3001/api/v1/sleep").then(data => {
-      sleepDataHelper(data.sleepData)
-    })
-  })
-  sleepForm.reset();
+ e.preventDefault();
+ let betterDate = dayjs(date).format("YYYY/MM/DD");
+ let postObject = {
+   userID: displayedUsersID,
+   date: betterDate,
+   hoursSlept: hours.value,
+   sleepQuality: quality.value,
+ }
+ addData(postObject).then(response => response.json())
+ .then(object => {
+   fetchData("http://localhost:3001/api/v1/sleep").then(data => {
+     sleepDataHelper(data.sleepData)
+   })
+ })
+ sleepForm.reset();
 }
 
 const fetchData = (url) => {
