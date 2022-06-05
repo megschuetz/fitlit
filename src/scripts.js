@@ -1,7 +1,7 @@
 import './css/styles.css';
 import './images/turing-logo.png';
 import './images/pngdesert.png'
-import {userProfileData, userActivityData, userSleepData, userHydrationData, addData, addHydrationData, fetchData} from './apiCalls';
+import {userProfileData, userActivityData, userSleepData, userHydrationData, addData, addHydrationData, fetchData, addActivityData} from './apiCalls';
 import UserRepository from './UserRepository';
 import SleepRepository from './sleep-repository';
 import Activity from './Activity';
@@ -64,7 +64,7 @@ activityRadio.addEventListener("click", toggleFormVisibility);
 
 sleepFormSubmit.addEventListener("click", submitSleepForm);
 hydrationFormSubmit.addEventListener("click", submitHydrationForm);
-// activityFormSubmit.addEventListener("click", submitActivityForm);
+activityFormSubmit.addEventListener("click", submitActivityForm);
 
 // GLOBAL VARIABLE
 let displayedUsersID = Math.floor(Math.random() * 50);

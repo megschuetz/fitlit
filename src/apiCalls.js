@@ -29,12 +29,12 @@ const addHydrationData = (postHydrationObject) => {
   }).then(response => response.json());
 }
 
-// const addActivityData = (postHydrationObject) => {
-//   return fetch("http://localhost:3001/api/v1/hydration", {
-//     method: "POST",
-//     headers: {"Content-Type": "application/json"},
-//     body: JSON.stringify(postHydrationObject)
-//   }).then(response => response.json());
-// }
+const addActivityData = (postActivityObject) => {
+  return fetch("http://localhost:3001/api/v1/activity", {
+    method: "POST",
+    headers: {"Content-Type": "application/json"},
+    body: JSON.stringify(postActivityObject)
+  }).then(response => response.json());
+}
 
-export {userProfileData, userActivityData, userSleepData, userHydrationData, addData, addHydrationData, fetchData}
+export {userProfileData, userActivityData, userSleepData, userHydrationData, addData, addHydrationData, addActivityData, fetchData}
