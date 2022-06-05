@@ -60,7 +60,7 @@ activityRadio.addEventListener("click", toggleFormVisibility);
 
 sleepFormSubmit.addEventListener("click", submitSleepForm);
 hydrationFormSubmit.addEventListener("click", submitHydrationForm);
-// activityFormSubmit.addEventListener("click", submitForm);
+// activityFormSubmit.addEventListener("click", submitActivityForm);
 
 // GLOBAL VARIABLE
 let displayedUsersID = Math.floor(Math.random() * 50);
@@ -79,7 +79,6 @@ Promise.all([userProfileData, userActivityData, userSleepData, userHydrationData
 // Sleep Form:
 function submitSleepForm(e){
  e.preventDefault();
- // let betterDate = dayjs(date).format("YYYY/MM/DD");
  let postObject = {
    userID: displayedUsersID,
    date: dayjs(sleepDateInput.value).format("YYYY/MM/DD"),
@@ -102,7 +101,7 @@ function submitHydrationForm(e){
   let postHydrationObject = {
     userID: displayedUsersID,
     date: dayjs(hydrationDateInput.value).format("YYYY/MM/DD"),
-    numOunces: numOuncesInput.value
+    numOunces: Number(numOuncesInput.value)
   }
 
   addHydrationData(postHydrationObject)
@@ -113,6 +112,10 @@ function submitHydrationForm(e){
   })
   hydrationForm.reset();
 }
+
+// Activity Form:
+
+
 
 // DOM
 const displayUserInfo = (user, userRepo) => {
@@ -172,13 +175,13 @@ const displayActivityInfo = (activityRepo) => {
   <div>${Array.from(flightKeys[0]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklyFlights[flightKeys[0]]}</b></div>  flights</div></div>`;
 
   weeklyUserMinActive.innerHTML = `
-    <div>${Array.from(minsActiveKeys[6]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[6]]}</b></div>  min.</div></div>
-    <div>${Array.from(minsActiveKeys[5]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[5]]}</b></div>  min.</div></div>
-    <div>${Array.from(minsActiveKeys[4]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[4]]}</b></div>  min.</div></div>
-    <div>${Array.from(minsActiveKeys[3]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[3]]}</b></div>  min.</div></div>
-    <div>${Array.from(minsActiveKeys[2]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[2]]}</b></div>  min.</div></div>
-    <div>${Array.from(minsActiveKeys[1]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[1]]}</b></div>  min.</div></div>
-    <div>${Array.from(minsActiveKeys[0]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[0]]}</b></div>  min.</div></div>`;
+  <div>${Array.from(minsActiveKeys[6]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[6]]}</b></div>  min.</div></div>
+  <div>${Array.from(minsActiveKeys[5]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[5]]}</b></div>  min.</div></div>
+  <div>${Array.from(minsActiveKeys[4]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[4]]}</b></div>  min.</div></div>
+  <div>${Array.from(minsActiveKeys[3]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[3]]}</b></div>  min.</div></div>
+  <div>${Array.from(minsActiveKeys[2]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[2]]}</b></div>  min.</div></div>
+  <div>${Array.from(minsActiveKeys[1]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[1]]}</b></div>  min.</div></div>
+  <div>${Array.from(minsActiveKeys[0]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[0]]}</b></div>  min.</div></div>`;
 };
 
 const displaySleepInfo = (id, sleepRepo) => {
