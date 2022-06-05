@@ -29,4 +29,4 @@ const addHydrationData = (postHydrationObject) => {
   })
 }
 
-export {userProfileData, userActivityData, userSleepData, userHydrationData, addData, addHydrationData}
+export {userProfileData, userActivityData, userSleepData, userHydrationData, addData, addHydrationData, fetchData}

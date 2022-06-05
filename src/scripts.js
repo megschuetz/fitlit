@@ -1,7 +1,7 @@
 import './css/styles.css';
 import './images/turing-logo.png';
 import './images/pngdesert.png'
-import {userProfileData, userActivityData, userSleepData, userHydrationData, addData, addHydrationData} from './apiCalls';
+import {userProfileData, userActivityData, userSleepData, userHydrationData, addData, addHydrationData, fetchData} from './apiCalls';
 import UserRepository from './UserRepository';
 import SleepRepository from './sleep-repository';
 import Activity from './Activity';
@@ -89,10 +89,6 @@ function submitSleepForm(e){
    })
  })
  sleepForm.reset();
-}
-
-const fetchData = (url) => {
-    return fetch(url).then(response => response.json())
 }
 
 function submitHydrationForm(e){
