@@ -1,6 +1,6 @@
 import './css/styles.css';
 import './images/turing-logo.png';
-import './images/pngdesert.png'
+import './images/pngdesert.png';
 import {userProfileData, userActivityData, userSleepData, userHydrationData, addData, addHydrationData, fetchData, addActivityData} from './apiCalls';
 import UserRepository from './UserRepository';
 import SleepRepository from './sleep-repository';
@@ -10,7 +10,7 @@ import Sleep from './sleep.js';
 import HydrationRepository from './HydrationRepository';
 import User from './User';
 import Chart from 'chart.js/auto';
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 // QUERY SELECTORS
 let friends = document.getElementById('friends');
@@ -78,8 +78,6 @@ Promise.all([userProfileData, userActivityData, userSleepData, userHydrationData
   })
   .catch((error) => alert("Oops something went wrong. Try again later."));
 
-
-//Event Handlers:
 // Sleep Form:
 function submitSleepForm(e){
  e.preventDefault();
@@ -136,7 +134,6 @@ function submitActivityForm(e){
   })
   activityForm.reset();
 }
-
 
 // DOM
 const displayUserInfo = (user, userRepo) => {
@@ -257,7 +254,6 @@ const hydrationDataHelper = (data) => {
 };
 
 const sleepDataHelper = (data) => {
-  console.log(data)
   const sleepRepo = new SleepRepository(data);
   displaySleepInfo(displayedUsersID, sleepRepo);
 };
