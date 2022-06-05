@@ -14,12 +14,34 @@ const userSleepData = fetchData(sleepApi);
 const userHydrationData = fetchData(hydrationApi);
 
 const addData = (postObject) => {
-  return fetch("http://localhost:3001/api/v1/sleep", {
-    method: "POST",
-    headers: {"Content-Type": "application/json"},
-    body: JSON.stringify(postObject)
-  })
-}
+    return fetch("http://localhost:3001/api/v1/sleep", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(postObject)
+    })
+  }
+  
+
+const addActivityData = (postActivityObject) => {
+    fetch("http://localhost:3001/api/v1/activity", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(postActivityObject)
+    })
+    .then(response => response.json())
+    .then(object => {
+        console.log('newinfo', object)
+    })
+    // .catch((error) => {
+    //     console.log(error);
+    //       if (error.message === "Failed to fetch") {
+    //         return (errorTag.innerText = "OOPS SORRY something went wrong");
+    //       } else {
+    //         return (errorTag.innerText = error.message);
+    //       }
+    // })
+
+  }
 
 
-export {userProfileData, userActivityData, userSleepData, userHydrationData, addData}
+export {userProfileData, userActivityData, userSleepData, userHydrationData, addData, addActivityData}
