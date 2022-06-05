@@ -49,6 +49,9 @@ let hydrationForm = document.getElementById("hydration-form");
 let activityForm = document.getElementById("activity-form");
 let hydrationDateInput = document.getElementById("hydration-date-input");
 let numOuncesInput = document.getElementById("water-input");
+let sleepDateInput = document.getElementById("sleep-date-input");
+let sleepHoursInput = document.getElementById("sleep-hours-input");
+let sleepQualityInput = document.getElementById("sleep-quality-input");
 
 // EVENT LISTENERS
 sleepRadio.addEventListener("click", toggleFormVisibility);
@@ -73,14 +76,15 @@ Promise.all([userProfileData, userActivityData, userSleepData, userHydrationData
 
 
 //Event Handlers:
+// Sleep Form:
 function submitSleepForm(e){
  e.preventDefault();
- let betterDate = dayjs(date).format("YYYY/MM/DD");
+ // let betterDate = dayjs(date).format("YYYY/MM/DD");
  let postObject = {
    userID: displayedUsersID,
-   date: betterDate,
-   hoursSlept: hours.value,
-   sleepQuality: quality.value,
+   date: dayjs(sleepDateInput.value).format("YYYY/MM/DD"),
+   hoursSlept: sleepHoursInput.value,
+   sleepQuality: sleepQualityInput.value,
  }
 
  addData(postObject)
@@ -92,6 +96,7 @@ function submitSleepForm(e){
  sleepForm.reset();
 }
 
+// Hydration Form:
 function submitHydrationForm(e){
   e.preventDefault();
   let postHydrationObject = {
