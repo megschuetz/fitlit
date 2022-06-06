@@ -75,6 +75,9 @@ sleepDateInput.addEventListener("input", checkSleepInput)
 sleepHoursInput.addEventListener("input", checkSleepInput)
 sleepQualityInput.addEventListener("input", checkSleepInput)
 
+hydrationDateInput.addEventListener("input", checkHydroInput)
+numOuncesInput.addEventListener("input", checkHydroInput)
+
 // GLOBAL VARIABLE
 let displayedUsersID = Math.floor(Math.random() * 50);
 
@@ -97,6 +100,12 @@ function checkActiveInput() {
 function checkSleepInput() {
   if(sleepDateInput.value && sleepHoursInput.value && sleepQualityInput.value) {
     sleepFormSubmit.disabled = false
+  }
+}
+
+function checkHydroInput() {
+  if(hydrationDateInput.value && numOuncesInput.value) {
+    hydrationFormSubmit.disabled = false
   }
 }
 
