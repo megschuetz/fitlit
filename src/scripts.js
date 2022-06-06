@@ -66,6 +66,18 @@ sleepFormSubmit.addEventListener("click", submitSleepForm);
 hydrationFormSubmit.addEventListener("click", submitHydrationForm);
 activityFormSubmit.addEventListener("click", submitActivityForm);
 
+activityStepsInput.addEventListener("input", checkActiveInput)
+activityDateInput.addEventListener("input", checkActiveInput)
+activityFlightsInput.addEventListener("input", checkActiveInput)
+activityMinInput.addEventListener("input", checkActiveInput)
+
+sleepDateInput.addEventListener("input", checkSleepInput)
+sleepHoursInput.addEventListener("input", checkSleepInput)
+sleepQualityInput.addEventListener("input", checkSleepInput)
+
+hydrationDateInput.addEventListener("input", checkHydroInput)
+numOuncesInput.addEventListener("input", checkHydroInput)
+
 // GLOBAL VARIABLE
 let displayedUsersID = Math.floor(Math.random() * 50);
 
@@ -77,6 +89,25 @@ Promise.all([userProfileData, userActivityData, userSleepData, userHydrationData
     hydrationDataHelper(data[3].hydrationData);
   })
   .catch((error) => alert("Oops something went wrong. Try again later."));
+
+// Functions to Check Form Inputs:
+function checkActiveInput() {
+  if(activityStepsInput.value && activityDateInput.value && activityFlightsInput.value && activityMinInput.value) {
+    activityFormSubmit.disabled = false
+  }
+}
+
+function checkSleepInput() {
+  if(sleepDateInput.value && sleepHoursInput.value && sleepQualityInput.value) {
+    sleepFormSubmit.disabled = false
+  }
+}
+
+function checkHydroInput() {
+  if(hydrationDateInput.value && numOuncesInput.value) {
+    hydrationFormSubmit.disabled = false
+  }
+}
 
 // Sleep Form:
 function submitSleepForm(e){
@@ -170,9 +201,15 @@ const displayActivityInfo = (activityRepo) => {
 
   milesWalked.innerHTML = `<b>Miles walked</b>: ${activityRepo.milesPerDay(displayedUsersID, lastActivityElement.date)} miles`;
 
-  allUserDailyAvgSteps.innerHTML = `${activityRepo.allUsersAverageUnits('numSteps')}`;
-  allUsersDailyAvgFlights.innerHTML = `${activityRepo.allUsersAverageUnits('flightsOfStairs')}`;
-  allUsersDailyAvgMinActive.innerHTML = `${activityRepo.allUsersAverageUnits('minutesActive')}`;
+  allUserDailyAvgSteps.innerHTML = `<b>Steps today:</b> ${activityRepo.allUsersAverageUnits('numSteps')} steps`;
+  allUsersDailyAvgFlights.innerHTML = `<b>Minutes active:</b> ${activityRepo.allUsersAverageUnits('flightsOfStairs')} flights`;
+  allUsersDailyAvgMinActive.innerHTML = `<b> Flights conquered:</b> ${activityRepo.allUsersAverageUnits('minutesActive')} min. active`;
+
+  makeAnotherChart(parseInt(activityRepo.allUsersAverageUnits("numSteps")), parseInt(lastActivityElement.numSteps))
+  makeBarGraph(parseInt(activityRepo.allUsersAverageUnits("minutesActive")), parseInt(lastActivityElement.minutesActive))
+
+  // makeAnotherChart(parseInt(activityRepo.allUsersAverageUnits("numSteps")), parseInt(activityRepo.allUsersAverageUnits("flightsOfStairs")), parseInt(activityRepo.allUsersAverageUnits("minutesActive")), parseInt(lastActivityElement.numSteps), parseInt(lastActivityElement.flightsOfStairs), parseInt(lastActivityElement.minutesActive))
+
 
   weeklyUserSteps.innerHTML =  `
   <div>${Array.from(stepKeys[6]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[6]]}</b></div>  steps</div></div>
@@ -268,19 +305,24 @@ const activityDataHelper = (data) => {
 function toggleFormVisibility(){
   if(sleepRadio.checked){
     sleepForm.classList.remove("hidden");
-    hydrationForm.className = "hidden";
-    activityForm.className = "hidden";
+    checkForHidden(hydrationForm);
+    checkForHidden(activityForm);
   } else if (hydrationRadio.checked){
     hydrationForm.classList.remove("hidden");
-    sleepForm.className = "hidden";
-    activityForm.className = "hidden";
+    checkForHidden(sleepForm);
+    checkForHidden(activityForm);
   } else if (activityRadio.checked){
     activityForm.classList.remove("hidden");
-    hydrationForm.className = "hidden";
-    sleepForm.className = "hidden";
+    checkForHidden(sleepForm);
+    checkForHidden(hydrationForm);
+  };
+};
+
+function checkForHidden(element) {
+  if (!element.classList.contains("hidden")){
+    element.classList.add("hidden")
   }
 }
-
 // WEIRD CHART EXPERIMENT STUFF
 
 const ctx = document.getElementById('myChart');
@@ -322,15 +364,52 @@ function makeChart(userGoal, avgGoal){
   });
 }
 const dctx = document.getElementById('donut');
-makeAnotherChart()
-function makeAnotherChart(){
+function makeAnotherChart(allSteps, userSteps){
   const myDonutChart = new Chart(dctx, {
-    type: 'doughnut',
+    type: 'bar',
     data: {
-        labels: ['Your Goal', 'Avg. Goal'],
+        labels: ['Your Steps', 'FitLit User Steps'],
         datasets: [{
-            label: '# of Steps',
-            data: [10, 15],
+            label: 'Avg',
+            data: [allSteps, userSteps],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+}
+
+const avgUserMinsGraph = document.getElementById('avgMins-graph');
+function makeBarGraph(avgData, userData){
+  const myBarGraph = new Chart(avgUserMinsGraph, {
+    type: 'bar',
+    data: {
+        labels: ['Your Mins. Active', 'FitLit User Mins. Active'],
+        datasets: [{
+            label: 'Avg',
+            data: [avgData, userData],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',
