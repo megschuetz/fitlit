@@ -71,9 +71,9 @@ activityDateInput.addEventListener("input", checkActiveInput)
 activityFlightsInput.addEventListener("input", checkActiveInput)
 activityMinInput.addEventListener("input", checkActiveInput)
 
-// sleepDateInput.addEventListener("input", checkSleepInput)
-// sleepHoursInput.addEventListener("input", checkSleepInput)
-// sleepQualityInput.addEventListener("input", checkSleepInput)
+sleepDateInput.addEventListener("input", checkSleepInput)
+sleepHoursInput.addEventListener("input", checkSleepInput)
+sleepQualityInput.addEventListener("input", checkSleepInput)
 
 // GLOBAL VARIABLE
 let displayedUsersID = Math.floor(Math.random() * 50);
@@ -91,6 +91,12 @@ Promise.all([userProfileData, userActivityData, userSleepData, userHydrationData
 function checkActiveInput() {
   if(activityStepsInput.value && activityDateInput.value && activityFlightsInput.value && activityMinInput.value) {
     activityFormSubmit.disabled = false
+  }
+}
+
+function checkSleepInput() {
+  if(sleepDateInput.value && sleepHoursInput.value && sleepQualityInput.value) {
+    sleepFormSubmit.disabled = false
   }
 }
 
