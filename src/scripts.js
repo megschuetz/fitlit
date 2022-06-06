@@ -339,7 +339,7 @@ function makeAnotherChart(allSteps, userSteps){
     data: {
         labels: ['Your Steps', 'FitLit User Steps'],
         datasets: [{
-            label: 'Avg',
+            label: 'Steps',
             data: [allSteps, userSteps],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
@@ -377,7 +377,7 @@ function makeBarGraph(avgData, userData){
     data: {
         labels: ['Your Mins. Active', 'FitLit User Mins. Active'],
         datasets: [{
-            label: 'Avg',
+            label: 'Minutes',
             data: [avgData, userData],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
