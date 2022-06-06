@@ -120,6 +120,13 @@ form > label {
   grid-column: 1;
 }
 
+
+#submit-sleep,
+#submit-hydration,
+#submit-activity :disabled {
+  cursor: disabled;
+}
+
 .hydration-form,
 .activity-form,
 .sleep-form {
