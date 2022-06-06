@@ -89,18 +89,74 @@ p {
   color: tan;
 }
 
-.form {
-  background-color: white;
-}
-
 .hidden {
-  display: none;
+  display: none !important;
 }
 
 .user-input:hover {
   cursor: pointer;
 }
 
+/* ------ FORM ----- */
+
+.form {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  font-family: Georgia;
+}
+
+.form-radio {
+  padding: 10px;
+  background-color: tan;
+  margin-bottom: 20px;
+}
+
+form > label {
+  font-size: 15px;
+  font-weight: bold;
+  grid-column: 1;
+}
+
+.hydration-form {
+  display: grid;
+  grid-template-columns: 150px, 150px;
+  grid-template-rows: 50px, 50px, 50px;
+  grid-gap: 2px;
+  padding: 5px;
+}
+
+.activity-form {
+  display: grid;
+  grid-template-columns: 150px, 150px;
+  grid-template-rows: 50px, 50px, 50px, 50px, 50px;
+  grid-gap: 2px;
+  padding: 5px;
+}
+
+.sleep-form {
+  display: grid;
+  grid-template-columns: 150px, 150px;
+  grid-template-rows: 50px, 50px, 50px, 50px;
+  grid-gap: 2px;
+  padding: 5px;
+}
+
+
+/* SUBMIT BUTTON STYLING */
+
+form > button {
+  padding: 20px;
+  margin-top: 20px;
+  border-radius: 15px;
+  border: none;
+  grid-column: 1 / span 2;
+}
+
+form > button:hover {
+  cursor: pointer;
+  background-color: tan;
+}
 
 
 /*  -----  DASHBOARD  -----  */
@@ -148,14 +204,14 @@ p {
 /*  ------ USER DATA MODULES  ------  */
 
 .grid-container > section {
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.7);
   margin: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
   box-shadow: 5px 10px 5px;
-  opacity: 0.7;
+  /* opacity: 0.7; */
   border-radius: 25px;
 }
 

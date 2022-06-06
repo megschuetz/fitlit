@@ -268,19 +268,24 @@ const activityDataHelper = (data) => {
 function toggleFormVisibility(){
   if(sleepRadio.checked){
     sleepForm.classList.remove("hidden");
-    hydrationForm.className = "hidden";
-    activityForm.className = "hidden";
+    checkForHidden(hydrationForm);
+    checkForHidden(activityForm);
   } else if (hydrationRadio.checked){
     hydrationForm.classList.remove("hidden");
-    sleepForm.className = "hidden";
-    activityForm.className = "hidden";
+    checkForHidden(sleepForm);
+    checkForHidden(activityForm);
   } else if (activityRadio.checked){
     activityForm.classList.remove("hidden");
-    hydrationForm.className = "hidden";
-    sleepForm.className = "hidden";
+    checkForHidden(sleepForm);
+    checkForHidden(hydrationForm);
+  };
+};
+
+function checkForHidden(element) {
+  if (!element.classList.contains("hidden")){
+    element.classList.add("hidden")
   }
 }
-
 // WEIRD CHART EXPERIMENT STUFF
 
 const ctx = document.getElementById('myChart');
