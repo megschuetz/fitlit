@@ -17,9 +17,7 @@
           <p class="sb friends" id="friends">friends</p>
         </div>
         <section class="form">
-          <form>
-            <!-- <form action="/action_page.php" method="post"> -->
-            <!-- RADIO -->
+          <form class="form-radio">
             <input class="user-input" id="sleep-radio" type="radio" name="user-input" value="sleep" checked>
             <label for="sleep-radio">Sleep</label>
             <input class="user-input" id="hydration-radio" type="radio" name="user-input" value="hydration">
@@ -27,43 +25,33 @@
             <input class="user-input" id="activity-radio" type="radio" name="user-input" value="activity">
             <label for="activity-radio">Activity</label><br>
           </form>
-
-            <!-- SLEEP FORM -->
-          <form class="" id="sleep-form">
+          <form class="sleep-form" id="sleep-form">
               <label for="date-input">Date:</label>
-              <input class="user-input" type="date" id="sleep-date-input" name="date"><br>
-              <label for="sleep-hours-input">Hours Slept:</label>
-              <input class="user-input" id="sleep-hours-input" type="form" name="user-input" value=""><br>
-              <label for="sleep-quality-input">Rate Your Sleep Quality:</label>
-              <input class="user-input" id="sleep-quality-input" type="form" name="user-input" value=""><br>
-              <button id="submit-sleep" disabled=true>Submit</button>
+              <input class="date-input" type="date" id="sleep-date-input" name="date">
+              <label for="sleep-hours-input" class="sleep-hours-input-label">Hours Slept:</label>
+              <input class="user-input sleep-hours-input" id="sleep-hours-input" type="form" name="user-input" value="">
+              <label for="sleep-quality-input" class="sleep-quality-input-label">Rate Your Sleep Quality:</label>
+              <input class="user-input sleep-quality-input" id="sleep-quality-input" type="form" name="user-input" value="">
+              <button class="submit-sleep" id="submit-sleep" disabled=true>Submit</button>
           </form>
-
-            <!-- HYDRATION FORM -->
-          <form class="hidden" id="hydration-form">
+          <form class="hydration-form hidden" id="hydration-form">
               <label for="date-input">Date:</label>
-              <input class="user-input" type="date" id="hydration-date-input" name="date"><br>
-              <label for="steps">Oz. Water Today:</label>
-              <input class="user-input" id="water-input" type="form" name="user-input" value=""><br>
+              <input class="user-input date-input" type="date" id="hydration-date-input" name="date">
+              <label for="water">Oz. Water Today:</label>
+              <input class="user-input" id="water-input" type="form" name="user-input" value="">
               <button id="submit-hydration" disabled=true>Submit</button>
           </form>
-
-            <!-- ACTIVITY FORM -->
-          <form class="hidden" id="activity-form">
+          <form class="activity-form hidden" id="activity-form">
               <label for="date-input">Date:</label>
-              <input class="user-input" type="date" id="activity-date-input" name="date"><br>
-              <label for="steps">Steps Taken:</label>
-              <input class="user-input" id="activity-steps-input" type="form" name="user-input" value=""><br>
+              <input class="user-input date-input" type="date" id="activity-date-input" name="date">
+              <label for="steps" class="steps-taken">Steps Taken:</label>
+              <input class="user-input" id="activity-steps-input" type="form" name="user-input" value="">
               <label for="flights-steps">Flights of Stairs:</label>
-              <input class="user-input" id="activity-stairs-input" type="form" name="user-input" value=""><br>
+              <input class="user-input" id="activity-stairs-input" type="form" name="user-input" value="">
               <label for="min-activity">Minutes of Activity:</label>
-              <input class="user-input" id="activity-minutes-input" type="form" name="user-input" value=""><br>
+              <input class="user-input" id="activity-minutes-input" type="form" name="user-input" value="">
               <button id="submit-activity" disabled=true>Submit</button>
           </form>
-
-
-
-
         </section>
       </section>
       <div class="main-wrapper">
@@ -81,10 +69,10 @@
                 <div class="chart">
                   <div class="step-goal-chart"><canvas id="myChart" width="200" height="150"></canvas></div>
                   <div class="avg-step-goal" id="avg-step-goal">Avg Step Goal</div>
-                  <div class="step-goal" id="step-goal">Your Step Goal</div>
+                  <div class="user-step-goal" id="step-goal">Your Step Goal</div>
                 </div>
               </section>
-              <section class="activity">
+              <!-- <section class="activity">
                 <h1 class="info-title">👟 Activity</h1>
                 <div class="info">
                   <p class="'steps-taken" id="steps-taken">Steps Taken</p>
@@ -92,21 +80,22 @@
                   <p class="flights" id="flights">Flights</p>
                   <p class="miles-walked" id="miles-walked">Miles Walked</p>
                 </div>
-              </section>
+              </section> -->
               <section class="sleep">
                 <h1 class="info-title">🌙 Sleep</h1>
                   <div class="info">
-                  <p class="weekly-sleep" id="weekly-sleep">Weekly Report</p>
-                  <p class="avg-sleep" id="avg-sleep">Averages</p>
-                  <p class="avg-quality" id="avg-quality">Averages</p>
-                </div>
+                    <p class="weekly-sleep" id="weekly-sleep">Weekly Report</p>
+                    <p class="avg-sleep" id="avg-sleep">Averages</p>
+                    <p class="avg-quality" id="avg-quality">Averages</p>
+                  </div>
               </section>
               <section class="sleep-last-night">
                 <h1 class="info-title">🌙 Last Night:</h1>
                 <div class="info">
                   <p>You slept for
-                  <div class="last-sleep large-text" id="last-sleep">Last Nights Sleep</div>
-                  hours!</p>
+                    <div class="last-sleep large-text" id="last-sleep">Last Nights Sleep</div>
+                    hours!
+                  </p>
                 </div>
               </section>
               <section class="hydration">
@@ -117,19 +106,41 @@
                   oz.
                 </div>
               </section>
-              <section class="test">
+              <!-- <section class="test">
                 <h1 class="test-title">💧 Chart:</h1>
                 <div class="test-div">
                   <div class="test-chart"><canvas id="donut" width="200" height="150"></canvas></div>
                 </div>
-              </section>
+              </section> -->
               <section class="all-users-weekly">
-                <h1 class="info-title">💧 FitLit Users Avg Today:</h1>
-                <div>
-                  <div class="all-users-avg-steps" id="all-users-avg-steps"></div>
-                  <div class="all-users-avg-flights" id="all-users-avg-flights"></div>
-                  <div class="all-users-avg-mins-active" id="all-users-avg-mins-active"></div>
+              <div class="activity-data-wrapper">
+                <div class="activity-wrapper left">
+                  <h1 class="info-title">👟 FitLit Users Avg Today:</h1>
+                  <div>
+                    <div class="all-users-avg-steps" id="all-users-avg-steps"></div>
+                    <div class="all-users-avg-flights" id="all-users-avg-flights"></div>
+                    <div class="all-users-avg-mins-active" id="all-users-avg-mins-active"></div>
+                  </div>
                 </div>
+                <div class="activity-wrapper">
+                    <h1 class="info-title">👟 Your Activity:</h1>
+                    <div class="info">
+                      <p class="'steps-taken" id="steps-taken">Steps Taken</p>
+                      <p class="mins-active" id="mins-active">Mins Active</p>
+                      <p class="flights" id="flights">Flights</p>
+                      <p class="miles-walked" id="miles-walked">Miles Walked</p>
+                    </div>
+                </div>
+              </div>
+              <div class="activity-chart-wrapper">
+                <h1 class="test-title">💧 Chart:</h1>
+                <div class="test-div">
+                  <div class="test-chart"><canvas id="donut" width="200" height="150"></canvas></div>
+                  <!-- <div class="test-chart"><canvas id="avgFlights-graph" width="200" height="150"></canvas></div> -->
+                  <div class="test-chart"><canvas id="avgMins-graph" width="200" height="150"></canvas></div>
+
+                </div>
+              </div>
               </section>
               <section class="hydration-weekly">
                 <h1 class="info-title">💧 Weekly Hydration:</h1>
