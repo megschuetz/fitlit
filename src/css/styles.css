@@ -107,6 +107,11 @@ p {
   cursor: pointer;
 }
 
+#submit-sleep,
+#submit-hydration,
+#submit-activity :disabled {
+  cursor: disabled;
+}
 
 
 /*  -----  DASHBOARD  -----  */

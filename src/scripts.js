@@ -66,6 +66,15 @@ sleepFormSubmit.addEventListener("click", submitSleepForm);
 hydrationFormSubmit.addEventListener("click", submitHydrationForm);
 activityFormSubmit.addEventListener("click", submitActivityForm);
 
+activityStepsInput.addEventListener("input", checkActiveInput)
+activityDateInput.addEventListener("input", checkActiveInput)
+activityFlightsInput.addEventListener("input", checkActiveInput)
+activityMinInput.addEventListener("input", checkActiveInput)
+
+// sleepDateInput.addEventListener("input", checkSleepInput)
+// sleepHoursInput.addEventListener("input", checkSleepInput)
+// sleepQualityInput.addEventListener("input", checkSleepInput)
+
 // GLOBAL VARIABLE
 let displayedUsersID = Math.floor(Math.random() * 50);
 
@@ -77,6 +86,13 @@ Promise.all([userProfileData, userActivityData, userSleepData, userHydrationData
     hydrationDataHelper(data[3].hydrationData);
   })
   .catch((error) => alert("Oops something went wrong. Try again later."));
+
+// Functions to Check Form Inputs:
+function checkActiveInput() {
+  if(activityStepsInput.value && activityDateInput.value && activityFlightsInput.value && activityMinInput.value) {
+    activityFormSubmit.disabled = false
+  }
+}
 
 // Sleep Form:
 function submitSleepForm(e){
