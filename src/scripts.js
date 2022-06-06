@@ -1,7 +1,7 @@
 import './css/styles.css';
 import './images/turing-logo.png';
-import './images/pngdesert.png'
-import {userProfileData, userActivityData, userSleepData, userHydrationData, addData} from './apiCalls';
+import './images/pngdesert.png';
+import {userProfileData, userActivityData, userSleepData, userHydrationData, addData, addHydrationData, fetchData, addActivityData} from './apiCalls';
 import UserRepository from './UserRepository';
 import SleepRepository from './sleep-repository';
 import Activity from './Activity';
@@ -10,7 +10,7 @@ import Sleep from './sleep.js';
 import HydrationRepository from './HydrationRepository';
 import User from './User';
 import Chart from 'chart.js/auto';
-import dayjs from 'dayjs'
+import dayjs from 'dayjs';
 
 // QUERY SELECTORS
 let friends = document.getElementById('friends');
@@ -47,6 +47,15 @@ let activityRadio = document.getElementById("activity-radio");
 let sleepForm = document.getElementById("sleep-form");
 let hydrationForm = document.getElementById("hydration-form");
 let activityForm = document.getElementById("activity-form");
+let hydrationDateInput = document.getElementById("hydration-date-input");
+let numOuncesInput = document.getElementById("water-input");
+let sleepDateInput = document.getElementById("sleep-date-input");
+let sleepHoursInput = document.getElementById("sleep-hours-input");
+let sleepQualityInput = document.getElementById("sleep-quality-input");
+let activityDateInput = document.getElementById("activity-date-input");
+let activityStepsInput = document.getElementById("activity-steps-input");
+let activityFlightsInput = document.getElementById("activity-stairs-input");
+let activityMinInput = document.getElementById("activity-minutes-input");
 
 // EVENT LISTENERS
 sleepRadio.addEventListener("click", toggleFormVisibility);
@@ -54,8 +63,8 @@ hydrationRadio.addEventListener("click", toggleFormVisibility);
 activityRadio.addEventListener("click", toggleFormVisibility);
 
 sleepFormSubmit.addEventListener("click", submitSleepForm);
-// hydrationFormSubmit.addEventListener("click", submitForm);
-// activityFormSubmit.addEventListener("click", submitForm);
+hydrationFormSubmit.addEventListener("click", submitHydrationForm);
+activityFormSubmit.addEventListener("click", submitActivityForm);
 
 // GLOBAL VARIABLE
 let displayedUsersID = Math.floor(Math.random() * 50);
@@ -69,66 +78,62 @@ Promise.all([userProfileData, userActivityData, userSleepData, userHydrationData
   })
   .catch((error) => alert("Oops something went wrong. Try again later."));
 
-
-//POST Request
+// Sleep Form:
 function submitSleepForm(e){
-  e.preventDefault();
-  let date = document.getElementById("date-input").value;
-  let betterDate = dayjs(date).format("YYYY/MM/DD");
-  let hours = document.getElementById("sleep-hours-input").value;
-  let quality = document.getElementById("sleep-quality-input").value;
-  let postObject = createSleepPostObject(betterDate, hours, quality);
+ e.preventDefault();
+ let postObject = {
+   userID: displayedUsersID,
+   date: dayjs(sleepDateInput.value).format("YYYY/MM/DD"),
+   hoursSlept: sleepHoursInput.value,
+   sleepQuality: sleepQualityInput.value,
+ }
 
-  addData(postObject).then(response => response.json())
+ addData(postObject)
+ .then(object => {
+   fetchData("http://localhost:3001/api/v1/sleep").then(data => {
+     sleepDataHelper(data.sleepData);
+   })
+ })
+ sleepForm.reset();
+}
+
+// Hydration Form:
+function submitHydrationForm(e){
+  e.preventDefault();
+  let postHydrationObject = {
+    userID: displayedUsersID,
+    date: dayjs(hydrationDateInput.value).format("YYYY/MM/DD"),
+    numOunces: Number(numOuncesInput.value)
+  }
+
+  addHydrationData(postHydrationObject)
   .then(object => {
-    fetchData("http://localhost:3001/api/v1/sleep").then(data => {
-      sleepDataHelper(data.sleepData)
+    fetchData("http://localhost:3001/api/v1/hydration").then(data => {
+      hydrationDataHelper(data.hydrationData)
     })
   })
-  sleepForm.reset();
+  hydrationForm.reset();
 }
 
-const fetchData = (url) => {
-    return fetch(url).then(response => response.json())
-}
-
-function createSleepPostObject(date, hours, quality){
-  let object = {
+// Activity Form:
+function submitActivityForm(e){
+  e.preventDefault();
+  let postActivityObject = {
     userID: displayedUsersID,
-    date: date,
-    hoursSlept: hours,
-    sleepQuality: quality,
+    date: dayjs(activityDateInput.value).format("YYYY/MM/DD"),
+    numSteps: Number(activityStepsInput.value),
+    minutesActive: Number(activityMinInput.value),
+    flightsOfStairs: Number(activityFlightsInput.value)
   }
-  return object
+
+  addActivityData(postActivityObject)
+  .then(object => {
+    fetchData("http://localhost:3001/api/v1/activity").then(data => {
+      activityDataHelper(data.activityData)
+    })
+  })
+  activityForm.reset();
 }
-
-// let postObject = {
-//   userID: 1,
-//   date: '2022/03/01',
-//   hoursSlept: 4,
-//   sleepQuality: 5
-// }
-//
-// addData(postObject)
-
-// let postSleepObject = {
-//   userID: 1,
-//   date: '2022/03/01',
-//   hoursSlept: 4,
-//   sleepQuality: 5
-// }
-// let postActivityObject = {
-//   userID:
-//   date:
-//   numSteps:
-//   minutesActive:
-//   flightsOfStairs:
-// }
-// let postHydrationObject = {
-//   userID:
-//   date:
-//   water:
-// }
 
 // DOM
 const displayUserInfo = (user, userRepo) => {
@@ -188,13 +193,13 @@ const displayActivityInfo = (activityRepo) => {
   <div>${Array.from(flightKeys[0]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklyFlights[flightKeys[0]]}</b></div>  flights</div></div>`;
 
   weeklyUserMinActive.innerHTML = `
-    <div>${Array.from(minsActiveKeys[6]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[6]]}</b></div>  min.</div></div>
-    <div>${Array.from(minsActiveKeys[5]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[5]]}</b></div>  min.</div></div>
-    <div>${Array.from(minsActiveKeys[4]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[4]]}</b></div>  min.</div></div>
-    <div>${Array.from(minsActiveKeys[3]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[3]]}</b></div>  min.</div></div>
-    <div>${Array.from(minsActiveKeys[2]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[2]]}</b></div>  min.</div></div>
-    <div>${Array.from(minsActiveKeys[1]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[1]]}</b></div>  min.</div></div>
-    <div>${Array.from(minsActiveKeys[0]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[0]]}</b></div>  min.</div></div>`;
+  <div>${Array.from(minsActiveKeys[6]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[6]]}</b></div>  min.</div></div>
+  <div>${Array.from(minsActiveKeys[5]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[5]]}</b></div>  min.</div></div>
+  <div>${Array.from(minsActiveKeys[4]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[4]]}</b></div>  min.</div></div>
+  <div>${Array.from(minsActiveKeys[3]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[3]]}</b></div>  min.</div></div>
+  <div>${Array.from(minsActiveKeys[2]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[2]]}</b></div>  min.</div></div>
+  <div>${Array.from(minsActiveKeys[1]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[1]]}</b></div>  min.</div></div>
+  <div>${Array.from(minsActiveKeys[0]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${userMinsActiveWeek[minsActiveKeys[0]]}</b></div>  min.</div></div>`;
 };
 
 const displaySleepInfo = (id, sleepRepo) => {
@@ -249,7 +254,6 @@ const hydrationDataHelper = (data) => {
 };
 
 const sleepDataHelper = (data) => {
-  console.log(data)
   const sleepRepo = new SleepRepository(data);
   displaySleepInfo(displayedUsersID, sleepRepo);
 };
