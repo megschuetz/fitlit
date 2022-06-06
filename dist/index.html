@@ -72,7 +72,7 @@
                   <div class="user-step-goal" id="step-goal">Your Step Goal</div>
                 </div>
               </section>
-              <section class="activity">
+              <!-- <section class="activity">
                 <h1 class="info-title">👟 Activity</h1>
                 <div class="info">
                   <p class="'steps-taken" id="steps-taken">Steps Taken</p>
@@ -80,7 +80,7 @@
                   <p class="flights" id="flights">Flights</p>
                   <p class="miles-walked" id="miles-walked">Miles Walked</p>
                 </div>
-              </section>
+              </section> -->
               <section class="sleep">
                 <h1 class="info-title">🌙 Sleep</h1>
                   <div class="info">
@@ -106,19 +106,38 @@
                   oz.
                 </div>
               </section>
-              <section class="test">
+              <!-- <section class="test">
                 <h1 class="test-title">💧 Chart:</h1>
                 <div class="test-div">
                   <div class="test-chart"><canvas id="donut" width="200" height="150"></canvas></div>
                 </div>
-              </section>
+              </section> -->
               <section class="all-users-weekly">
-                <h1 class="info-title">💧 FitLit Users Avg Today:</h1>
-                <div>
-                  <div class="all-users-avg-steps" id="all-users-avg-steps"></div>
-                  <div class="all-users-avg-flights" id="all-users-avg-flights"></div>
-                  <div class="all-users-avg-mins-active" id="all-users-avg-mins-active"></div>
+              <div class="activity-data-wrapper">
+                <div class="activity-wrapper left">
+                  <h1 class="info-title">👟 FitLit Users Avg Today:</h1>
+                  <div>
+                    <div class="all-users-avg-steps" id="all-users-avg-steps"></div>
+                    <div class="all-users-avg-flights" id="all-users-avg-flights"></div>
+                    <div class="all-users-avg-mins-active" id="all-users-avg-mins-active"></div>
+                  </div>
                 </div>
+                <div class="activity-wrapper">
+                    <h1 class="info-title">👟 Your Activity:</h1>
+                    <div class="info">
+                      <p class="'steps-taken" id="steps-taken">Steps Taken</p>
+                      <p class="mins-active" id="mins-active">Mins Active</p>
+                      <p class="flights" id="flights">Flights</p>
+                      <p class="miles-walked" id="miles-walked">Miles Walked</p>
+                    </div>
+                </div>
+              </div>
+              <div class="activity-chart-wrapper">
+                <h1 class="test-title">💧 Chart:</h1>
+                <div class="test-div">
+                  <div class="test-chart"><canvas id="donut" width="200" height="150"></canvas></div>
+                </div>
+              </div>
               </section>
               <section class="hydration-weekly">
                 <h1 class="info-title">💧 Weekly Hydration:</h1>

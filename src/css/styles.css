@@ -269,7 +269,25 @@ section > .info {
 
 .all-users-weekly {
   display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  grid-row: 3 / span 2;
+  grid-column: 2 / span 2;
+}
+
+.activity-data-wrapper {
+  display: flex;
+
+}
+.activity-wrapper {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
+}
+
+.activity-wrapper.left {
+  margin-left: 15px;
 }
 
 .hydration-weekly {
