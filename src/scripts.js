@@ -174,6 +174,12 @@ const displayActivityInfo = (activityRepo) => {
   allUsersDailyAvgFlights.innerHTML = `<b>Minutes active:</b> ${activityRepo.allUsersAverageUnits('flightsOfStairs')} flights`;
   allUsersDailyAvgMinActive.innerHTML = `<b> Flights conquered:</b> ${activityRepo.allUsersAverageUnits('minutesActive')} min. active`;
 
+  makeAnotherChart(parseInt(activityRepo.allUsersAverageUnits("numSteps")), parseInt(lastActivityElement.numSteps))
+  makeBarGraph(parseInt(activityRepo.allUsersAverageUnits("minutesActive")), parseInt(lastActivityElement.minutesActive))
+
+  // makeAnotherChart(parseInt(activityRepo.allUsersAverageUnits("numSteps")), parseInt(activityRepo.allUsersAverageUnits("flightsOfStairs")), parseInt(activityRepo.allUsersAverageUnits("minutesActive")), parseInt(lastActivityElement.numSteps), parseInt(lastActivityElement.flightsOfStairs), parseInt(lastActivityElement.minutesActive))
+
+
   weeklyUserSteps.innerHTML =  `
   <div>${Array.from(stepKeys[6]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[6]]}</b></div>  steps</div></div>
   <div>${Array.from(stepKeys[5]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[5]]}</b></div>  steps</div></div>
@@ -327,15 +333,52 @@ function makeChart(userGoal, avgGoal){
   });
 }
 const dctx = document.getElementById('donut');
-makeAnotherChart()
-function makeAnotherChart(){
+function makeAnotherChart(allSteps, userSteps){
   const myDonutChart = new Chart(dctx, {
-    type: 'doughnut',
+    type: 'bar',
     data: {
-        labels: ['Your Goal', 'Avg. Goal'],
+        labels: ['Your Steps', 'FitLit User Steps'],
         datasets: [{
-            label: '# of Steps',
-            data: [10, 15],
+            label: 'Avg',
+            data: [allSteps, userSteps],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+            ],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+}
+
+const avgUserMinsGraph = document.getElementById('avgMins-graph');
+function makeBarGraph(avgData, userData){
+  const myBarGraph = new Chart(avgUserMinsGraph, {
+    type: 'bar',
+    data: {
+        labels: ['Your Mins. Active', 'FitLit User Mins. Active'],
+        datasets: [{
+            label: 'Avg',
+            data: [avgData, userData],
             backgroundColor: [
                 'rgba(255, 99, 132, 0.2)',
                 'rgba(54, 162, 235, 0.2)',

@@ -334,3 +334,7 @@ section > .info {
   display: flex;
   align-items: flex-end;
 }
+
+.test-div {
+  display: flex;
+}
