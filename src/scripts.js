@@ -66,17 +66,17 @@ sleepFormSubmit.addEventListener("click", submitSleepForm);
 hydrationFormSubmit.addEventListener("click", submitHydrationForm);
 activityFormSubmit.addEventListener("click", submitActivityForm);
 
-activityStepsInput.addEventListener("input", checkActiveInput)
-activityDateInput.addEventListener("input", checkActiveInput)
-activityFlightsInput.addEventListener("input", checkActiveInput)
-activityMinInput.addEventListener("input", checkActiveInput)
+activityStepsInput.addEventListener("input", checkActiveInput);
+activityDateInput.addEventListener("input", checkActiveInput);
+activityFlightsInput.addEventListener("input", checkActiveInput);
+activityMinInput.addEventListener("input", checkActiveInput);
 
-sleepDateInput.addEventListener("input", checkSleepInput)
-sleepHoursInput.addEventListener("input", checkSleepInput)
-sleepQualityInput.addEventListener("input", checkSleepInput)
+sleepDateInput.addEventListener("input", checkSleepInput);
+sleepHoursInput.addEventListener("input", checkSleepInput);
+sleepQualityInput.addEventListener("input", checkSleepInput);
 
-hydrationDateInput.addEventListener("input", checkHydroInput)
-numOuncesInput.addEventListener("input", checkHydroInput)
+hydrationDateInput.addEventListener("input", checkHydroInput);
+numOuncesInput.addEventListener("input", checkHydroInput);
 
 // GLOBAL VARIABLE
 let displayedUsersID = Math.floor(Math.random() * 50);
@@ -90,27 +90,26 @@ Promise.all([userProfileData, userActivityData, userSleepData, userHydrationData
   })
   .catch((error) => alert("Oops something went wrong. Try again later."));
 
-// Functions to Check Form Inputs:
 function checkActiveInput() {
   if(activityStepsInput.value && activityDateInput.value && activityFlightsInput.value && activityMinInput.value) {
-    activityFormSubmit.disabled = false
+    activityFormSubmit.disabled = false;
   }
 }
 
 function checkSleepInput() {
   if(sleepDateInput.value && sleepHoursInput.value && sleepQualityInput.value) {
-    sleepFormSubmit.disabled = false
+    sleepFormSubmit.disabled = false;
   }
 }
 
 function checkHydroInput() {
   if(hydrationDateInput.value && numOuncesInput.value) {
-    hydrationFormSubmit.disabled = false
+    hydrationFormSubmit.disabled = false;
   }
 }
 
 // Sleep Form:
-function submitSleepForm(e){
+function submitSleepForm(e) {
  e.preventDefault();
  let postObject = {
    userID: displayedUsersID,
@@ -126,10 +125,11 @@ function submitSleepForm(e){
    })
  })
  sleepForm.reset();
+ sleepFormSubmit.disabled = true;
 }
 
 // Hydration Form:
-function submitHydrationForm(e){
+function submitHydrationForm(e) {
   e.preventDefault();
   let postHydrationObject = {
     userID: displayedUsersID,
@@ -144,10 +144,11 @@ function submitHydrationForm(e){
     })
   })
   hydrationForm.reset();
+  hydrationFormSubmit.disabled = true;
 }
 
 // Activity Form:
-function submitActivityForm(e){
+function submitActivityForm(e) {
   e.preventDefault();
   let postActivityObject = {
     userID: displayedUsersID,
@@ -164,6 +165,7 @@ function submitActivityForm(e){
     })
   })
   activityForm.reset();
+  activityFormSubmit.disabled = true;
 }
 
 // DOM
@@ -205,11 +207,10 @@ const displayActivityInfo = (activityRepo) => {
   allUsersDailyAvgFlights.innerHTML = `<b>Minutes active:</b> ${activityRepo.allUsersAverageUnits('flightsOfStairs')} flights`;
   allUsersDailyAvgMinActive.innerHTML = `<b> Flights conquered:</b> ${activityRepo.allUsersAverageUnits('minutesActive')} min. active`;
 
-  makeAnotherChart(parseInt(activityRepo.allUsersAverageUnits("numSteps")), parseInt(lastActivityElement.numSteps))
-  makeBarGraph(parseInt(activityRepo.allUsersAverageUnits("minutesActive")), parseInt(lastActivityElement.minutesActive))
+  // makeAnotherChart(parseInt(activityRepo.allUsersAverageUnits("numSteps")), parseInt(lastActivityElement.numSteps))
+  // makeBarGraph(parseInt(activityRepo.allUsersAverageUnits("minutesActive")), parseInt(lastActivityElement.minutesActive))
 
   // makeAnotherChart(parseInt(activityRepo.allUsersAverageUnits("numSteps")), parseInt(activityRepo.allUsersAverageUnits("flightsOfStairs")), parseInt(activityRepo.allUsersAverageUnits("minutesActive")), parseInt(lastActivityElement.numSteps), parseInt(lastActivityElement.flightsOfStairs), parseInt(lastActivityElement.minutesActive))
-
 
   weeklyUserSteps.innerHTML =  `
   <div>${Array.from(stepKeys[6]).splice(5).join("")}: <div class="a"><div class="med-text"><b>${weeklySteps[stepKeys[6]]}</b></div>  steps</div></div>
@@ -249,7 +250,8 @@ const displaySleepInfo = (id, sleepRepo) => {
 };
 
 const displayHydrationInfo = (id, hydrationRepo) => {
-  const lastElement = hydrationRepo.hydrationData[hydrationRepo.hydrationData.length-1];
+  const allUserHydrationData = hydrationRepo.getUserById(id);
+  const lastElement = allUserHydrationData[allUserHydrationData.length-1];
   const waterByWeek = hydrationRepo.getFluidOuncesEachDayOfWeek(id, lastElement.date);
   const keys = Object.keys(waterByWeek);
   waterDrank.innerHTML = `${hydrationRepo.getFluidOuncesByDate(id, lastElement.date)}`;
