@@ -4,7 +4,7 @@ We used four API's to fetch the data, from a local server, and several classes t
 
 ## Preview
 
-![image](https://user-images.githubusercontent.com/98415017/169919366-d5a22fda-5699-4de0-b3ba-ba5fa9b22a6d.png)
+![Imgur](https://i.imgur.com/7BNgJZY.jpg)
 
 ## Reflections
 Part 1:
