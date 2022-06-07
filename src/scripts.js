@@ -109,7 +109,7 @@ function checkHydroInput() {
 }
 
 // Sleep Form:
-function submitSleepForm(e){
+function submitSleepForm(e) {
  e.preventDefault();
  let postObject = {
    userID: displayedUsersID,
@@ -129,7 +129,7 @@ function submitSleepForm(e){
 }
 
 // Hydration Form:
-function submitHydrationForm(e){
+function submitHydrationForm(e) {
   e.preventDefault();
   let postHydrationObject = {
     userID: displayedUsersID,
@@ -148,7 +148,7 @@ function submitHydrationForm(e){
 }
 
 // Activity Form:
-function submitActivityForm(e){
+function submitActivityForm(e) {
   e.preventDefault();
   let postActivityObject = {
     userID: displayedUsersID,
