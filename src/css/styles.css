@@ -276,8 +276,8 @@ section > .info {
 
 .all-users-weekly {
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
+  flex-direction: row !important;
+  justify-content: center !important;
   align-items: center;
   grid-row: 3 / span 2;
   grid-column: 2 / span 2;
@@ -325,7 +325,7 @@ section > .info {
 
 .info-title {
   display: flex;
-  margin: 0px 0px 15px 0px;
+  margin: 0px 0px 20px 0px;
 }
 
 .med-text {
@@ -337,11 +337,11 @@ section > .info {
   font-weight: bold;
 }
 
+.text {
+  margin: 10px 0px;
+}
+
 .a {
   display: flex;
   align-items: flex-end;
-}
-
-.test-div {
-  display: flex;
 }
