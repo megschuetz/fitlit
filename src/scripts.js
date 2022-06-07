@@ -80,6 +80,7 @@ numOuncesInput.addEventListener("input", checkHydroInput)
 
 // GLOBAL VARIABLE
 let displayedUsersID = Math.floor(Math.random() * 50);
+console.log("id", displayedUsersID);
 
 Promise.all([userProfileData, userActivityData, userSleepData, userHydrationData])
   .then(data => {
@@ -126,6 +127,7 @@ function submitSleepForm(e){
    })
  })
  sleepForm.reset();
+ sleepFormSubmit.disabled = true;
 }
 
 // Hydration Form:
@@ -144,6 +146,7 @@ function submitHydrationForm(e){
     })
   })
   hydrationForm.reset();
+  hydrationFormSubmit.disabled = true;
 }
 
 // Activity Form:
@@ -164,6 +167,7 @@ function submitActivityForm(e){
     })
   })
   activityForm.reset();
+  activityFormSubmit.disabled = true;
 }
 
 // DOM
@@ -205,8 +209,8 @@ const displayActivityInfo = (activityRepo) => {
   allUsersDailyAvgFlights.innerHTML = `<b>Minutes active:</b> ${activityRepo.allUsersAverageUnits('flightsOfStairs')} flights`;
   allUsersDailyAvgMinActive.innerHTML = `<b> Flights conquered:</b> ${activityRepo.allUsersAverageUnits('minutesActive')} min. active`;
 
-  makeAnotherChart(parseInt(activityRepo.allUsersAverageUnits("numSteps")), parseInt(lastActivityElement.numSteps))
-  makeBarGraph(parseInt(activityRepo.allUsersAverageUnits("minutesActive")), parseInt(lastActivityElement.minutesActive))
+  // makeAnotherChart(parseInt(activityRepo.allUsersAverageUnits("numSteps")), parseInt(lastActivityElement.numSteps))
+  // makeBarGraph(parseInt(activityRepo.allUsersAverageUnits("minutesActive")), parseInt(lastActivityElement.minutesActive))
 
   // makeAnotherChart(parseInt(activityRepo.allUsersAverageUnits("numSteps")), parseInt(activityRepo.allUsersAverageUnits("flightsOfStairs")), parseInt(activityRepo.allUsersAverageUnits("minutesActive")), parseInt(lastActivityElement.numSteps), parseInt(lastActivityElement.flightsOfStairs), parseInt(lastActivityElement.minutesActive))
 
@@ -249,7 +253,8 @@ const displaySleepInfo = (id, sleepRepo) => {
 };
 
 const displayHydrationInfo = (id, hydrationRepo) => {
-  const lastElement = hydrationRepo.hydrationData[hydrationRepo.hydrationData.length-1];
+  const allUserHydrationData = hydrationRepo.getUserById(id);
+  const lastElement = allUserHydrationData[allUserHydrationData.length-1];
   const waterByWeek = hydrationRepo.getFluidOuncesEachDayOfWeek(id, lastElement.date);
   const keys = Object.keys(waterByWeek);
   waterDrank.innerHTML = `${hydrationRepo.getFluidOuncesByDate(id, lastElement.date)}`;
